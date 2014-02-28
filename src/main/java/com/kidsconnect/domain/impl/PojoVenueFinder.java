@@ -46,7 +46,9 @@ public class PojoVenueFinder implements VenueFinder {
     @Override
     public ResultSet<Venue> findAll()
     {
-        return new ResultSet<Venue>(this.venues, new Pagination(this.venues.size(), this.venues.size(), 0));
+        return new ResultSet<Venue>(this.venues,
+        	                    new Pagination(this.venues.size(), this.venues.size(), 0),
+        	                    Venue.class.getSimpleName());
     }
     
 
@@ -63,14 +65,16 @@ public class PojoVenueFinder implements VenueFinder {
 	    @Override
 	    public boolean apply(Venue venue)
 	    {
-	        return venue.getName().contains(query);
+	        return venue.getName().toLowerCase().contains(query.toLowerCase());
 	    }
 	};
         
 	
 	ImmutableList<Venue> filteredVenues = ImmutableList.copyOf(Iterables.filter(venues, p));
 	
-	ResultSet<Venue> r = new ResultSet<Venue>(filteredVenues, new Pagination(filteredVenues.size(), this.venues.size(), 0));
+	ResultSet<Venue> r = new ResultSet<Venue>(filteredVenues,
+		 				  new Pagination(filteredVenues.size(), this.venues.size(), 0),
+		 				  Venue.class.getSimpleName());
 	return r;
     }
 }

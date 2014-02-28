@@ -4,8 +4,10 @@ import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
@@ -79,13 +81,7 @@ public class VenueService extends EntityService<Venue>{
 	    Criteria<Venue> criteria = this.buildCriteria(null, query, resultSize, paginationIndex, userid);
 	    LOG.info("Searching for venue data with query " + query);
 	    
-		/*Venue v[] = new Venue[]{
-			  new PojoVenueData("7", "Bickley Primary School", "Nightingale Road, Bickley" ).makeDomainWrapper(),
-			  new PojoVenueData("8", "Etheldred Day Centre", "92 Florence Road").makeDomainWrapper(),
-			  new PojoVenueData("9", "PlayBus", "All over").makeDomainWrapper(),
-			  new PojoVenueData("9", "PlayBus", "All over").makeDomainWrapper()};
-		return Response.ok(Arrays.asList(v)).build();*/
-	    return Response.ok(this.finder.findMany(criteria)).build();
+            return Response.ok(this.finder.findMany(criteria)).build();
 	}
 	catch (IllegalArgumentException e)
 	{
@@ -96,5 +92,29 @@ public class VenueService extends EntityService<Venue>{
 	    LOG.error("Unable to fetch venue details.", e);
 	    return Response.serverError().build();
 	}
+    }
+    
+    
+    @GET
+    @Path("/{venueId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response details(@PathParam("venueId") String venueId)
+    {
+        try
+        {
+            Venue venue = this.finder.findOne(venueId);
+            if (null == venue)
+            {
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+
+	    this.objectMapper.getSerializationConfig().withView(com.kidsconnect.domain.external.DomainView.Master.class);
+	    return Response.ok(venue).build();
+        }
+        catch (Exception e)
+        {
+            LOG.error("Unable to fetch details for venueId: " + venueId, e);
+            return Response.serverError().build();
+        }
     }
 }

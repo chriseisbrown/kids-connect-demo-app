@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.google.common.collect.ImmutableList;
 import com.kidsconnect.domain.data.impl.PojoVenueData;
 import com.kidsconnect.domain.model.QueryCriteria;
 import com.kidsconnect.domain.model.ResultSet;
@@ -65,6 +66,36 @@ public class PojoVenueFinderTest {
     }
 
     @Test
+    public void findManyIsCaseInsensitive() {
+
+	Venue v = new PojoVenueData("7", "Bickley Primary School", "Nightingale Road, Bickley" ).makeDomainWrapper();
+	
+	QueryCriteria<Venue> criteriaUpper = new QueryCriteria<Venue>(new String("Primary"));
+	ResultSet<Venue> venues = new PojoVenueFinder(this.venueList).findMany(criteriaUpper);
+	assertEquals(1, venues.size());
+	
+	ImmutableList<Venue> results = venues.getResults();
+	
+	if(venues.size() == 1){
+	    for (Venue venue : results){
+		assertEquals(v, venue);
+	    }
+	}
+	
+	QueryCriteria<Venue> criteriaLower = new QueryCriteria<Venue>(new String("primary"));
+	ResultSet<Venue> otherVenues = new PojoVenueFinder(this.venueList).findMany(criteriaLower);
+	assertEquals(1, otherVenues.size());
+	
+	ImmutableList<Venue> otherResults = otherVenues.getResults();
+	
+	if(otherVenues.size() == 1){
+	    for (Venue venue : otherResults){
+		assertEquals(v, venue);
+	    }
+	}
+    }
+    
+    @Test
     public void findManyWithNoQueryParameterSetGivesBackAllElements() {
 	
 	// if no query parameter is received then only a result criteria will be passed in
@@ -77,7 +108,7 @@ public class PojoVenueFinderTest {
     }
     
     @Test
-    public void findManyWithNoQueryParameterSetAndResultsSizeSetGivesBackSizeElements() {
+    public void findManyWithNoQueryParameterSetAndResultsSizeSetGivesBackResultSizeElements() {
 	
 	// if no query parameter is received then only a result criteria will be passed in
 	// and result will

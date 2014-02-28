@@ -19,9 +19,13 @@ public class ResultSet<Entity extends DomainClass>
     }
 
     public ResultSet(Iterable<Entity> results, Pagination pagination) {
-        
         this.results = ImmutableList.copyOf(results);
         this.pagination = pagination;
+    }
+    
+    public ResultSet(Iterable<Entity> results, Pagination pagination, String type) {
+        this(results, pagination);
+	this.resultType = type;
     }
 
     public ImmutableList<Entity> getResults()
