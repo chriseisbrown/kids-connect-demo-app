@@ -1,6 +1,7 @@
 package com.kidsconnect.domain.data.impl;
 
 import com.kidsconnect.domain.data.VenueData;
+import com.kidsconnect.domain.model.Location;
 import com.kidsconnect.domain.model.Venue;
 
 
@@ -10,21 +11,27 @@ public class PojoVenueData implements VenueData {
     public String address;
     public String venueId;
     
+    public Location location;
     
+
     public PojoVenueData(String id) {
-	super();
 	this.venueId = id;
 	this.address = "";
 	this.name = "";
     }
 
     public PojoVenueData(String id, String name, String address) {
-	super();
-	this.venueId = id;
+	this(id);
 	this.address = address;
 	this.name = name;
     }
 
+    public PojoVenueData(String id, String name, String address, Location location) {
+	this(id, name, address);
+	this.location = location;
+    }
+
+    
     @Override
     public String getName() {
 	return name;
@@ -39,6 +46,14 @@ public class PojoVenueData implements VenueData {
     public String getId() {
 	return venueId;
     }
+    
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 
     @Override
     public Venue makeDomainWrapper() {
@@ -48,7 +63,7 @@ public class PojoVenueData implements VenueData {
     @Override
     public String toString() {
 	return "PojoVenueData [name=" + name + ", address=" + address
-		+ ", venueId=" + venueId + "]";
+		+ ", venueId=" + venueId + ", location=" + location + "]";
     }
 
     @Override
@@ -56,6 +71,8 @@ public class PojoVenueData implements VenueData {
 	final int prime = 31;
 	int result = 1;
 	result = prime * result + ((address == null) ? 0 : address.hashCode());
+	result = prime * result
+		+ ((location == null) ? 0 : location.hashCode());
 	result = prime * result + ((name == null) ? 0 : name.hashCode());
 	result = prime * result + ((venueId == null) ? 0 : venueId.hashCode());
 	return result;
@@ -74,6 +91,11 @@ public class PojoVenueData implements VenueData {
 	    if (other.address != null)
 		return false;
 	} else if (!address.equals(other.address))
+	    return false;
+	if (location == null) {
+	    if (other.location != null)
+		return false;
+	} else if (!location.equals(other.location))
 	    return false;
 	if (name == null) {
 	    if (other.name != null)

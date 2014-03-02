@@ -24,6 +24,10 @@ public class Venue implements DomainClass
 	return delegate.getId();
     }
 
+    public Location getLocation() {
+ 	return delegate.getLocation();
+    }
+
     @Override
     public String toString() {
 	return "Venue [delegate=" + delegate + "]";
