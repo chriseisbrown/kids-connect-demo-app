@@ -47,7 +47,8 @@ public class VenueServiceTest {
 	  new PojoVenueData("7", "Bickley Primary School", "Nightingale Road, Bickley" ).makeDomainWrapper(),
 	  new PojoVenueData("8", "Etheldred Day Centre", "92 Florence Road").makeDomainWrapper(),
 	  new PojoVenueData("9", "PlayBus", "All over").makeDomainWrapper(),
-	  new PojoVenueData("9", "PlayBus", "All over").makeDomainWrapper()};
+	  new PojoVenueData("9", "PlayBus", "All over").makeDomainWrapper(),
+	  new PojoVenueData("10", "Martha Biggles House", "18 Priory Road, Southwark").makeDomainWrapper()};
 	
 	this.venueList = Arrays.asList(v);
     }
@@ -55,7 +56,7 @@ public class VenueServiceTest {
     
     @SuppressWarnings("unchecked")
     @Test
-    public void index(){
+    public void search(){
 	
 	when(servletRequest.getSession(true)).thenReturn(session);
 	
@@ -70,5 +71,26 @@ public class VenueServiceTest {
 
         ResultSet<Venue> resultSet = (ResultSet<Venue>) response.getEntity();
         Assert.assertThat(resultSet.size(), CoreMatchers.is(2));	
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void details(){
+	
+	Venue expectedVenue = new PojoVenueData("10", "Martha Biggles House", "18 Priory Road, Southwark").makeDomainWrapper();
+	
+	when(servletRequest.getSession(true)).thenReturn(session);
+	
+	ObjectMapper mapper = new ObjectMapper();
+	
+	this.serviceUnderTest = new VenueService(mapper, new PojoVenueFinder(this.venueList));
+	
+	Response response = this.serviceUnderTest.details("10");
+	    
+        Assert.assertThat(response.getStatus(), CoreMatchers.is(200));
+        Assert.assertThat(response.getEntity(), CoreMatchers.is(Venue.class));
+
+        Venue venue =  (Venue)response.getEntity();
+        Assert.assertEquals(expectedVenue, venue);	
     }
 }
