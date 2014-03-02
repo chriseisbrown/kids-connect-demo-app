@@ -29,6 +29,7 @@ http://cxf.apache.org/schemas/jaxrs.xsd">
       <bean class="com.kidsconnect.HelloWorld" />
       <bean class="com.kidsconnect.services.AppService" />
       <bean class="com.kidsconnect.services.VenueService" />
+      <bean class="com.kidsconnect.services.ActivityService" />
     </jaxrs:serviceBeans>
     <jaxrs:providers>
       <bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider">

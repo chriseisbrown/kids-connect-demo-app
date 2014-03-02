@@ -1,10 +1,7 @@
 package com.kidsconnect.services;
 
-import java.util.Arrays;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -14,44 +11,32 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-//import org.codehaus.jackson.map.ObjectMapper;
-//import org.codehaus.jackson.map.SerializationConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationConfig;
-import com.kidsconnect.domain.VenueFinder;
-import com.kidsconnect.domain.data.impl.PojoVenueData;
+import com.kidsconnect.domain.ActivityFinder;
+import com.kidsconnect.domain.model.Activity;
 import com.kidsconnect.domain.model.Criteria;
-import com.kidsconnect.domain.model.Venue;
 
 
 @Component
-@Path("/venues")
-public class VenueService extends EntityService<Venue>{
+@Path("/activities")
+public class ActivityService extends EntityService<Activity>{
 
-    private static final Logger LOG = LoggerFactory.getLogger(VenueService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ActivityService.class);
 
-    private final VenueFinder finder;
+    private final ActivityFinder finder;
     private final ObjectMapper objectMapper;
-
-    private final SerializationConfig master;
-    private final SerializationConfig detail;
-    
+   
     
     @Autowired
-    public VenueService(ObjectMapper objectMapper, VenueFinder finder)
+    public ActivityService(ObjectMapper objectMapper, ActivityFinder finder)
     {
         this.finder = finder;
         this.objectMapper = objectMapper;
-        
-        SerializationConfig basicSerializationConfig = this.objectMapper.getSerializationConfig();
-
-        this.master = basicSerializationConfig.withView(com.kidsconnect.domain.external.DomainView.Master.class);
-        this.detail = basicSerializationConfig.withView(com.kidsconnect.domain.external.DomainView.Detail.class);
     }
 
     
@@ -70,16 +55,15 @@ public class VenueService extends EntityService<Venue>{
 		LOG.info("{} searching for venue data.", userName);
 	}
 	*/	
-	    //TODO: fix this
-	    //this.objectMapper.setSerializationConfig(this.master);
+
 	    this.objectMapper.getSerializationConfig().withView(com.kidsconnect.domain.external.DomainView.Master.class);
 	    
 	    int resultSize = 10;
 	    long paginationIndex = 0;
 	    String userid = "";
 	    
-	    Criteria<Venue> criteria = this.buildCriteria(null, query, resultSize, paginationIndex, userid);
-	    LOG.info("Searching for VENUE data with query " + query);	    
+	    Criteria<Activity> criteria = this.buildCriteria(null, query, resultSize, paginationIndex, userid);
+	    LOG.info("Searching for ACTIVITY data with query " + query);	    
             return Response.ok(this.finder.findMany(criteria)).build();
 	}
 	catch (IllegalArgumentException e)
@@ -88,31 +72,31 @@ public class VenueService extends EntityService<Venue>{
 	}
 	catch (Exception e)
 	{
-	    LOG.error("Unable to fetch VENUE details.", e);
+	    LOG.error("Unable to fetch ACTIVITY details.", e);
 	    return Response.serverError().build();
 	}
     }
     
     
     @GET
-    @Path("/{venueId}")
+    @Path("/{activityId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response details(@PathParam("venueId") String venueId)
+    public Response details(@PathParam("activityId") String activityId)
     {
         try
         {
-            Venue venue = this.finder.findOne(venueId);
-            if (null == venue)
+            Activity activity = this.finder.findOne(activityId);
+            if (null == activity)
             {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
 
 	    this.objectMapper.getSerializationConfig().withView(com.kidsconnect.domain.external.DomainView.Master.class);
-	    return Response.ok(venue).build();
+	    return Response.ok(activity).build();
         }
         catch (Exception e)
         {
-            LOG.error("Unable to fetch details for venueId: " + venueId, e);
+            LOG.error("Unable to fetch details for activityId: " + activityId, e);
             return Response.serverError().build();
         }
     }
