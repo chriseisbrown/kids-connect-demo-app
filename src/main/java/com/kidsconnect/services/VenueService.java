@@ -57,7 +57,7 @@ public class VenueService extends EntityService<Venue>{
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)   
-    public Response index(@Context HttpServletRequest request,
+    public Response search(@Context HttpServletRequest request,
 			  @QueryParam("q") String query)
     {
 	try
@@ -79,8 +79,7 @@ public class VenueService extends EntityService<Venue>{
 	    String userid = "";
 	    
 	    Criteria<Venue> criteria = this.buildCriteria(null, query, resultSize, paginationIndex, userid);
-	    LOG.info("Searching for venue data with query " + query);
-	    
+	    LOG.info("Searching for venue data with query " + query);	    
             return Response.ok(this.finder.findMany(criteria)).build();
 	}
 	catch (IllegalArgumentException e)

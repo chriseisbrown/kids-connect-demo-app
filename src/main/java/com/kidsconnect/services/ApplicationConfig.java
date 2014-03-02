@@ -31,7 +31,8 @@ public class ApplicationConfig
 		  new PojoVenueData("7", "Bickley Primary School", "Nightingale Road, Bickley" ).makeDomainWrapper(),
 		  new PojoVenueData("8", "Etheldred Day Centre", "92 Florence Road").makeDomainWrapper(),
 		  new PojoVenueData("9", "PlayBus", "All over").makeDomainWrapper(),
-		  new PojoVenueData("9", "PlayBus", "All over").makeDomainWrapper()};
+		  new PojoVenueData("9", "PlayBus", "All over").makeDomainWrapper(),
+		  new PojoVenueData("10", "Martha Biggles House", "18 Priory Road, Southwark").makeDomainWrapper()};
 		
         return new PojoVenueFinder(Arrays.asList(v));
     }

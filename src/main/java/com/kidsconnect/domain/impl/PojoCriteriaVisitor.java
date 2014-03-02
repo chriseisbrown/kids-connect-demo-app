@@ -32,16 +32,6 @@ public class PojoCriteriaVisitor<Entity extends DomainClass> implements Criteria
         }
     }
     
- 
-    public String applyTo(String query)
-    {
-	if(!this.queries.isEmpty()){
-	    for(String s: queries){
-		query += s;
-	    }
-	}
-        return query;
-    }
     
     @Override
     public void visit(PaginationCriteria<Entity> criteria)
@@ -63,4 +53,22 @@ public class PojoCriteriaVisitor<Entity extends DomainClass> implements Criteria
     {
 	this.resultSize = criteria.getSize();
     }
+    
+    public String applyTo(String query)
+    {
+	if(!this.queries.isEmpty()){
+	    for(String s: queries){
+		query += s;
+	    }
+	}
+        return query;
+    }
+
+    
+    public int applyTo(int resultSizeThreshold)
+    {
+	resultSizeThreshold = this.resultSize;
+        return resultSizeThreshold;
+    }
+
 }

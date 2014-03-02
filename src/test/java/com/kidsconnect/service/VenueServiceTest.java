@@ -63,7 +63,7 @@ public class VenueServiceTest {
 	
 	this.serviceUnderTest = new VenueService(mapper, new PojoVenueFinder(this.venueList));
 	
-	Response response = this.serviceUnderTest.index(servletRequest, "PlayBus");
+	Response response = this.serviceUnderTest.search(servletRequest, "PlayBus");
 	    
         Assert.assertThat(response.getStatus(), CoreMatchers.is(200));
         Assert.assertThat(response.getEntity(), CoreMatchers.is(ResultSet.class));

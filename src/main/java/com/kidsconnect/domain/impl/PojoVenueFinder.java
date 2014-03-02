@@ -58,19 +58,27 @@ public class PojoVenueFinder implements VenueFinder {
     {
         final PojoCriteriaVisitor<Venue> visitor = new PojoCriteriaVisitor<Venue>();
         ((Criteria<Venue>) criteria).accept(visitor);
+        
         String q = "";
         final String query = visitor.applyTo(q);
+        
+        int maxResults = 0; 
+        final int maxResultsReturned = visitor.applyTo(maxResults);
 	
 	Predicate<Venue> p = new Predicate<Venue>(){	    
 	    @Override
 	    public boolean apply(Venue venue)
 	    {
-	        return venue.getName().toLowerCase().contains(query.toLowerCase());
+	        return venue.getName().toLowerCase().contains(query.toLowerCase())
+	        	|| venue.getAddress().toLowerCase().contains(query.toLowerCase());
 	    }
-	};
-        
+	};    
 	
 	ImmutableList<Venue> filteredVenues = ImmutableList.copyOf(Iterables.filter(venues, p));
+	
+	if(maxResultsReturned != 0 && filteredVenues.size() > maxResultsReturned){
+	    filteredVenues = filteredVenues.subList(0, maxResultsReturned);
+	}
 	
 	ResultSet<Venue> r = new ResultSet<Venue>(filteredVenues,
 		 				  new Pagination(filteredVenues.size(), this.venues.size(), 0),

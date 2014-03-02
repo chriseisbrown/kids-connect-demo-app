@@ -2,6 +2,8 @@ package com.kidsconnect.domain.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +13,7 @@ import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
 import com.kidsconnect.domain.data.impl.PojoVenueData;
+import com.kidsconnect.domain.model.CriteriaChain;
 import com.kidsconnect.domain.model.QueryCriteria;
 import com.kidsconnect.domain.model.ResultSet;
 import com.kidsconnect.domain.model.ResultSizeCriteria;
@@ -29,7 +32,8 @@ public class PojoVenueFinderTest {
 	Venue v[] = new Venue[]{new PojoVenueData("7", "Bickley Primary School", "Nightingale Road, Bickley" ).makeDomainWrapper(),
 				  new PojoVenueData("8", "Etheldred Day Centre", "92 Florence Road").makeDomainWrapper(),
 				  new PojoVenueData("9", "PlayBus", "All over").makeDomainWrapper(),
-				  new PojoVenueData("9", "PlayBus", "All over").makeDomainWrapper()};
+				  new PojoVenueData("9", "PlayBus", "All over").makeDomainWrapper(),
+				  new PojoVenueData("10", "Martha Biggles House", "18 Priory Road, Southwark").makeDomainWrapper()};
 	this.venueList = Arrays.asList(v);
 	
     }
@@ -64,6 +68,18 @@ public class PojoVenueFinderTest {
 	ResultSet<Venue> venues = new PojoVenueFinder(this.venueList).findMany(criteria);
 	assertEquals(2, venues.size());
     }
+    
+    @Test
+    public void findManyWithResultsSizeSetReturnsCorrectAmountOfResults() {
+	
+	int expectedResultSize = 1;
+	ResultSizeCriteria<Venue> resultSizeCriteria = new ResultSizeCriteria<Venue>(expectedResultSize);
+	QueryCriteria<Venue> criteria = new QueryCriteria<Venue>(new String("PlayBus"));
+	CriteriaChain<Venue> chain = criteria.attach(resultSizeCriteria);
+	
+	ResultSet<Venue> venues = new PojoVenueFinder(this.venueList).findMany(chain);
+	assertEquals(expectedResultSize, venues.size());
+    }
 
     @Test
     public void findManyIsCaseInsensitive() {
@@ -95,23 +111,43 @@ public class PojoVenueFinderTest {
 	}
     }
     
+    
+    @Test
+    public void findManyIsASearchAcrossAttributesOfAVenue() {
+
+	
+	Venue expectedVenues[] = new Venue[]{new PojoVenueData("7", "Bickley Primary School", "Nightingale Road, Bickley" ).makeDomainWrapper(),
+		  		     new PojoVenueData("10", "Martha Biggles House", "18 Priory Road, Southwark").makeDomainWrapper()};
+	List<Venue> expectedVenuesList = Arrays.asList(expectedVenues);
+
+	QueryCriteria<Venue> criteria = new QueryCriteria<Venue>(new String("pri"));
+	ResultSet<Venue> venues = new PojoVenueFinder(this.venueList).findMany(criteria);
+	assertEquals(expectedVenuesList.size(), venues.size());
+	
+	ImmutableList<Venue> results = venues.getResults();
+	
+	for (Venue venue : expectedVenuesList){
+	    assertTrue(results.contains(venue));
+	}
+	
+    }
+    
     @Test
     public void findManyWithNoQueryParameterSetGivesBackAllElements() {
 	
-	// if no query parameter is received then only a result criteria will be passed in
-	// and result will
+	// if no query parameter is received then only a resultSize criteria will be passed in
+	// and result will be all elements in the collection
 	int resultSize = 25;
 	ResultSizeCriteria<Venue> result = new ResultSizeCriteria<Venue>(resultSize);
 	
 	ResultSet<Venue> venues = new PojoVenueFinder(this.venueList).findMany(result);
-	assertEquals(4, venues.size());
+	assertEquals(this.venueList.size(), venues.size());
     }
     
     @Test
     public void findManyWithNoQueryParameterSetAndResultsSizeSetGivesBackResultSizeElements() {
 	
-	// if no query parameter is received then only a result criteria will be passed in
-	// and result will
+	// expect to limit the amount of results coming back
 	int resultSize = 2;
 	ResultSizeCriteria<Venue> result = new ResultSizeCriteria<Venue>(resultSize);
 	

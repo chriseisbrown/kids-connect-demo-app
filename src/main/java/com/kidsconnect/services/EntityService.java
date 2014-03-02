@@ -27,8 +27,8 @@ public abstract class EntityService<Entity extends DomainClass> {
         if (StringUtils.isNotEmpty(query))
         {
             query = query.trim();
-            Criteria<E> result = new QueryCriteria<E>(query);
-            criteria = null == criteria ? result : criteria.attach(result);
+            Criteria<E> queryCriteria = new QueryCriteria<E>(query);
+            criteria = null == criteria ? queryCriteria : criteria.attach(queryCriteria);
         }
         return criteria;
     }
@@ -38,8 +38,8 @@ public abstract class EntityService<Entity extends DomainClass> {
     {
         if(0 != resultSize)
         {
-            ResultSizeCriteria<E> result = new ResultSizeCriteria<E>(resultSize);
-            criteria = null == criteria ? result : criteria.attach(result);
+            ResultSizeCriteria<E> resultCriteria = new ResultSizeCriteria<E>(resultSize);
+            criteria = null == criteria ? resultCriteria : criteria.attach(resultCriteria);
         }
         return criteria;
     }
