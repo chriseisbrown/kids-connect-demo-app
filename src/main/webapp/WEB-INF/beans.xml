@@ -33,7 +33,7 @@ http://cxf.apache.org/schemas/jaxrs.xsd">
     </jaxrs:serviceBeans>
     <jaxrs:providers>
       <bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider">
-        
+          <constructor-arg ref="objectMapper"/>
       </bean>
     </jaxrs:providers>
    </jaxrs:server>
