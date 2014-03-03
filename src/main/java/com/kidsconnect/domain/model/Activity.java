@@ -33,6 +33,11 @@ public class Activity implements DomainClass
 	return delegate.getDescription();
     }
     
+    public String getVenueId(){
+	return delegate.getVenueId();
+    }
+    
+    
     @Override
     public String toString() {
 	return "Venue [delegate=" + delegate + "]";

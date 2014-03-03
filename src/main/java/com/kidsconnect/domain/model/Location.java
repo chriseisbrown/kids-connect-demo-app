@@ -5,6 +5,26 @@ public class Location {
     double latitude = 0;
     double longitude = 0;
     
+    public Location(double latitude, double longitude) {
+	super();
+	this.latitude = latitude;
+	this.longitude = longitude;
+    }
+
+    
+    
+    public double getLatitude() {
+        return latitude;
+    }
+
+
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+
+
     @Override
     public String toString() {
 	return "Location [latitude=" + latitude + ", longitude=" + longitude

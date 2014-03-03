@@ -13,7 +13,10 @@ import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
 import com.kidsconnect.domain.data.impl.PojoVenueData;
+import com.kidsconnect.domain.model.Borough;
 import com.kidsconnect.domain.model.CriteriaChain;
+import com.kidsconnect.domain.model.Location;
+import com.kidsconnect.domain.model.PostCode;
 import com.kidsconnect.domain.model.QueryCriteria;
 import com.kidsconnect.domain.model.ResultSet;
 import com.kidsconnect.domain.model.ResultSizeCriteria;
@@ -29,13 +32,16 @@ public class PojoVenueFinderTest {
     @Before
     public void setUp()
     {
-	Venue v[] = new Venue[]{new PojoVenueData("7", "Bickley Primary School", "Nightingale Road, Bickley" ).makeDomainWrapper(),
-				  new PojoVenueData("8", "Etheldred Day Centre", "92 Florence Road").makeDomainWrapper(),
-				  new PojoVenueData("9", "PlayBus", "All over").makeDomainWrapper(),
-				  new PojoVenueData("9", "PlayBus", "All over").makeDomainWrapper(),
-				  new PojoVenueData("10", "Martha Biggles House", "18 Priory Road, Southwark").makeDomainWrapper()};
+	Venue v[] = new Venue[]{
+	new PojoVenueData("7", "Bickley Primary School", "Nightingale Road, Bickley", new Borough("Southwark"), new PostCode("BR1 2BT"), new Location(0,0)).makeDomainWrapper(),
+	new PojoVenueData("8", "Etheldred Day Centre", "92 Florence Road", new Borough("Southwark"), new PostCode("SE15 6XX"), new Location(0,0)).makeDomainWrapper(),
+	new PojoVenueData("9", "PlayBus", "All over", new Borough("Southwark"), new PostCode("SE15 6XX"), new Location(0,0)).makeDomainWrapper(),
+	new PojoVenueData("9", "PlayBus", "All over", new Borough("Southwark"), new PostCode("SE15 6XX"), new Location(0,0)).makeDomainWrapper(),
+	new PojoVenueData("10", "Martha Biggles House", "18 Priory Road, Southwark", new Borough("Southwark"), new PostCode("SE15 6BP"), new Location(0,0)).makeDomainWrapper(),
+	new PojoVenueData("101", "The Grove Children and Family Centre", "Tower Mill Road", new Borough("Southwark"), new PostCode("SE15 6BP"), new Location(0,0)).makeDomainWrapper(),
+	new PojoVenueData("102", "Albrighton Community Centre", "Albrighton Road, East Dulwich Estate", new Borough("Southwark"), new PostCode("SE22 8AH"), new Location(0,0)).makeDomainWrapper(),
+	new PojoVenueData("103", "Bessemer Grange Children\'s Centre", "Dylways", new Borough("Southwark"), new PostCode("SE5 8HP"), new Location(0,0)).makeDomainWrapper()};
 	this.venueList = Arrays.asList(v);
-	
     }
     
     @Test
@@ -84,8 +90,10 @@ public class PojoVenueFinderTest {
     @Test
     public void findManyIsCaseInsensitive() {
 
-	Venue v = new PojoVenueData("7", "Bickley Primary School", "Nightingale Road, Bickley" ).makeDomainWrapper();
-	
+	Venue v = 
+	new PojoVenueData("7", "Bickley Primary School", "Nightingale Road, Bickley", new Borough("Southwark"),
+		new PostCode("BR1 2BT"), new Location(0,0)).makeDomainWrapper();
+
 	QueryCriteria<Venue> criteriaUpper = new QueryCriteria<Venue>(new String("Primary"));
 	ResultSet<Venue> venues = new PojoVenueFinder(this.venueList).findMany(criteriaUpper);
 	assertEquals(1, venues.size());
@@ -116,8 +124,12 @@ public class PojoVenueFinderTest {
     public void findManyIsASearchAcrossAttributesOfAVenue() {
 
 	
-	Venue expectedVenues[] = new Venue[]{new PojoVenueData("7", "Bickley Primary School", "Nightingale Road, Bickley" ).makeDomainWrapper(),
-		  		     new PojoVenueData("10", "Martha Biggles House", "18 Priory Road, Southwark").makeDomainWrapper()};
+	Venue expectedVenues[] = 
+		new Venue[]{new PojoVenueData("7", "Bickley Primary School", "Nightingale Road, Bickley", new Borough("Southwark"),
+			new PostCode("BR1 2BT"), new Location(0,0)).makeDomainWrapper(),
+			new PojoVenueData("10", "Martha Biggles House", "18 Priory Road, Southwark", new Borough("Southwark"),
+			new PostCode("SE15 6BP"), new Location(0,0)).makeDomainWrapper()};
+	
 	List<Venue> expectedVenuesList = Arrays.asList(expectedVenues);
 
 	QueryCriteria<Venue> criteria = new QueryCriteria<Venue>(new String("pri"));

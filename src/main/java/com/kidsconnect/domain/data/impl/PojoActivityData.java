@@ -9,14 +9,14 @@ import com.kidsconnect.domain.model.AgeRange;
 public class PojoActivityData implements ActivityData {
 
     public String activityId;
-    public String name;
+    public String name = "";
     public ActivityType type;
     public String description;
     public AgeRange age;
+    public String venueId;
     
     public PojoActivityData(String id) {
 	this.activityId = id;
-	this.name = "";
     }
 
     public PojoActivityData(String id, String name, ActivityType type, String description) {
@@ -26,9 +26,10 @@ public class PojoActivityData implements ActivityData {
 	this.description = description;
     }
     
-    public PojoActivityData(String id, String name, ActivityType type,String description, AgeRange range) {
+    public PojoActivityData(String id, String name, ActivityType type,String description, AgeRange range, String venueId) {
 	this(id, name, type, description);
 	this.age = range;
+	this.venueId = venueId;
     }
 
 
@@ -56,6 +57,11 @@ public class PojoActivityData implements ActivityData {
     }
 
     @Override
+    public String getVenueId() {
+ 	return venueId;
+    } 
+     
+    @Override
     public Activity makeDomainWrapper() {
 	return new Activity(this);
     }
@@ -64,7 +70,7 @@ public class PojoActivityData implements ActivityData {
     public String toString() {
 	return "PojoActivityData [activityId=" + activityId + ", name=" + name
 		+ ", type=" + type + ", description=" + description + ", age="
-		+ age + "]";
+		+ age + ", venueId=" + venueId + "]";
     }
 
     @Override
@@ -78,6 +84,7 @@ public class PojoActivityData implements ActivityData {
 		+ ((description == null) ? 0 : description.hashCode());
 	result = prime * result + ((name == null) ? 0 : name.hashCode());
 	result = prime * result + ((type == null) ? 0 : type.hashCode());
+	result = prime * result + ((venueId == null) ? 0 : venueId.hashCode());
 	return result;
     }
 
@@ -109,8 +116,15 @@ public class PojoActivityData implements ActivityData {
 	    return false;
 	if (type != other.type)
 	    return false;
+	if (venueId == null) {
+	    if (other.venueId != null)
+		return false;
+	} else if (!venueId.equals(other.venueId))
+	    return false;
 	return true;
     }
+
+
 
     
 }

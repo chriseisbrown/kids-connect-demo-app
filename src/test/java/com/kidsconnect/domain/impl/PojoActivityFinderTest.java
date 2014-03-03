@@ -31,18 +31,17 @@ public class PojoActivityFinderTest {
     @Before
     public void setUp()
     {
-	Activity a[] = new Activity[]{new PojoActivityData("1001", "Holiday stay and play sessions", ActivityType.STAYANDPLAY,
-                					    "Easter fun activities for all children.", AgeRange.YRS8ANDUNDER).makeDomainWrapper(),
-   		      new PojoActivityData("1010", "Stay and play for babies and toddlers", ActivityType.STAYANDPLAY, 
-          		  			            "A session for both babies and toddlers to play.", AgeRange.YRS5ANDUNDER).makeDomainWrapper(),
-          		new PojoActivityData("1019", "Diddi dance", ActivityType.MUSICANDDANCE, 
-		  			     "Music and movement sessions. Term time only.", AgeRange.FROM18MONTHS).makeDomainWrapper(),
-		        new PojoActivityData("1038", "Healthy fun time cooking", ActivityType.COOKING, 
-				             "After school stay and play with a focus on cooking fun for kids.", AgeRange.YRS6ANDUNDER).makeDomainWrapper()};
+	Activity a[] = new Activity[]{
+		new PojoActivityData("1001", "Holiday stay and play sessions", ActivityType.STAYANDPLAY,
+		    "Easter fun activities for all children.", AgeRange.YRS8ANDUNDER, "102").makeDomainWrapper(),
+		new PojoActivityData("1010", "Stay and play for babies and toddlers", ActivityType.STAYANDPLAY, 
+	            "A session for both babies and toddlers to play.", AgeRange.YRS5ANDUNDER, "103").makeDomainWrapper(),
+	        new PojoActivityData("1019", "Diddi dance", ActivityType.MUSICANDDANCE, 
+	        	    "Music and movement sessions. Term time only.", AgeRange.FROM18MONTHS, "101").makeDomainWrapper(),
+	        new PojoActivityData("1038", "Healthy fun time cooking", ActivityType.COOKING, 
+	               "After school stay and play with a focus on cooking fun for kids.", AgeRange.YRS6ANDUNDER, "103").makeDomainWrapper()};
 
-          		  			            
 	this.activityList = Arrays.asList(a);
-	
     }
     
     @Test
@@ -92,7 +91,7 @@ public class PojoActivityFinderTest {
     public void findManyIsCaseInsensitive() {
 
 	Activity a = new PojoActivityData("1019", "Diddi dance", ActivityType.MUSICANDDANCE, 
-			     "Music and movement sessions. Term time only.", AgeRange.FROM18MONTHS).makeDomainWrapper();
+			"Music and movement sessions. Term time only.", AgeRange.FROM18MONTHS, "101").makeDomainWrapper();
 
 	QueryCriteria<Activity> criteriaUpper = new QueryCriteria<Activity>(new String("diddi"));
 	ResultSet<Activity> activities = new PojoActivityFinder(this.activityList).findMany(criteriaUpper);
@@ -124,14 +123,14 @@ public class PojoActivityFinderTest {
     public void findManyIsASearchAcrossAttributesOfAActivity() {
 
 	
-	Activity expectedActivitys[] = new Activity[]{new PojoActivityData("1001", "Holiday stay and play sessions",
-		                                                           ActivityType.STAYANDPLAY,
-		                                                           "Easter fun activities for all children.",AgeRange.YRS8ANDUNDER).makeDomainWrapper(),
-		                                     new PojoActivityData("1019", "Diddi dance", ActivityType.MUSICANDDANCE, 
-	                      		  			     "Music and movement sessions. Term time only.", AgeRange.FROM18MONTHS).makeDomainWrapper(),
-                                                      new PojoActivityData("1010", "Stay and play for babies and toddlers",
-		  			                  ActivityType.STAYANDPLAY, "A session for both babies and toddlers to play.",AgeRange.YRS5ANDUNDER).makeDomainWrapper()};
-	
+	Activity expectedActivitys[] = new Activity[]{	
+		new PojoActivityData("1001", "Holiday stay and play sessions", ActivityType.STAYANDPLAY,
+		    "Easter fun activities for all children.", AgeRange.YRS8ANDUNDER, "102").makeDomainWrapper(),
+		new PojoActivityData("1010", "Stay and play for babies and toddlers", ActivityType.STAYANDPLAY, 
+	            "A session for both babies and toddlers to play.", AgeRange.YRS5ANDUNDER, "103").makeDomainWrapper(),
+	        new PojoActivityData("1019", "Diddi dance", ActivityType.MUSICANDDANCE, 
+	        	    "Music and movement sessions. Term time only.", AgeRange.FROM18MONTHS, "101").makeDomainWrapper()};
+
 	List<Activity> expectedActivitiesList = Arrays.asList(expectedActivitys);
 
 	QueryCriteria<Activity> criteria = new QueryCriteria<Activity>(new String("session"));

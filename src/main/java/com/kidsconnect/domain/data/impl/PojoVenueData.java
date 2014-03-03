@@ -1,7 +1,9 @@
 package com.kidsconnect.domain.data.impl;
 
 import com.kidsconnect.domain.data.VenueData;
+import com.kidsconnect.domain.model.Borough;
 import com.kidsconnect.domain.model.Location;
+import com.kidsconnect.domain.model.PostCode;
 import com.kidsconnect.domain.model.Venue;
 
 
@@ -10,26 +12,31 @@ public class PojoVenueData implements VenueData {
     public String name;
     public String address;
     public String venueId;
+    public Borough borough;
+    public PostCode postCode;
     
     public Location location;
     
 
-    public PojoVenueData(String id) {
+    public PojoVenueData(String id, String name) {
 	this.venueId = id;
 	this.address = "";
-	this.name = "";
-    }
-
-    public PojoVenueData(String id, String name, String address) {
-	this(id);
-	this.address = address;
 	this.name = name;
     }
 
     public PojoVenueData(String id, String name, String address, Location location) {
-	this(id, name, address);
+	this(id, name);
+	this.address = address;
 	this.location = location;
     }
+    
+    public PojoVenueData(String id, String name, String address, Borough borough, PostCode postCode, Location location) {
+	this(id, name, address, location);
+	this.borough = borough;
+	this.postCode = postCode;
+    }
+
+
 
     
     @Override
@@ -51,8 +58,16 @@ public class PojoVenueData implements VenueData {
         return location;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public String getVenueId() {
+        return venueId;
+    }
+
+    public Borough getBorough() {
+        return borough;
+    }
+
+    public PostCode getPostCode() {
+        return postCode;
     }
 
     @Override
@@ -63,7 +78,8 @@ public class PojoVenueData implements VenueData {
     @Override
     public String toString() {
 	return "PojoVenueData [name=" + name + ", address=" + address
-		+ ", venueId=" + venueId + ", location=" + location + "]";
+		+ ", venueId=" + venueId + ", borough=" + borough
+		+ ", postCode=" + postCode + ", location=" + location + "]";
     }
 
     @Override
@@ -71,9 +87,12 @@ public class PojoVenueData implements VenueData {
 	final int prime = 31;
 	int result = 1;
 	result = prime * result + ((address == null) ? 0 : address.hashCode());
+	result = prime * result + ((borough == null) ? 0 : borough.hashCode());
 	result = prime * result
 		+ ((location == null) ? 0 : location.hashCode());
 	result = prime * result + ((name == null) ? 0 : name.hashCode());
+	result = prime * result
+		+ ((postCode == null) ? 0 : postCode.hashCode());
 	result = prime * result + ((venueId == null) ? 0 : venueId.hashCode());
 	return result;
     }
@@ -92,6 +111,11 @@ public class PojoVenueData implements VenueData {
 		return false;
 	} else if (!address.equals(other.address))
 	    return false;
+	if (borough == null) {
+	    if (other.borough != null)
+		return false;
+	} else if (!borough.equals(other.borough))
+	    return false;
 	if (location == null) {
 	    if (other.location != null)
 		return false;
@@ -101,6 +125,11 @@ public class PojoVenueData implements VenueData {
 	    if (other.name != null)
 		return false;
 	} else if (!name.equals(other.name))
+	    return false;
+	if (postCode == null) {
+	    if (other.postCode != null)
+		return false;
+	} else if (!postCode.equals(other.postCode))
 	    return false;
 	if (venueId == null) {
 	    if (other.venueId != null)

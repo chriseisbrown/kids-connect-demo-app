@@ -20,6 +20,9 @@ import org.mockito.Mock;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kidsconnect.domain.data.impl.PojoVenueData;
 import com.kidsconnect.domain.impl.PojoVenueFinder;
+import com.kidsconnect.domain.model.Borough;
+import com.kidsconnect.domain.model.Location;
+import com.kidsconnect.domain.model.PostCode;
 import com.kidsconnect.domain.model.ResultSet;
 import com.kidsconnect.domain.model.Venue;
 import com.kidsconnect.services.VenueService;
@@ -44,12 +47,14 @@ public class VenueServiceTest {
 	initMocks(this);
 	
 	Venue v[] = new Venue[]{
-	  new PojoVenueData("7", "Bickley Primary School", "Nightingale Road, Bickley" ).makeDomainWrapper(),
-	  new PojoVenueData("8", "Etheldred Day Centre", "92 Florence Road").makeDomainWrapper(),
-	  new PojoVenueData("9", "PlayBus", "All over").makeDomainWrapper(),
-	  new PojoVenueData("9", "PlayBus", "All over").makeDomainWrapper(),
-	  new PojoVenueData("10", "Martha Biggles House", "18 Priory Road, Southwark").makeDomainWrapper()};
-	
+	new PojoVenueData("7", "Bickley Primary School", "Nightingale Road, Bickley", new Borough("Southwark"), new PostCode("BR1 2BT"), new Location(0,0)).makeDomainWrapper(),
+	new PojoVenueData("8", "Etheldred Day Centre", "92 Florence Road", new Borough("Southwark"), new PostCode("SE15 6XX"), new Location(0,0)).makeDomainWrapper(),
+	new PojoVenueData("9", "PlayBus", "All over", new Borough("Southwark"), new PostCode("SE15 6XX"), new Location(0,0)).makeDomainWrapper(),
+	new PojoVenueData("9", "PlayBus", "All over", new Borough("Southwark"), new PostCode("SE15 6XX"), new Location(0,0)).makeDomainWrapper(),
+	new PojoVenueData("10", "Martha Biggles House", "18 Priory Road, Southwark", new Borough("Southwark"), new PostCode("SE15 6BP"), new Location(0,0)).makeDomainWrapper(),
+	new PojoVenueData("101", "The Grove Children and Family Centre", "Tower Mill Road", new Borough("Southwark"), new PostCode("SE15 6BP"), new Location(0,0)).makeDomainWrapper(),
+	new PojoVenueData("102", "Albrighton Community Centre", "Albrighton Road, East Dulwich Estate", new Borough("Southwark"), new PostCode("SE22 8AH"), new Location(0,0)).makeDomainWrapper(),
+	new PojoVenueData("103", "Bessemer Grange Children\'s Centre", "Dylways", new Borough("Southwark"), new PostCode("SE5 8HP"), new Location(0,0)).makeDomainWrapper()};
 	this.venueList = Arrays.asList(v);
     }
  
@@ -73,11 +78,13 @@ public class VenueServiceTest {
         Assert.assertThat(resultSet.size(), CoreMatchers.is(2));	
     }
 
-    @SuppressWarnings("unchecked")
+    
     @Test
     public void details(){
 	
-	Venue expectedVenue = new PojoVenueData("10", "Martha Biggles House", "18 Priory Road, Southwark").makeDomainWrapper();
+	Venue expectedVenue = 
+	    new PojoVenueData("10", "Martha Biggles House", "18 Priory Road, Southwark", new Borough("Southwark"),
+		    new PostCode("SE15 6BP"), new Location(0,0)).makeDomainWrapper();
 	
 	when(servletRequest.getSession(true)).thenReturn(session);
 	

@@ -11,6 +11,8 @@ public interface ActivityData {
     public String getId();
     public AgeRange getAgeRange();
     public String getDescription();
+    
+    public String getVenueId();
 
     Activity makeDomainWrapper();    
 }

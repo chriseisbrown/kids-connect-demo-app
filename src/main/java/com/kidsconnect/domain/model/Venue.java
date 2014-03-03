@@ -28,6 +28,15 @@ public class Venue implements DomainClass
  	return delegate.getLocation();
     }
 
+    public Borough getBorough() {
+ 	return delegate.getBorough();
+    }
+    
+    public PostCode getPostCode() {
+ 	return delegate.getPostCode();
+    }
+
+
     @Override
     public String toString() {
 	return "Venue [delegate=" + delegate + "]";
