@@ -14,4 +14,6 @@ public interface ActivityFinder extends Finder<Activity>
     ResultSet<Activity> findAll();
 
     ResultSet<Activity> findMany(Criteria<? extends Activity> criteria);
+    
+    ResultSet<Activity> findByVenue(String venueId);
 }

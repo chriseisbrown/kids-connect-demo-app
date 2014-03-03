@@ -100,4 +100,32 @@ public class ActivityService extends EntityService<Activity>{
             return Response.serverError().build();
         }
     }
+    
+    
+    @GET
+    @Path("/venue/{venueId}")
+    @Produces(MediaType.APPLICATION_JSON)   
+    public Response activityAtVenue(@Context HttpServletRequest request,
+	    				@PathParam("venueId") String venueId)
+    {
+	try
+	{
+	    HttpSession session = request.getSession(true);
+
+	    this.objectMapper.getSerializationConfig().withView(com.kidsconnect.domain.external.DomainView.Master.class);	  
+	    
+	    LOG.info("Searching for ACTIVITY data at venueId " + venueId);	    
+            return Response.ok(this.finder.findByVenue(venueId)).build();
+	}
+	catch (IllegalArgumentException e)
+	{
+	    return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+	}
+	catch (Exception e)
+	{
+	    LOG.error("Unable to fetch ACTIVITY details.", e);
+	    return Response.serverError().build();
+	}
+    }
+
 }

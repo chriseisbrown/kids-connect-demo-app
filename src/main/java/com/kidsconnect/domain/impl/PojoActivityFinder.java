@@ -9,6 +9,7 @@ import com.kidsconnect.domain.model.Activity;
 import com.kidsconnect.domain.model.Criteria;
 import com.kidsconnect.domain.model.Pagination;
 import com.kidsconnect.domain.model.ResultSet;
+import com.kidsconnect.domain.model.Venue;
 
 
 public class PojoActivityFinder implements ActivityFinder {
@@ -85,4 +86,32 @@ public class PojoActivityFinder implements ActivityFinder {
     		 				  Activity.class.getSimpleName());
     	return r;
     }
+    
+    
+    @Override
+    public ResultSet<Activity> findByVenue(final String venueId)
+    {
+	//TODO: fix this method to do things "properly"
+        final int maxResultsReturned = 10;
+	
+	    Predicate<Activity> p = new Predicate<Activity>(){	    
+    	    @Override
+    	    public boolean apply(Activity activity)
+    	    {
+    	        return activity.getVenueId().equals(venueId);
+    	    }
+    	};    
+	
+    	ImmutableList<Activity> filteredActivities = ImmutableList.copyOf(Iterables.filter(activities, p));
+    	
+    	if(maxResultsReturned != 0 && filteredActivities.size() > maxResultsReturned){
+    	    filteredActivities = filteredActivities.subList(0, maxResultsReturned);
+    	}
+    	
+    	ResultSet<Activity> r = new ResultSet<Activity>(filteredActivities,
+    		 				  new Pagination(filteredActivities.size(), this.activities.size(), 0),
+    		 				  Activity.class.getSimpleName());
+    	return r;
+    }
+
 }

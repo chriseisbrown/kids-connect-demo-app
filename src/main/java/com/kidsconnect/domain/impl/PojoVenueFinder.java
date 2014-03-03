@@ -85,4 +85,5 @@ public class PojoVenueFinder implements VenueFinder {
 		 				  Venue.class.getSimpleName());
 	return r;
     }
+    
 }

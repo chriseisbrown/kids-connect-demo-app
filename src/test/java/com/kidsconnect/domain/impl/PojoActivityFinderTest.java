@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
@@ -25,11 +26,11 @@ import com.kidsconnect.domain.model.Activity;
 
 public class PojoActivityFinderTest {
 
-    List<Activity> activityList;
+    static List<Activity> activityList;
     
     
-    @Before
-    public void setUp()
+    @BeforeClass
+    public static void setUp()
     {
 	Activity a[] = new Activity[]{
 		new PojoActivityData("1001", "Holiday stay and play sessions", ActivityType.STAYANDPLAY,
@@ -41,38 +42,61 @@ public class PojoActivityFinderTest {
 	        new PojoActivityData("1038", "Healthy fun time cooking", ActivityType.COOKING, 
 	               "After school stay and play with a focus on cooking fun for kids.", AgeRange.YRS6ANDUNDER, "103").makeDomainWrapper()};
 
-	this.activityList = Arrays.asList(a);
+	activityList = Arrays.asList(a);
     }
     
     @Test
     public void dontfindOneNotInList() {
 
 	final String id = "77";
-	Activity venue = new PojoActivityFinder(this.activityList).findOne(id);
-	assertNull(venue);
+	Activity activity = new PojoActivityFinder(this.activityList).findOne(id);
+	assertNull(activity);
     }
 
     @Test
     public void findOneInList() {
 
 	final String id = "1038";
-	Activity venue = new PojoActivityFinder(this.activityList).findOne(id);
-	System.out.println(venue);
-	assertEquals(venue.getId(), id);
+	Activity activity = new PojoActivityFinder(this.activityList).findOne(id);
+	System.out.println(activity);
+	assertEquals(activity.getId(), id);
     }
     
     @Test
     public void findAll() {
-	ResultSet<Activity> venues = new PojoActivityFinder(this.activityList).findAll();
-	assertEquals(venues.size(), activityList.size());
+	ResultSet<Activity> activities = new PojoActivityFinder(this.activityList).findAll();
+	assertEquals(activities.size(), activityList.size());
     }
 
     @Test
     public void findMany() {
 	
 	QueryCriteria<Activity> criteria = new QueryCriteria<Activity>(new String("stay"));
-	ResultSet<Activity> venues = new PojoActivityFinder(this.activityList).findMany(criteria);
-	assertEquals(3, venues.size());
+	ResultSet<Activity> activities = new PojoActivityFinder(this.activityList).findMany(criteria);
+	assertEquals(3, activities.size());
+    }
+    
+    @Test
+    public void findByVenue() {
+	
+	String venueId = "103";
+	
+	Activity expectedActivities[] = new Activity[]{	
+		new PojoActivityData("1010", "Stay and play for babies and toddlers", ActivityType.STAYANDPLAY, 
+	            "A session for both babies and toddlers to play.", AgeRange.YRS5ANDUNDER, "103").makeDomainWrapper(),
+	        new PojoActivityData("1038", "Healthy fun time cooking", ActivityType.COOKING, 
+	     	    "After school stay and play with a focus on cooking fun for kids.", AgeRange.YRS6ANDUNDER, "103").makeDomainWrapper()};
+
+	List<Activity> expectedActivitiesList = Arrays.asList(expectedActivities);
+	
+	ResultSet<Activity> activitiesForVenue = new PojoActivityFinder(this.activityList).findByVenue(venueId);
+	assertEquals(expectedActivitiesList.size(), activitiesForVenue.size());
+	
+	ImmutableList<Activity> results = activitiesForVenue.getResults();
+	
+	for (Activity activity : expectedActivitiesList){
+	    assertTrue(results.contains(activity));
+	}
     }
     
     @Test
@@ -83,8 +107,8 @@ public class PojoActivityFinderTest {
 	QueryCriteria<Activity> criteria = new QueryCriteria<Activity>(new String("stay"));
 	CriteriaChain<Activity> chain = criteria.attach(resultSizeCriteria);
 	
-	ResultSet<Activity> venues = new PojoActivityFinder(this.activityList).findMany(chain);
-	assertEquals(expectedResultSize, venues.size());
+	ResultSet<Activity> activities = new PojoActivityFinder(this.activityList).findMany(chain);
+	assertEquals(expectedResultSize, activities.size());
     }
 
     @Test
@@ -120,10 +144,10 @@ public class PojoActivityFinderTest {
     
     
     @Test
-    public void findManyIsASearchAcrossAttributesOfAActivity() {
+    public void findManyIsASearchAcrossAttributesOfAnActivity() {
 
 	
-	Activity expectedActivitys[] = new Activity[]{	
+	Activity expectedActivities[] = new Activity[]{	
 		new PojoActivityData("1001", "Holiday stay and play sessions", ActivityType.STAYANDPLAY,
 		    "Easter fun activities for all children.", AgeRange.YRS8ANDUNDER, "102").makeDomainWrapper(),
 		new PojoActivityData("1010", "Stay and play for babies and toddlers", ActivityType.STAYANDPLAY, 
@@ -131,7 +155,7 @@ public class PojoActivityFinderTest {
 	        new PojoActivityData("1019", "Diddi dance", ActivityType.MUSICANDDANCE, 
 	        	    "Music and movement sessions. Term time only.", AgeRange.FROM18MONTHS, "101").makeDomainWrapper()};
 
-	List<Activity> expectedActivitiesList = Arrays.asList(expectedActivitys);
+	List<Activity> expectedActivitiesList = Arrays.asList(expectedActivities);
 
 	QueryCriteria<Activity> criteria = new QueryCriteria<Activity>(new String("session"));
 	
