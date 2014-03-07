@@ -18,6 +18,7 @@ import com.kidsconnect.domain.model.ResultSet;
 public class PojoActivityFinder implements ActivityFinder {
 
     private static final String BOOK = "book";
+    private static final String FREE = "free";
     
     private FluentIterable<Activity> activities;
     
@@ -88,18 +89,33 @@ public class PojoActivityFinder implements ActivityFinder {
     	if(qMap.containsKey(BOOK)){
     	    
     	    final String[] bookingParam = qMap.get(BOOK);
-    	    final String bookingRequired = bookingParam[0];
+    	    final boolean bookingRequired = Boolean.parseBoolean(bookingParam[0]);
     	    
     	    Predicate<Activity> bookedPredicate = new Predicate<Activity>(){	    
     		@Override
     		public boolean apply(Activity activity)
     		{
-    		    return activity.getBookingRequired() == Boolean.parseBoolean(bookingRequired);
+    		    return activity.getBookingRequired() == bookingRequired;
     		}
     	    };
 
     	    queryfilteredActivities = ImmutableList.copyOf(Iterables.filter(queryfilteredActivities, bookedPredicate));
+    	}
+    	
+    	if(qMap.containsKey(FREE)){
+    	    
+    	    final String[] freeParam = qMap.get(FREE);
+    	    final boolean isFree = Boolean.parseBoolean(freeParam[0]);
+    	    
+    	    Predicate<Activity> chargePredicate = new Predicate<Activity>(){	    
+    		@Override
+    		public boolean apply(Activity activity)
+    		{
+    		    return activity.getFreeOfCharge() == isFree;
+    		}
+    	    };
 
+    	    queryfilteredActivities = ImmutableList.copyOf(Iterables.filter(queryfilteredActivities, chargePredicate));
     	}
  
     	
