@@ -62,7 +62,7 @@ public class ActivityService extends EntityService<Activity>{
 	    Map<String, String[]> m = (Map<String, String[]>)request.getParameterMap();
 	    
 	    Criteria<Activity> criteria = this.buildCriteria(null, query, resultSize, paginationIndex, userid, m);
-	    LOG.info("Searching for ACTIVITY data with query " + query + " map=" + m.toString());	    
+	    LOG.info("Searching for ACTIVITY data with query= " + query + " map=" + m.toString());	    
             return Response.ok(this.finder.findMany(criteria)).build();
 	}
 	catch (IllegalArgumentException e)
