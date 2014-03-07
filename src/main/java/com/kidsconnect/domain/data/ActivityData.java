@@ -11,8 +11,15 @@ public interface ActivityData {
     public String getId();
     public AgeRange getAgeRange();
     public String getDescription();
+    public boolean getBookingRequired();
+    public String getBookingNarrative();
+    public boolean getFreeOfCharge();
+    public double getPrice();
+    public boolean getLimitedCapacity();
+    public String getCapacityNarrative();
     
     public String getVenueId();
+    public String getVenueName();    
 
-    Activity makeDomainWrapper();    
+    Activity makeDomainWrapper();
 }

@@ -37,7 +37,34 @@ public class Activity implements DomainClass
 	return delegate.getVenueId();
     }
     
+    public String getVenueName(){
+	return delegate.getVenueName();
+    }
     
+    public boolean getBookingRequired(){
+	return delegate.getBookingRequired();
+    }
+    
+    public String getBookingNarrative(){
+	return delegate.getBookingNarrative();
+    }     
+    
+    public boolean getFreeOfCharge(){
+	 return delegate.getFreeOfCharge();
+    }
+     
+    public double getPrice(){
+	 return delegate.getPrice();
+    }
+     
+    public boolean getLimitedCapacity(){
+	 return delegate.getLimitedCapacity();
+    }
+
+    public String getCapacityNarrative(){
+	 return delegate.getCapacityNarrative();
+    }
+     
     @Override
     public String toString() {
 	return "Venue [delegate=" + delegate + "]";

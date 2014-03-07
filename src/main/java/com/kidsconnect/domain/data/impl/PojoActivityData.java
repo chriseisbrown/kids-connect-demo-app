@@ -13,7 +13,17 @@ public class PojoActivityData implements ActivityData {
     public ActivityType type;
     public String description;
     public AgeRange age;
+    
+    public boolean bookingRequired;
+    public String bookingNarrative;
+    public boolean freeOfCharge;
+    public double price;
+    public boolean limitedCapacity;
+    public String capacityNarrative;
+    
     public String venueId;
+    public String venueName = "";
+    
     
     public PojoActivityData(String id) {
 	this.activityId = id;
@@ -26,13 +36,27 @@ public class PojoActivityData implements ActivityData {
 	this.description = description;
     }
     
-    public PojoActivityData(String id, String name, ActivityType type,String description, AgeRange range, String venueId) {
+    public PojoActivityData(String id, String name, ActivityType type,String description, AgeRange range, String venueId, String venueName) {
 	this(id, name, type, description);
 	this.age = range;
 	this.venueId = venueId;
+	this.venueName = venueName;
     }
 
-
+    public PojoActivityData(String id, String name, ActivityType type,String description, AgeRange range, String venueId, String venueName,
+	    		    boolean bookingRequired, String bookingNarrative, boolean freeOfCharge, double price, boolean limitedCapacity,
+	    		    String capacityNarrative) {
+	this(id, name, type, description);
+	this.age = range;
+	this.venueId = venueId;
+	this.venueName = venueName;
+	this.bookingRequired = bookingRequired;
+	this.bookingNarrative = bookingNarrative;
+	this.freeOfCharge = freeOfCharge;
+	this.price = price;
+	this.limitedCapacity = limitedCapacity;
+	this.capacityNarrative = capacityNarrative;
+    }
     
     @Override
     public String getName() {
@@ -52,15 +76,50 @@ public class PojoActivityData implements ActivityData {
         return age;
     }
 
-     public String getDescription() {
+    public String getDescription() {
         return description;
     }
-
-    @Override
+    
     public String getVenueId() {
  	return venueId;
     } 
-     
+    
+    public String getVenueName() {
+ 	return venueName;
+    }
+    
+    public String getActivityId() {
+        return activityId;
+    }
+
+    public AgeRange getAge() {
+        return age;
+    }
+
+    public boolean getBookingRequired() {
+        return bookingRequired;
+    }
+
+    public String getBookingNarrative() {
+        return bookingNarrative;
+    }
+
+    public boolean getFreeOfCharge() {
+        return freeOfCharge;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public boolean getLimitedCapacity() {
+        return limitedCapacity;
+    }
+
+    public String getCapacityNarrative() {
+        return capacityNarrative;
+    }
+
     @Override
     public Activity makeDomainWrapper() {
 	return new Activity(this);
@@ -70,7 +129,8 @@ public class PojoActivityData implements ActivityData {
     public String toString() {
 	return "PojoActivityData [activityId=" + activityId + ", name=" + name
 		+ ", type=" + type + ", description=" + description + ", age="
-		+ age + ", venueId=" + venueId + "]";
+		+ age + ", venueId=" + venueId + ", venueName=" + venueName
+		+ "]";
     }
 
     @Override

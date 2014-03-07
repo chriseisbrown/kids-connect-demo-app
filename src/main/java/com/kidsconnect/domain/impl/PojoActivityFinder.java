@@ -9,7 +9,7 @@ import com.kidsconnect.domain.model.Activity;
 import com.kidsconnect.domain.model.Criteria;
 import com.kidsconnect.domain.model.Pagination;
 import com.kidsconnect.domain.model.ResultSet;
-import com.kidsconnect.domain.model.Venue;
+
 
 
 public class PojoActivityFinder implements ActivityFinder {
@@ -80,6 +80,7 @@ public class PojoActivityFinder implements ActivityFinder {
     	if(maxResultsReturned != 0 && filteredActivities.size() > maxResultsReturned){
     	    filteredActivities = filteredActivities.subList(0, maxResultsReturned);
     	}
+    	
     	
     	ResultSet<Activity> r = new ResultSet<Activity>(filteredActivities,
     		 				  new Pagination(filteredActivities.size(), this.activities.size(), 0),
