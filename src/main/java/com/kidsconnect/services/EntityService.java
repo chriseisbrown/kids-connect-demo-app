@@ -51,7 +51,8 @@ public abstract class EntityService<Entity extends DomainClass> {
     
     protected <E extends DomainClass> Criteria<E> attachQueryCriteria(Criteria<E> criteria, String query)
     {
-        if (StringUtils.isNotEmpty(query))
+	//HACK: Appery REST call puts {param-name} in arguments if not specified in the mobile app control}
+        if (StringUtils.isNotEmpty(query)  && !query.contains("{"))   
         {
             query = query.trim();
             Criteria<E> queryCriteria = new QueryCriteria<E>(query);

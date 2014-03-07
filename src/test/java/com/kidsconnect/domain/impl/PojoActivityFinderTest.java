@@ -71,6 +71,7 @@ public class PojoActivityFinderTest {
 	assertEquals(4, activities.size());
     }
     
+    
     @Test
     public void findByVenue() {
 	
