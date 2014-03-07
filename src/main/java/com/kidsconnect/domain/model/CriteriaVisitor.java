@@ -11,4 +11,6 @@ public interface CriteriaVisitor<Entity extends DomainClass>
     
     void visit(ResultSizeCriteria<Entity> criteria);
 
+    void visit(ParameterCriteria<Entity> criteria);
+
 }

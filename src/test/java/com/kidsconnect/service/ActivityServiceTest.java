@@ -4,6 +4,7 @@ import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Maps;
 import com.kidsconnect.domain.impl.PojoActivityFinder;
 import com.kidsconnect.domain.model.Activity;
 import com.kidsconnect.domain.model.ResultSet;
@@ -28,13 +30,15 @@ public class ActivityServiceTest {
     
     private ActivityService serviceUnderTest;
     
-    List<Activity> actList;
+    private List<Activity> actList;
   
     @Mock
     HttpServletRequest servletRequest;
     
     @Mock
-    HttpSession session;    
+    HttpSession session;  
+    
+    Map<String, String[]> parameterMap;
   
     
     @Before
@@ -44,12 +48,19 @@ public class ActivityServiceTest {
 	this.actList = ActivityFinderData.data();
     }
  
-    
+        
     @SuppressWarnings("unchecked")
     @Test
-    public void search(){
+    public void searchUsingCriteria(){
+	
+	Map<String, String[]> parameterMap = Maps.newHashMap();
+	parameterMap.put(ActivityFinderData.BOOK, ActivityFinderData.TRUE);
+	parameterMap.put(ActivityFinderData.DIST, ActivityFinderData.DISTANCE);
+	parameterMap.put(ActivityFinderData.Q, ActivityFinderData.NOT_RELEVANT);
+	parameterMap.put(ActivityFinderData.I, ActivityFinderData.NOT_RELEVANT);
 	
 	when(servletRequest.getSession(true)).thenReturn(session);
+	when(servletRequest.getParameterMap()).thenReturn(parameterMap);
 	
 	ObjectMapper mapper = new ObjectMapper();
 	
@@ -60,7 +71,8 @@ public class ActivityServiceTest {
         Assert.assertThat(response.getStatus(), CoreMatchers.is(200));
         Assert.assertThat(response.getEntity(), CoreMatchers.is(ResultSet.class));
 
-        ResultSet<Venue> resultSet = (ResultSet<Venue>) response.getEntity();
-        Assert.assertThat(resultSet.size(), CoreMatchers.is(2));	
+        ResultSet<Activity> resultSet = (ResultSet<Activity>) response.getEntity();
+        Assert.assertThat(resultSet.size(), CoreMatchers.is(1));
+        Assert.assertTrue(resultSet.getResults().contains(ActivityFinderData.POJO_ACTIVITY_DATA_1040));
     }
 }

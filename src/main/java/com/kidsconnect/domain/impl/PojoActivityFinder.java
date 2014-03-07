@@ -1,9 +1,12 @@
 package com.kidsconnect.domain.impl;
 
+import java.util.Map;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.kidsconnect.domain.ActivityFinder;
 import com.kidsconnect.domain.model.Activity;
 import com.kidsconnect.domain.model.Criteria;
@@ -14,6 +17,8 @@ import com.kidsconnect.domain.model.ResultSet;
 
 public class PojoActivityFinder implements ActivityFinder {
 
+    private static final String BOOK = "book";
+    
     private FluentIterable<Activity> activities;
     
     
@@ -65,8 +70,11 @@ public class PojoActivityFinder implements ActivityFinder {
         
         int maxResults = 0; 
         final int maxResultsReturned = visitor.applyTo(maxResults);
+        
+        Map<String, String[]> queryMap = Maps.newHashMap();
+        final Map<String, String[]> qMap = visitor.applyTo(queryMap);
 	
-	    Predicate<Activity> p = new Predicate<Activity>(){	    
+	Predicate<Activity> queryPredicate = new Predicate<Activity>(){	    
     	    @Override
     	    public boolean apply(Activity activity)
     	    {
@@ -75,15 +83,33 @@ public class PojoActivityFinder implements ActivityFinder {
     	    }
     	};    
 	
-    	ImmutableList<Activity> filteredActivities = ImmutableList.copyOf(Iterables.filter(activities, p));
+    	ImmutableList<Activity> queryfilteredActivities = ImmutableList.copyOf(Iterables.filter(activities, queryPredicate));
     	
-    	if(maxResultsReturned != 0 && filteredActivities.size() > maxResultsReturned){
-    	    filteredActivities = filteredActivities.subList(0, maxResultsReturned);
+    	if(qMap.containsKey(BOOK)){
+    	    
+    	    final String[] bookingParam = qMap.get(BOOK);
+    	    final String bookingRequired = bookingParam[0];
+    	    
+    	    Predicate<Activity> bookedPredicate = new Predicate<Activity>(){	    
+    		@Override
+    		public boolean apply(Activity activity)
+    		{
+    		    return activity.getBookingRequired() == Boolean.parseBoolean(bookingRequired);
+    		}
+    	    };
+
+    	    queryfilteredActivities = ImmutableList.copyOf(Iterables.filter(queryfilteredActivities, bookedPredicate));
+
+    	}
+ 
+    	
+    	if(maxResultsReturned != 0 && queryfilteredActivities.size() > maxResultsReturned){
+    	    queryfilteredActivities = queryfilteredActivities.subList(0, maxResultsReturned);
     	}
     	
     	
-    	ResultSet<Activity> r = new ResultSet<Activity>(filteredActivities,
-    		 				  new Pagination(filteredActivities.size(), this.activities.size(), 0),
+    	ResultSet<Activity> r = new ResultSet<Activity>(queryfilteredActivities,
+    		 				  new Pagination(queryfilteredActivities.size(), this.activities.size(), 0),
     		 				  Activity.class.getSimpleName());
     	return r;
     }

@@ -1,7 +1,10 @@
 package com.kidsconnect.services;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -48,13 +51,6 @@ public class ActivityService extends EntityService<Activity>{
 	try
 	{
 	    HttpSession session = request.getSession(true);
-	    /*Object sessionObject = session.getAttribute(SimpleUserContextManager.SESSION_USER);
-	    if(sessionObject != null){
-		UserContext userContext = (UserContext)sessionObject;
-		String userName = userContext.getUserName();
-		LOG.info("{} searching for venue data.", userName);
-	}
-	*/	
 
 	    this.objectMapper.getSerializationConfig().withView(com.kidsconnect.domain.external.DomainView.Master.class);
 	    
@@ -62,8 +58,11 @@ public class ActivityService extends EntityService<Activity>{
 	    long paginationIndex = 0;
 	    String userid = "";
 	    
-	    Criteria<Activity> criteria = this.buildCriteria(null, query, resultSize, paginationIndex, userid);
-	    LOG.info("Searching for ACTIVITY data with query " + query);	    
+	    @SuppressWarnings("unchecked")
+	    Map<String, String[]> m = (Map<String, String[]>)request.getParameterMap();
+	    
+	    Criteria<Activity> criteria = this.buildCriteria(null, query, resultSize, paginationIndex, userid, m);
+	    LOG.info("Searching for ACTIVITY data with query " + query + " map=" + m.toString());	    
             return Response.ok(this.finder.findMany(criteria)).build();
 	}
 	catch (IllegalArgumentException e)

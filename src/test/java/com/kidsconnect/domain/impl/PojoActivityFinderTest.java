@@ -7,16 +7,19 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Maps;
 import com.kidsconnect.domain.data.impl.PojoActivityData;
 import com.kidsconnect.domain.model.ActivityType;
 import com.kidsconnect.domain.model.AgeRange;
 import com.kidsconnect.domain.model.CriteriaChain;
+import com.kidsconnect.domain.model.ParameterCriteria;
 import com.kidsconnect.domain.model.QueryCriteria;
 import com.kidsconnect.domain.model.ResultSet;
 import com.kidsconnect.domain.model.ResultSizeCriteria;
@@ -28,7 +31,7 @@ import com.kidsconnect.services.ActivityFinderData;
 public class PojoActivityFinderTest {
 
     static List<Activity> activityList;
-    
+ 
     
     @BeforeClass
     public static void setUp()
@@ -40,7 +43,7 @@ public class PojoActivityFinderTest {
     public void dontfindOneNotInList() {
 
 	final String id = "77";
-	Activity activity = new PojoActivityFinder(this.activityList).findOne(id);
+	Activity activity = new PojoActivityFinder(PojoActivityFinderTest.activityList).findOne(id);
 	assertNull(activity);
     }
 
@@ -48,14 +51,15 @@ public class PojoActivityFinderTest {
     public void findOneInList() {
 
 	final String id = "1038";
-	Activity activity = new PojoActivityFinder(this.activityList).findOne(id);
+	Activity activity = new PojoActivityFinder(PojoActivityFinderTest.activityList).findOne(id);
 	System.out.println(activity);
-	assertEquals(activity.getId(), id);
+	assertEquals(id, activity.getId());
+	assertEquals(ActivityFinderData.POJO_ACTIVITY_DATA_1038, activity);
     }
     
     @Test
     public void findAll() {
-	ResultSet<Activity> activities = new PojoActivityFinder(this.activityList).findAll();
+	ResultSet<Activity> activities = new PojoActivityFinder(PojoActivityFinderTest.activityList).findAll();
 	assertEquals(activities.size(), activityList.size());
     }
 
@@ -63,7 +67,7 @@ public class PojoActivityFinderTest {
     public void findMany() {
 	
 	QueryCriteria<Activity> criteria = new QueryCriteria<Activity>(new String("stay"));
-	ResultSet<Activity> activities = new PojoActivityFinder(this.activityList).findMany(criteria);
+	ResultSet<Activity> activities = new PojoActivityFinder(PojoActivityFinderTest.activityList).findMany(criteria);
 	assertEquals(4, activities.size());
     }
     
@@ -76,13 +80,11 @@ public class PojoActivityFinderTest {
 		new PojoActivityData("1010", "Stay and play for babies and toddlers", ActivityType.STAYANDPLAY, 
 	            "A session for both babies and toddlers to play.", AgeRange.YRS5ANDUNDER,
 	            "103", "Bessemer Grange Children\'s Centre").makeDomainWrapper(),
-	        new PojoActivityData("1038", "Healthy fun time cooking", ActivityType.COOKING, 
-	     	    "After school stay and play with a focus on cooking fun for kids.", AgeRange.YRS6ANDUNDER,
-	     	    "103", "Bessemer Grange Children\'s Centre").makeDomainWrapper()};
+	            ActivityFinderData.POJO_ACTIVITY_DATA_1038};
 
 	List<Activity> expectedActivitiesList = Arrays.asList(expectedActivities);
 	
-	ResultSet<Activity> activitiesForVenue = new PojoActivityFinder(this.activityList).findByVenue(venueId);
+	ResultSet<Activity> activitiesForVenue = new PojoActivityFinder(PojoActivityFinderTest.activityList).findByVenue(venueId);
 	assertEquals(expectedActivitiesList.size(), activitiesForVenue.size());
 	
 	ImmutableList<Activity> results = activitiesForVenue.getResults();
@@ -100,10 +102,11 @@ public class PojoActivityFinderTest {
 	QueryCriteria<Activity> criteria = new QueryCriteria<Activity>(new String("stay"));
 	CriteriaChain<Activity> chain = criteria.attach(resultSizeCriteria);
 	
-	ResultSet<Activity> activities = new PojoActivityFinder(this.activityList).findMany(chain);
+	ResultSet<Activity> activities = new PojoActivityFinder(PojoActivityFinderTest.activityList).findMany(chain);
 	assertEquals(expectedResultSize, activities.size());
     }
 
+    
     @Test
     public void findManyIsCaseInsensitive() {
 
@@ -112,7 +115,7 @@ public class PojoActivityFinderTest {
 			"101", "The Grove Children and Family Centre").makeDomainWrapper();
 
 	QueryCriteria<Activity> criteriaUpper = new QueryCriteria<Activity>(new String("diddi"));
-	ResultSet<Activity> activities = new PojoActivityFinder(this.activityList).findMany(criteriaUpper);
+	ResultSet<Activity> activities = new PojoActivityFinder(PojoActivityFinderTest.activityList).findMany(criteriaUpper);
 	assertEquals(1, activities.size());
 	
 	ImmutableList<Activity> results = activities.getResults();
@@ -124,7 +127,7 @@ public class PojoActivityFinderTest {
 	}
 	
 	QueryCriteria<Activity> criteriaLower = new QueryCriteria<Activity>(new String("Diddi"));
-	ResultSet<Activity> otherActivities = new PojoActivityFinder(this.activityList).findMany(criteriaLower);
+	ResultSet<Activity> otherActivities = new PojoActivityFinder(PojoActivityFinderTest.activityList).findMany(criteriaLower);
 	assertEquals(1, otherActivities.size());
 	
 	ImmutableList<Activity> otherResults = otherActivities.getResults();
@@ -142,24 +145,18 @@ public class PojoActivityFinderTest {
 
 	
 	Activity expectedActivities[] = new Activity[]{	
-	        new PojoActivityData("1038", "Healthy fun time cooking", ActivityType.COOKING, 
-		               "After school stay and play with a focus on cooking fun for kids.", AgeRange.YRS6ANDUNDER,
-		               "103", "Bessemer Grange Children\'s Centre").makeDomainWrapper(),
-			new PojoActivityData("1040", "Sharing Stories session", ActivityType.PLAYGROUP, 
-				"Share and enjoy stories in a playful way, learn new skills to engage children in " +
-				"reading, making props for books, playing and exploring in messy play and cooking activities.", AgeRange.YRS6ANDUNDER,
-				"104", "Coin Street family and children's centre (Borough)",
-				false, "By referral only by a health visitor", true, 0.0, true, "By referral only by a health visitor").makeDomainWrapper(),
+		               ActivityFinderData.POJO_ACTIVITY_DATA_1038,
+		               ActivityFinderData.POJO_ACTIVITY_DATA_1040
 	};
 	
 	List<Activity> expectedActivitiesList = Arrays.asList(expectedActivities);
 
 	QueryCriteria<Activity> criteria = new QueryCriteria<Activity>(new String("cooking"));
 	
-	ResultSet<Activity> otherActivities = new PojoActivityFinder(this.activityList).findMany(criteria);
-	assertEquals(expectedActivitiesList.size(), otherActivities.size());
+	ResultSet<Activity> activities = new PojoActivityFinder(PojoActivityFinderTest.activityList).findMany(criteria);
+	assertEquals(expectedActivitiesList.size(), activities.size());
 	
-	ImmutableList<Activity> results = otherActivities.getResults();
+	ImmutableList<Activity> results = activities.getResults();
 	
 	for (Activity activity : expectedActivitiesList){
 	    assertTrue(results.contains(activity));
@@ -171,12 +168,12 @@ public class PojoActivityFinderTest {
     public void findManyWithNoQueryParameterSetGivesBackAllElements() {
 	
 	// if no query parameter is received then only a resultSize criteria will be passed in
-	// and result will be all elements in the collection
+	// and result will be all elements in the collection up to that size
 	int resultSize = 25;
 	ResultSizeCriteria<Activity> result = new ResultSizeCriteria<Activity>(resultSize);
 	
-	ResultSet<Activity> activities = new PojoActivityFinder(this.activityList).findMany(result);
-	assertEquals(this.activityList.size(), activities.size());
+	ResultSet<Activity> activities = new PojoActivityFinder(PojoActivityFinderTest.activityList).findMany(result);
+	assertEquals(PojoActivityFinderTest.activityList.size(), activities.size());
     }
     
     @Test
@@ -186,8 +183,42 @@ public class PojoActivityFinderTest {
 	int resultSize = 2;
 	ResultSizeCriteria<Activity> result = new ResultSizeCriteria<Activity>(resultSize);
 	
-	ResultSet<Activity> activities = new PojoActivityFinder(this.activityList).findMany(result);
+	ResultSet<Activity> activities = new PojoActivityFinder(PojoActivityFinderTest.activityList).findMany(result);
 	assertEquals(2, activities.size());
+    }
+    
+    
+    @Test
+    public void findManyWithQueryAndParameters() {
+
+	Activity expectedActivity = ActivityFinderData.POJO_ACTIVITY_DATA_1040;
+		
+	Activity expectedActivities[] = new Activity[]{expectedActivity};	
+	List<Activity> expectedActivitiesList = Arrays.asList(expectedActivities);
+	
+	// expect to limit the amount of results coming back
+	int resultSize = 20;
+	ResultSizeCriteria<Activity> resultSizeCriteria = new ResultSizeCriteria<Activity>(resultSize);
+	
+	QueryCriteria<Activity> queryCriteria = new QueryCriteria<Activity>(new String("cooking"));
+	
+	Map<String, String[]> parameters = Maps.newHashMap();
+	parameters.put(ActivityFinderData.BOOK, ActivityFinderData.TRUE);
+	parameters.put(ActivityFinderData.DIST, ActivityFinderData.DISTANCE);
+	parameters.put(ActivityFinderData.Q, ActivityFinderData.NOT_RELEVANT);
+	parameters.put(ActivityFinderData.I, ActivityFinderData.NOT_RELEVANT);
+	
+	ParameterCriteria<Activity> parameterCriteria = new ParameterCriteria<Activity>(parameters);
+
+	CriteriaChain<Activity> chain1 = queryCriteria.attach(resultSizeCriteria);
+	CriteriaChain<Activity> chain2 = chain1.attach(parameterCriteria);
+	
+	ResultSet<Activity> activities = new PojoActivityFinder(PojoActivityFinderTest.activityList).findMany(chain2);
+	
+	assertEquals(expectedActivitiesList.size(), activities.size());
+	
+	ImmutableList<Activity> results = activities.getResults();
+	assertTrue(results.contains(expectedActivity));
     }
     
 }
