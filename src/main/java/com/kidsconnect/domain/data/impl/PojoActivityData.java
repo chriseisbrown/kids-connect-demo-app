@@ -8,20 +8,20 @@ import com.kidsconnect.domain.model.AgeRange;
 
 public class PojoActivityData implements ActivityData {
 
-    public String activityId;
+    public String activityId = "";
     public String name = "";
     public ActivityType type;
-    public String description;
+    public String description = "";
     public AgeRange age;
     
     public boolean bookingRequired;
-    public String bookingNarrative;
-    public boolean freeOfCharge;
-    public double price;
-    public boolean limitedCapacity;
-    public String capacityNarrative;
+    public String bookingNarrative = "";
+    public boolean freeOfCharge = false;
+    public double price = 0.0;
+    public boolean limitedCapacity = false;
+    public String capacityNarrative = "";
     
-    public String venueId;
+    public String venueId = "";
     public String venueName = "";
     
     
@@ -129,8 +129,11 @@ public class PojoActivityData implements ActivityData {
     public String toString() {
 	return "PojoActivityData [activityId=" + activityId + ", name=" + name
 		+ ", type=" + type + ", description=" + description + ", age="
-		+ age + ", venueId=" + venueId + ", venueName=" + venueName
-		+ "]";
+		+ age + ", bookingRequired=" + bookingRequired
+		+ ", bookingNarrative=" + bookingNarrative + ", freeOfCharge="
+		+ freeOfCharge + ", price=" + price + ", limitedCapacity="
+		+ limitedCapacity + ", capacityNarrative=" + capacityNarrative
+		+ ", venueId=" + venueId + ", venueName=" + venueName + "]";
     }
 
     @Override
@@ -140,11 +143,26 @@ public class PojoActivityData implements ActivityData {
 	result = prime * result
 		+ ((activityId == null) ? 0 : activityId.hashCode());
 	result = prime * result + ((age == null) ? 0 : age.hashCode());
+	result = prime
+		* result
+		+ ((bookingNarrative == null) ? 0 : bookingNarrative.hashCode());
+	result = prime * result + (bookingRequired ? 1231 : 1237);
+	result = prime
+		* result
+		+ ((capacityNarrative == null) ? 0 : capacityNarrative
+			.hashCode());
 	result = prime * result
 		+ ((description == null) ? 0 : description.hashCode());
+	result = prime * result + (freeOfCharge ? 1231 : 1237);
+	result = prime * result + (limitedCapacity ? 1231 : 1237);
 	result = prime * result + ((name == null) ? 0 : name.hashCode());
+	long temp;
+	temp = Double.doubleToLongBits(price);
+	result = prime * result + (int) (temp ^ (temp >>> 32));
 	result = prime * result + ((type == null) ? 0 : type.hashCode());
 	result = prime * result + ((venueId == null) ? 0 : venueId.hashCode());
+	result = prime * result
+		+ ((venueName == null) ? 0 : venueName.hashCode());
 	return result;
     }
 
@@ -164,15 +182,34 @@ public class PojoActivityData implements ActivityData {
 	    return false;
 	if (age != other.age)
 	    return false;
+	if (bookingNarrative == null) {
+	    if (other.bookingNarrative != null)
+		return false;
+	} else if (!bookingNarrative.equals(other.bookingNarrative))
+	    return false;
+	if (bookingRequired != other.bookingRequired)
+	    return false;
+	if (capacityNarrative == null) {
+	    if (other.capacityNarrative != null)
+		return false;
+	} else if (!capacityNarrative.equals(other.capacityNarrative))
+	    return false;
 	if (description == null) {
 	    if (other.description != null)
 		return false;
 	} else if (!description.equals(other.description))
 	    return false;
+	if (freeOfCharge != other.freeOfCharge)
+	    return false;
+	if (limitedCapacity != other.limitedCapacity)
+	    return false;
 	if (name == null) {
 	    if (other.name != null)
 		return false;
 	} else if (!name.equals(other.name))
+	    return false;
+	if (Double.doubleToLongBits(price) != Double
+		.doubleToLongBits(other.price))
 	    return false;
 	if (type != other.type)
 	    return false;
@@ -180,6 +217,11 @@ public class PojoActivityData implements ActivityData {
 	    if (other.venueId != null)
 		return false;
 	} else if (!venueId.equals(other.venueId))
+	    return false;
+	if (venueName == null) {
+	    if (other.venueName != null)
+		return false;
+	} else if (!venueName.equals(other.venueName))
 	    return false;
 	return true;
     }
