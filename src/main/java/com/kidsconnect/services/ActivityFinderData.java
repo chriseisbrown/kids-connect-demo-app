@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.kidsconnect.domain.data.impl.PojoActivityData;
 import com.kidsconnect.domain.impl.PojoActivityFinder;
+import com.kidsconnect.domain.impl.helper.CSVFileReader;
 import com.kidsconnect.domain.model.Activity;
 import com.kidsconnect.domain.model.ActivityType;
 import com.kidsconnect.domain.model.AgeRange;
@@ -22,6 +23,10 @@ public class ActivityFinderData {
     public static final String[] NOT_RELEVANT = {"ignore this"};
     public static final String[] DISTANCE = {"0.5"};
    
+    
+    private static CSVFileReader activityFileReader = new CSVFileReader();
+    
+    
     
     public static Activity POJO_ACTIVITY_DATA_1001 = new PojoActivityData("1001", "Holiday stay and play sessions", ActivityType.STAYANDPLAY,
 		    "Easter fun activities for all children.", AgeRange.YRS5ANDUNDER, "102", "Albrighton Community Centre").makeDomainWrapper();
@@ -73,8 +78,12 @@ public class ActivityFinderData {
 		POJO_ACTIVITY_DATA_1039,
 		POJO_ACTIVITY_DATA_1040,
 		POJO_ACTIVITY_DATA_1041};
-
-
 	return Arrays.asList(a);
     }
+  
+    
+    public static List<Activity> datafromCSV(){
+	return activityFileReader.data();
+    }
+
 }

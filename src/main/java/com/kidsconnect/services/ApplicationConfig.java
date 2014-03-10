@@ -54,6 +54,6 @@ public class ApplicationConfig
     @Bean
     public ActivityFinder activityFinder()
     {
-	return new PojoActivityFinder(ActivityFinderData.data());
+	return new PojoActivityFinder(ActivityFinderData.datafromCSV());
     }
 }
