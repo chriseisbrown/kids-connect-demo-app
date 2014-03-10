@@ -3,7 +3,7 @@ package com.kidsconnect.domain.model;
 import static com.kidsconnect.domain.impl.helper.EnumFromString.getEnumFromString;
 
 public enum ActivityType {
-
+    ANY,
     COOKING,
     STAYANDPLAY,
     COURSE,

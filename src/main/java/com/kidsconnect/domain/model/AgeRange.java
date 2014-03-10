@@ -3,7 +3,7 @@ package com.kidsconnect.domain.model;
 import static com.kidsconnect.domain.impl.helper.EnumFromString.getEnumFromString;
 
 public enum AgeRange {
-
+    ANY("Any"),
     FROM18MONTHS("From 18 months"),
     YRS2ANDUNDER("Years 2 And under"),
     YRS5ANDUNDER("Years 5 And under"),

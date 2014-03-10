@@ -16,13 +16,17 @@ public class ActivityFinderData {
     public static final String I = "i";
     public static final String BOOK = "book";
     public static final String FREE = "free";
+    public static final String ACTIVITY = "activity";
+    public static final String AGE_RANGE = "agerange";
     public static final String DIST = "dist";
 
     public static final String[] TRUE = {"true"};
     public static final String[] FALSE = {"false"};
     public static final String[] NOT_RELEVANT = {"ignore this"};
     public static final String[] DISTANCE = {"0.5"};
-   
+
+    public static final String[] ACTIVITY_MUSICANDDANCE = {ActivityType.MUSICANDDANCE.toString()};
+
     
     private static CSVFileReader activityFileReader = new CSVFileReader();
     

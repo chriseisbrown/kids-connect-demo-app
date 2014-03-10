@@ -9,6 +9,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.kidsconnect.domain.ActivityFinder;
 import com.kidsconnect.domain.model.Activity;
+import com.kidsconnect.domain.model.ActivityType;
+import com.kidsconnect.domain.model.AgeRange;
 import com.kidsconnect.domain.model.Criteria;
 import com.kidsconnect.domain.model.Pagination;
 import com.kidsconnect.domain.model.ResultSet;
@@ -17,8 +19,14 @@ import com.kidsconnect.domain.model.ResultSet;
 
 public class PojoActivityFinder implements ActivityFinder {
 
+    private static final String ANY = "ANY";
+
     private static final String BOOK = "book";
     private static final String FREE = "free";
+    public static final String ACTIVITY = "activity";
+    public static final String AGE_RANGE = "agerange";
+    public static final String DIST = "dist";
+
     
     private FluentIterable<Activity> activities;
     
@@ -89,35 +97,77 @@ public class PojoActivityFinder implements ActivityFinder {
     	if(qMap.containsKey(BOOK)){
     	    
     	    final String[] bookingParam = qMap.get(BOOK);
-    	    final boolean bookingRequired = Boolean.parseBoolean(bookingParam[0]);
-    	    
-    	    Predicate<Activity> bookedPredicate = new Predicate<Activity>(){	    
-    		@Override
-    		public boolean apply(Activity activity)
-    		{
-    		    return activity.getBookingRequired() == bookingRequired;
-    		}
-    	    };
+    	    if(!bookingParam[0].equals("any")){
+    		final boolean bookingRequired = Boolean.parseBoolean(bookingParam[0]);
 
-    	    queryfilteredActivities = ImmutableList.copyOf(Iterables.filter(queryfilteredActivities, bookedPredicate));
+    		Predicate<Activity> bookedPredicate = new Predicate<Activity>(){	    
+    		    @Override
+    		    public boolean apply(Activity activity)
+    		    {
+    			return activity.getBookingRequired() == bookingRequired;
+    		    }
+    		};
+
+    		queryfilteredActivities = ImmutableList.copyOf(Iterables.filter(queryfilteredActivities, bookedPredicate));
+    	    }
     	}
     	
     	if(qMap.containsKey(FREE)){
-    	    
-    	    final String[] freeParam = qMap.get(FREE);
-    	    final boolean isFree = Boolean.parseBoolean(freeParam[0]);
-    	    
-    	    Predicate<Activity> chargePredicate = new Predicate<Activity>(){	    
-    		@Override
-    		public boolean apply(Activity activity)
-    		{
-    		    return activity.getFreeOfCharge() == isFree;
-    		}
-    	    };
 
-    	    queryfilteredActivities = ImmutableList.copyOf(Iterables.filter(queryfilteredActivities, chargePredicate));
+    	    final String[] freeParam = qMap.get(FREE);
+    	    if(!freeParam[0].equals("any")){
+    		final boolean isFree = Boolean.parseBoolean(freeParam[0]);
+
+    		Predicate<Activity> chargePredicate = new Predicate<Activity>(){	    
+    		    @Override
+    		    public boolean apply(Activity activity)
+    		    {
+    			return activity.getFreeOfCharge() == isFree;
+    		    }
+    		};
+
+    		queryfilteredActivities = ImmutableList.copyOf(Iterables.filter(queryfilteredActivities, chargePredicate));
+    	    }
     	}
- 
+    	
+    	
+    	if(qMap.containsKey(ACTIVITY)){
+
+    	    final String[] freeParam = qMap.get(ACTIVITY);
+    	    if(!freeParam[0].equals(ANY)){
+   		
+    		final ActivityType type = ActivityType.fromString(freeParam[0]);
+
+    		Predicate<Activity> chargePredicate = new Predicate<Activity>(){	    
+    		    @Override
+    		    public boolean apply(Activity activity)
+    		    {
+    			return activity.getType().equals(type);
+    		    }
+    		};
+
+    		queryfilteredActivities = ImmutableList.copyOf(Iterables.filter(queryfilteredActivities, chargePredicate));
+    	    }
+    	}
+    	
+    	if(qMap.containsKey(AGE_RANGE)){
+
+    	    final String[] freeParam = qMap.get(AGE_RANGE);
+    	    if(!freeParam[0].equals(ANY)){
+   		
+    		final AgeRange range = AgeRange.fromString(freeParam[0]);
+
+    		Predicate<Activity> chargePredicate = new Predicate<Activity>(){	    
+    		    @Override
+    		    public boolean apply(Activity activity)
+    		    {
+    			return activity.getAgeRange().equals(range);
+    		    }
+    		};
+
+    		queryfilteredActivities = ImmutableList.copyOf(Iterables.filter(queryfilteredActivities, chargePredicate));
+    	    }
+    	} 
     	
     	if(maxResultsReturned != 0 && queryfilteredActivities.size() > maxResultsReturned){
     	    queryfilteredActivities = queryfilteredActivities.subList(0, maxResultsReturned);

@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Maps;
 import com.kidsconnect.domain.impl.PojoActivityFinder;
 import com.kidsconnect.domain.model.Activity;
+import com.kidsconnect.domain.model.ActivityType;
 import com.kidsconnect.domain.model.ResultSet;
 import com.kidsconnect.domain.model.Venue;
 import com.kidsconnect.services.ActivityFinderData;
@@ -45,17 +46,47 @@ public class ActivityServiceTest {
     public void setUp(){
 	initMocks(this);
 	
-	this.actList = ActivityFinderData.data();
+	this.actList = ActivityFinderData.datafromCSV();
     }
  
-        
     @SuppressWarnings("unchecked")
     @Test
-    public void searchUsingCriteria(){
+    public void searchUsingSearchTerm(){
+	
+	Map<String, String[]> parameterMap = Maps.newHashMap();
+	
+	parameterMap.put(ActivityFinderData.Q, new String[]{"cooking"});
+	parameterMap.put(ActivityFinderData.I, ActivityFinderData.NOT_RELEVANT);
+	
+	when(servletRequest.getSession(true)).thenReturn(session);
+	when(servletRequest.getParameterMap()).thenReturn(parameterMap);
+	
+	ObjectMapper mapper = new ObjectMapper();
+	
+	this.serviceUnderTest = new ActivityService(mapper, new PojoActivityFinder(this.actList));
+	
+	Response response = this.serviceUnderTest.search(servletRequest, "cooking");
+	    
+        Assert.assertThat(response.getStatus(), CoreMatchers.is(200));
+        Assert.assertThat(response.getEntity(), CoreMatchers.is(ResultSet.class));
+
+        ResultSet<Activity> resultSet = (ResultSet<Activity>) response.getEntity();
+        Assert.assertThat(resultSet.size(), CoreMatchers.is(2));
+        Assert.assertTrue(resultSet.getResults().contains(ActivityFinderData.POJO_ACTIVITY_DATA_1040));
+        Assert.assertTrue(resultSet.getResults().contains(ActivityFinderData.POJO_ACTIVITY_DATA_1038));
+    }
+    
+    
+    
+    @SuppressWarnings("unchecked")
+    @Test
+    public void searchUsingCriteriaAndSearchTerm(){
 	
 	Map<String, String[]> parameterMap = Maps.newHashMap();
 	parameterMap.put(ActivityFinderData.BOOK, ActivityFinderData.TRUE);
+	parameterMap.put(ActivityFinderData.FREE, ActivityFinderData.TRUE);
 	parameterMap.put(ActivityFinderData.DIST, ActivityFinderData.DISTANCE);
+	
 	parameterMap.put(ActivityFinderData.Q, ActivityFinderData.NOT_RELEVANT);
 	parameterMap.put(ActivityFinderData.I, ActivityFinderData.NOT_RELEVANT);
 	
@@ -74,5 +105,36 @@ public class ActivityServiceTest {
         ResultSet<Activity> resultSet = (ResultSet<Activity>) response.getEntity();
         Assert.assertThat(resultSet.size(), CoreMatchers.is(1));
         Assert.assertTrue(resultSet.getResults().contains(ActivityFinderData.POJO_ACTIVITY_DATA_1040));
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Test
+    public void searchUsingCriteriaOnly(){
+	
+	Map<String, String[]> parameterMap = Maps.newHashMap();
+	parameterMap.put(ActivityFinderData.BOOK, ActivityFinderData.TRUE);
+	parameterMap.put(ActivityFinderData.FREE, ActivityFinderData.FALSE);
+	parameterMap.put(ActivityFinderData.ACTIVITY, ActivityFinderData.ACTIVITY_MUSICANDDANCE);
+	
+	parameterMap.put(ActivityFinderData.DIST, ActivityFinderData.DISTANCE);
+	
+	parameterMap.put(ActivityFinderData.Q, ActivityFinderData.NOT_RELEVANT);
+	parameterMap.put(ActivityFinderData.I, ActivityFinderData.NOT_RELEVANT);
+	
+	when(servletRequest.getSession(true)).thenReturn(session);
+	when(servletRequest.getParameterMap()).thenReturn(parameterMap);
+	
+	ObjectMapper mapper = new ObjectMapper();
+	
+	this.serviceUnderTest = new ActivityService(mapper, new PojoActivityFinder(this.actList));
+	
+	Response response = this.serviceUnderTest.search(servletRequest, "{search-query}");
+	    
+        Assert.assertThat(response.getStatus(), CoreMatchers.is(200));
+        Assert.assertThat(response.getEntity(), CoreMatchers.is(ResultSet.class));
+
+        ResultSet<Activity> resultSet = (ResultSet<Activity>) response.getEntity();
+        Assert.assertThat(resultSet.size(), CoreMatchers.is(1));
+        Assert.assertTrue(resultSet.getResults().contains(ActivityFinderData.POJO_ACTIVITY_DATA_1019));
     }
 }
