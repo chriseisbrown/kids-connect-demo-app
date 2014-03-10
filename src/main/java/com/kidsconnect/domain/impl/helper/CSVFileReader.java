@@ -52,9 +52,9 @@ public class CSVFileReader {
     		    	PojoActivityData p = new PojoActivityData(
     		    		fields[0],		//id
     		    		fields[1],		//name
-    		    		ActivityType.PLAYGROUP, //type
+    		    		ActivityType.fromString(fields[2]), //type
     		    		fields[3],		//desc
-    		    		AgeRange.YRS2ANDUNDER,	//age range
+    		    		AgeRange.fromString(fields[4]),	//age range
     		    		fields[5],		//venue id
     		    		fields[6],		//venue name
     		    		Boolean.parseBoolean(fields[7]),			//booking

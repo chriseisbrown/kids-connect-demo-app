@@ -1,5 +1,7 @@
 package com.kidsconnect.domain.model;
 
+import static com.kidsconnect.domain.impl.helper.EnumFromString.getEnumFromString;
+
 public enum AgeRange {
 
     FROM18MONTHS("From 18 months"),
@@ -19,6 +21,8 @@ public enum AgeRange {
         return description;
     }
     
-    
+    public static AgeRange fromString(String value){
+	return getEnumFromString(AgeRange.class, value);
+    }
     
 }
