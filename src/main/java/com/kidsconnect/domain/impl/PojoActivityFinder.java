@@ -97,7 +97,7 @@ public class PojoActivityFinder implements ActivityFinder {
     	if(qMap.containsKey(BOOK)){
     	    
     	    final String[] bookingParam = qMap.get(BOOK);
-    	    if(!bookingParam[0].equals("any")){
+    	    if(!bookingParam[0].equals(ANY)){
     		final boolean bookingRequired = Boolean.parseBoolean(bookingParam[0]);
 
     		Predicate<Activity> bookedPredicate = new Predicate<Activity>(){	    
@@ -115,7 +115,7 @@ public class PojoActivityFinder implements ActivityFinder {
     	if(qMap.containsKey(FREE)){
 
     	    final String[] freeParam = qMap.get(FREE);
-    	    if(!freeParam[0].equals("any")){
+    	    if(!freeParam[0].equals(ANY)){
     		final boolean isFree = Boolean.parseBoolean(freeParam[0]);
 
     		Predicate<Activity> chargePredicate = new Predicate<Activity>(){	    
