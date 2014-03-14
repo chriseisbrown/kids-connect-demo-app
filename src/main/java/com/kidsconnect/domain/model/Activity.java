@@ -64,6 +64,10 @@ public class Activity implements DomainClass
     public String getCapacityNarrative(){
 	 return delegate.getCapacityNarrative();
     }
+    
+    public Location getLocation(){
+	return delegate.getLocation();
+    }
      
     @Override
     public String toString() {

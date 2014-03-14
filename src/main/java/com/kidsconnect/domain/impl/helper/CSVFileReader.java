@@ -19,6 +19,7 @@ import com.kidsconnect.domain.data.impl.PojoActivityData;
 import com.kidsconnect.domain.model.Activity;
 import com.kidsconnect.domain.model.ActivityType;
 import com.kidsconnect.domain.model.AgeRange;
+import com.kidsconnect.domain.model.Location;
 
 
 public class CSVFileReader {
@@ -73,7 +74,9 @@ public class CSVFileReader {
 			    Boolean.parseBoolean(fields[9]),			//free
 			    Double.parseDouble(fields[10]),			//price
 			    Boolean.parseBoolean(fields[11]),			//limited cap
-			    fields[12]);		//cap narrative
+			    fields[12],						//cap narrative
+			    new Location(Double.parseDouble(fields[13]), Double.parseDouble(fields[14]))		//lat, long
+			    );		
 
 		    activityList.add(p.makeDomainWrapper());
 		    

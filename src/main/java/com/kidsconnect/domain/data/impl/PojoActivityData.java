@@ -4,6 +4,7 @@ import com.kidsconnect.domain.data.ActivityData;
 import com.kidsconnect.domain.model.Activity;
 import com.kidsconnect.domain.model.ActivityType;
 import com.kidsconnect.domain.model.AgeRange;
+import com.kidsconnect.domain.model.Location;
 
 
 public class PojoActivityData implements ActivityData {
@@ -23,6 +24,7 @@ public class PojoActivityData implements ActivityData {
     
     public String venueId = "";
     public String venueName = "";
+    public Location location;
     
     
     public PojoActivityData(String id) {
@@ -45,7 +47,7 @@ public class PojoActivityData implements ActivityData {
 
     public PojoActivityData(String id, String name, ActivityType type,String description, AgeRange range, String venueId, String venueName,
 	    		    boolean bookingRequired, String bookingNarrative, boolean freeOfCharge, double price, boolean limitedCapacity,
-	    		    String capacityNarrative) {
+	    		    String capacityNarrative, Location location) {
 	this(id, name, type, description);
 	this.age = range;
 	this.venueId = venueId;
@@ -56,6 +58,7 @@ public class PojoActivityData implements ActivityData {
 	this.price = price;
 	this.limitedCapacity = limitedCapacity;
 	this.capacityNarrative = capacityNarrative;
+	this.location = location;
     }
     
     @Override
@@ -120,6 +123,10 @@ public class PojoActivityData implements ActivityData {
         return capacityNarrative;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
     @Override
     public Activity makeDomainWrapper() {
 	return new Activity(this);
@@ -133,7 +140,8 @@ public class PojoActivityData implements ActivityData {
 		+ ", bookingNarrative=" + bookingNarrative + ", freeOfCharge="
 		+ freeOfCharge + ", price=" + price + ", limitedCapacity="
 		+ limitedCapacity + ", capacityNarrative=" + capacityNarrative
-		+ ", venueId=" + venueId + ", venueName=" + venueName + "]";
+		+ ", venueId=" + venueId + ", venueName=" + venueName
+		+ ", location=" + location + "]";
     }
 
     @Override

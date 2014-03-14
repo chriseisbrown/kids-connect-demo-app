@@ -9,6 +9,7 @@ import com.kidsconnect.domain.impl.helper.CSVFileReader;
 import com.kidsconnect.domain.model.Activity;
 import com.kidsconnect.domain.model.ActivityType;
 import com.kidsconnect.domain.model.AgeRange;
+import com.kidsconnect.domain.model.Location;
 
 public class ActivityFinderData {
 
@@ -42,7 +43,7 @@ public class ActivityFinderData {
     public static Activity POJO_ACTIVITY_DATA_1019 = new PojoActivityData("1019", "Diddi dance", ActivityType.MUSICANDDANCE, 
 		"Music and movement sessions. Term time only.", AgeRange.FROM18MONTHS,
 		"101", "The Grove Children and Family Centre",
-		true, "Book in advance.", false, 6.50, false, "Unlimited places available").makeDomainWrapper();
+		true, "Book in advance.", false, 6.50, false, "Unlimited places available", new Location(0,0)).makeDomainWrapper();
 
     public static Activity POJO_ACTIVITY_DATA_1038 = 
 	    new PojoActivityData("1038", "Healthy fun time cooking", ActivityType.COOKING, 
@@ -54,14 +55,14 @@ public class ActivityFinderData {
 		    "For parents and carers with children aged 0 to 5 years. These sessions are an opportunity for children to play in a fun and " +
 			    "relaxed environment whilst giving parents and carers the opportunity to understand and gain knowledge of children\'s play.", AgeRange.YRS6ANDUNDER,
 			    "104", "Coin Street family and children's centre (Borough)",
-			    false, "Just turn up", true, 0.0, true, "Capacity is limited to 20").makeDomainWrapper();
+			    false, "Just turn up", true, 0.0, true, "Capacity is limited to 20", new Location(0,0)).makeDomainWrapper();
     
     public static Activity POJO_ACTIVITY_DATA_1040 = 
 	    	new PojoActivityData("1040", "Sharing Stories session", ActivityType.PLAYGROUP, 
 	    	    "Share and enjoy stories in a playful way, learn new skills to engage children in " +
 	    	    "reading, making props for books, playing and exploring in messy play and cooking activities.", AgeRange.YRS6ANDUNDER,
 		    "104", "Coin Street family and children's centre (Borough)",
-		    true, "By referral only by a health visitor", true, 0.0, true, "By referral only by a health visitor").makeDomainWrapper();
+		    true, "By referral only by a health visitor", true, 0.0, true, "By referral only by a health visitor", new Location(0,0)).makeDomainWrapper();
 
     public static Activity POJO_ACTIVITY_DATA_1041 = 
 	    new PojoActivityData("1041", "Bumps and babies", ActivityType.PLAYGROUP, 
@@ -69,7 +70,7 @@ public class ActivityFinderData {
 			    "on exploration, investigation and activities to stimulate the minds of young children. Please note we have a " +
 			    "maximum capacity for these sessions and if we are full you may be asked to come back another week.", AgeRange.YRS2ANDUNDER,
 			    "104", "Coin Street family and children's centre (Borough)",
-			    false, "Just turn up", true, 0.0, true, "max capacity applies").makeDomainWrapper();
+			    false, "Just turn up", true, 0.0, true, "max capacity applies", new Location(0,0)).makeDomainWrapper();
 
     
     public static List<Activity> data(){
