@@ -22,27 +22,26 @@ import com.kidsconnect.domain.model.AgeRange;
 import com.kidsconnect.domain.model.Location;
 
 
-public class CSVFileReader {
+public class ActivityCSVFileReader {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CSVFileReader.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ActivityCSVFileReader.class);
     
-    private List<Activity> activityList = new ArrayList<Activity>();   
-    private Map<String, Activity> activityMap;    
+   private Map<String, Activity> activityMap = new HashMap<String, Activity>();    
     
-    public CSVFileReader(){
+    public ActivityCSVFileReader(){
 	this.load();
     }
     
     public List<Activity> data(){
-	return activityList;
+	return new ArrayList<Activity>(activityMap.values());  
     }
 
     public int count(){
-	return activityList.size();
+	return activityMap.size();
     }
     
-    public Activity get(String key){
-	return activityMap.get(key);
+    public Activity get(String id){
+	return activityMap.get(id);
     }
     
     private void load(){
@@ -57,7 +56,7 @@ public class CSVFileReader {
 	    int rowCount = 0;
 
 	    while ((str = in.readLine()) != null) {
-		//System.out.println(str);
+		System.out.println(str);
 		if(rowCount !=0){
 		    String[] fields = str.split(",");
 		    // get fields from row, put in member variables
@@ -75,10 +74,12 @@ public class CSVFileReader {
 			    Double.parseDouble(fields[10]),			//price
 			    Boolean.parseBoolean(fields[11]),			//limited cap
 			    fields[12],						//cap narrative
-			    new Location(Double.parseDouble(fields[13]), Double.parseDouble(fields[14]))		//lat, long
+			    new Location(Double.parseDouble(fields[13]), Double.parseDouble(fields[14])),  //lat, long
+			    fields[15]	//long description
 			    );		
 
-		    activityList.add(p.makeDomainWrapper());
+		    
+		    activityMap.put(p.activityId, p.makeDomainWrapper());
 		    
 		    LOG.info(p.toString());
 		 

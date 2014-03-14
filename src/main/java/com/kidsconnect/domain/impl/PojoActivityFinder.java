@@ -88,7 +88,8 @@ public class PojoActivityFinder implements ActivityFinder {
     	    public boolean apply(Activity activity)
     	    {
     	        return activity.getName().toLowerCase().contains(query.toLowerCase())
-    	               || activity.getDescription().toLowerCase().contains(query.toLowerCase());
+    	               || activity.getDescription().toLowerCase().contains(query.toLowerCase())
+    	               || activity.getNarrative().toLowerCase().contains(query.toLowerCase());
     	    }
     	};    
 	

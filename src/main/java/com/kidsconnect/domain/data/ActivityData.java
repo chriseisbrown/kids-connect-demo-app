@@ -12,6 +12,7 @@ public interface ActivityData {
     public String getId();
     public AgeRange getAgeRange();
     public String getDescription();
+    public String getNarrative();
     public boolean getBookingRequired();
     public String getBookingNarrative();
     public boolean getFreeOfCharge();

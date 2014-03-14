@@ -8,7 +8,7 @@ import org.junit.Test;
 public class CSVFileReaderTest {
 
     
-    private CSVFileReader underTest = new CSVFileReader();
+    private ActivityCSVFileReader underTest = new ActivityCSVFileReader();
     
     @Test (timeout=50)
     public void testLoadedCorrectNumberofRows() {

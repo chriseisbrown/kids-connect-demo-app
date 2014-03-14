@@ -90,7 +90,7 @@ public class ActivityService extends EntityService<Activity>{
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
 
-	    this.objectMapper.getSerializationConfig().withView(com.kidsconnect.domain.external.DomainView.Master.class);
+	    this.objectMapper.getSerializationConfig().withView(com.kidsconnect.domain.external.DomainView.Deep.class);
 	    return Response.ok(activity).build();
         }
         catch (Exception e)

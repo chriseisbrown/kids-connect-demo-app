@@ -13,6 +13,7 @@ public class PojoActivityData implements ActivityData {
     public String name = "";
     public ActivityType type;
     public String description = "";
+    public String narrative = "";
     public AgeRange age;
     
     public boolean bookingRequired = false;
@@ -47,7 +48,7 @@ public class PojoActivityData implements ActivityData {
 
     public PojoActivityData(String id, String name, ActivityType type,String description, AgeRange range, String venueId, String venueName,
 	    		    boolean bookingRequired, String bookingNarrative, boolean freeOfCharge, double price, boolean limitedCapacity,
-	    		    String capacityNarrative, Location location) {
+	    		    String capacityNarrative, Location location, String descNarrative) {
 	this(id, name, type, description);
 	this.age = range;
 	this.venueId = venueId;
@@ -59,6 +60,7 @@ public class PojoActivityData implements ActivityData {
 	this.limitedCapacity = limitedCapacity;
 	this.capacityNarrative = capacityNarrative;
 	this.location = location;
+	this.narrative = descNarrative;
     }
     
     @Override
@@ -83,6 +85,9 @@ public class PojoActivityData implements ActivityData {
         return description;
     }
     
+    public String getNarrative() {
+        return narrative;
+    }
     public String getVenueId() {
  	return venueId;
     } 

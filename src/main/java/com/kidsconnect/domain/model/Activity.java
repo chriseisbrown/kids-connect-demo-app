@@ -1,6 +1,10 @@
 package com.kidsconnect.domain.model;
 
+import org.codehaus.jackson.map.annotate.JsonView;
+
+
 import com.kidsconnect.domain.data.ActivityData;
+import com.kidsconnect.domain.external.DomainView;
 
 
 public class Activity implements DomainClass
@@ -11,11 +15,13 @@ public class Activity implements DomainClass
     {
 	this.delegate = delegate;
     }  
-
+    
+    @JsonView(DomainView.Master.class)
     public String getName(){
 	return delegate.getName();
     }
     
+    @JsonView(DomainView.Deep.class)
     public String getId() {
 	return delegate.getId();
     }
@@ -32,7 +38,11 @@ public class Activity implements DomainClass
     public String getDescription(){
 	return delegate.getDescription();
     }
-    
+
+    public String getNarrative(){
+	return delegate.getNarrative();
+    }
+
     public String getVenueId(){
 	return delegate.getVenueId();
     }
@@ -52,7 +62,9 @@ public class Activity implements DomainClass
     public boolean getFreeOfCharge(){
 	 return delegate.getFreeOfCharge();
     }
-     
+    
+    // CMB - annotate this property just to experiment with JsonViews
+    @JsonView(DomainView.Master.class) 
     public double getPrice(){
 	 return delegate.getPrice();
     }
