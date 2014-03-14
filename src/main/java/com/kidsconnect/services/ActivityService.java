@@ -21,8 +21,11 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kidsconnect.domain.ActivityFinder;
+import com.kidsconnect.domain.VenueFinder;
 import com.kidsconnect.domain.model.Activity;
 import com.kidsconnect.domain.model.Criteria;
+import com.kidsconnect.domain.model.DeepActivity;
+import com.kidsconnect.domain.model.Venue;
 
 
 @Component
@@ -31,14 +34,16 @@ public class ActivityService extends EntityService<Activity>{
 
     private static final Logger LOG = LoggerFactory.getLogger(ActivityService.class);
 
-    private final ActivityFinder finder;
+    private final ActivityFinder activityFinder;
+    private final VenueFinder venuefinder;
     private final ObjectMapper objectMapper;
    
     
     @Autowired
-    public ActivityService(ObjectMapper objectMapper, ActivityFinder finder)
+    public ActivityService(ObjectMapper objectMapper, ActivityFinder finder, VenueFinder venueFinder)
     {
-        this.finder = finder;
+        this.activityFinder = finder;
+        this.venuefinder = venueFinder;
         this.objectMapper = objectMapper;
     }
 
@@ -63,7 +68,7 @@ public class ActivityService extends EntityService<Activity>{
 	    
 	    Criteria<Activity> criteria = this.buildCriteria(null, query, resultSize, paginationIndex, userid, m);
 	    LOG.info("Searching for ACTIVITY data with query= " + query + " map=" + m.toString());	    
-            return Response.ok(this.finder.findMany(criteria)).build();
+            return Response.ok(this.activityFinder.findMany(criteria)).build();
 	}
 	catch (IllegalArgumentException e)
 	{
@@ -84,14 +89,24 @@ public class ActivityService extends EntityService<Activity>{
     {
         try
         {
-            Activity activity = this.finder.findOne(activityId);
+            Activity activity = this.activityFinder.findOne(activityId);
             if (null == activity)
             {
                 return Response.status(Response.Status.NOT_FOUND).build();
+            }   
+            
+            Venue venue = this.venuefinder.findOne(activity.getVenueId());
+            if (null == venue)
+            {
+                return Response.status(Response.Status.NOT_FOUND).build();
             }
+            
+            DeepActivity deepActivity = new DeepActivity(activity, venue);
+            
+            
 
 	    this.objectMapper.getSerializationConfig().withView(com.kidsconnect.domain.external.DomainView.Deep.class);
-	    return Response.ok(activity).build();
+	    return Response.ok(deepActivity).build();
         }
         catch (Exception e)
         {
@@ -114,7 +129,7 @@ public class ActivityService extends EntityService<Activity>{
 	    this.objectMapper.getSerializationConfig().withView(com.kidsconnect.domain.external.DomainView.Master.class);	  
 	    
 	    LOG.info("Searching for ACTIVITY data at venueId " + venueId);	    
-            return Response.ok(this.finder.findByVenue(venueId)).build();
+            return Response.ok(this.activityFinder.findByVenue(venueId)).build();
 	}
 	catch (IllegalArgumentException e)
 	{
