@@ -15,41 +15,43 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 
+import com.kidsconnect.domain.data.impl.PojoReviewData;
 import com.kidsconnect.domain.data.impl.PojoVenueData;
 import com.kidsconnect.domain.model.Borough;
 import com.kidsconnect.domain.model.PostCode;
+import com.kidsconnect.domain.model.Review;
 import com.kidsconnect.domain.model.Venue;
 import com.kidsconnect.domain.model.ActivityType;
 import com.kidsconnect.domain.model.AgeRange;
 import com.kidsconnect.domain.model.Location;
 
 
-public class VenueCSVFileReader {
+public class ReviewCSVFileReader {
 
-    private static final Logger LOG = LoggerFactory.getLogger(VenueCSVFileReader.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ReviewCSVFileReader.class);
     
-   private Map<String, Venue> venueMap = new HashMap<String, Venue>();    
+   private Map<String, Review> reviewMap = new HashMap<String, Review>();    
     
-    public VenueCSVFileReader(){
+    public ReviewCSVFileReader(){
 	this.load();
     }
     
-    public List<Venue> data(){
-	return new ArrayList<Venue>(venueMap.values());  
+    public List<Review> data(){
+	return new ArrayList<Review>(reviewMap.values());  
     }
 
     public int count(){
-	return venueMap.size();
+	return reviewMap.size();
     }
     
-    public Venue get(String id){
-	return venueMap.get(id);
+    public Review get(String id){
+	return reviewMap.get(id);
     }
     
     private void load(){
 	try {
 	    
-	    ClassPathResource r = new ClassPathResource("venues.csv");
+	    ClassPathResource r = new ClassPathResource("reviews.csv");
 	    
 	    BufferedReader in = new BufferedReader(new InputStreamReader(
 		    new FileInputStream(r.getFile()), "UTF8"));
@@ -58,23 +60,22 @@ public class VenueCSVFileReader {
 	    int rowCount = 0;
 
 	    while ((str = in.readLine()) != null) {
-		//System.out.println(str);
+		System.out.println(str);
 		if(rowCount !=0){
 		    String[] fields = str.split(",");
 		    // get fields from row, put in member variables
-		    PojoVenueData p = new PojoVenueData(
-			    fields[0],		//id
-			    fields[1],		//name
-			    fields[2], 		//address
-			    new Borough(fields[3]),		//borough
-			    new PostCode(fields[4]),	//postcode
-			    new Location(Double.parseDouble(fields[5]), Double.parseDouble(fields[6])),  //lat, long
-			    fields[7],		//transport
-			    fields[8]		//access
+		    PojoReviewData p = new PojoReviewData(
+			    fields[0],		//reviewId
+			    fields[1],		//activityId
+			    fields[2], 		//userName
+			    fields[3], 		//userDisplayName
+			    fields[4],		//datetime
+			    fields[5],		//rating
+			    fields[6]		//narrative
 			    );		
-
 		    
-		    venueMap.put(p.venueId, p.makeDomainWrapper());
+		    
+		    reviewMap.put(p.reviewId, p.makeDomainWrapper());
 		    
 		    LOG.info(p.toString());
 		 

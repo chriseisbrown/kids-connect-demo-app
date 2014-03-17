@@ -115,7 +115,7 @@ public class PojoVenueFinderTest {
 
 	
 	Venue expectedVenues[] = {VenueFinderData.POJO_VENUE_DATA_7,
-					VenueFinderData.POJO_VENUE_DATA_10};
+				VenueFinderData.POJO_VENUE_DATA_10};
 
 	List<Venue> expectedVenuesList = Arrays.asList(expectedVenues);
 
