@@ -1,5 +1,7 @@
 package com.kidsconnect.domain.data.impl;
 
+import org.joda.time.DateTime;
+
 import com.kidsconnect.domain.data.ReviewData;
 import com.kidsconnect.domain.data.VenueData;
 import com.kidsconnect.domain.model.Borough;
@@ -15,13 +17,13 @@ public class PojoReviewData implements ReviewData {
     public String activityId;
     public String userName;
     public String userDisplayName;
-    public String datetime;
+    public DateTime datetime;
     public String rating;
     public String narrative;
     
     
     public PojoReviewData(String reviewId, String activityId, String userName,
-	    String userDisplayName, String datetime, String rating,
+	    String userDisplayName, DateTime datetime, String rating,
 	    String narrative) {
 	super();
 	this.reviewId = reviewId;
@@ -54,7 +56,7 @@ public class PojoReviewData implements ReviewData {
     }
 
 
-    public String getDatetime() {
+    public DateTime getDatetime() {
         return datetime;
     }
 

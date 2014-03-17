@@ -1,7 +1,9 @@
 package com.kidsconnect.domain.model;
 
+import org.joda.time.format.DateTimeFormat;
+
 import com.kidsconnect.domain.data.ReviewData;
-import com.kidsconnect.domain.data.VenueData;
+
 
 
 public class Review implements DomainClass
@@ -31,7 +33,7 @@ public class Review implements DomainClass
     }
 
     public String getDatetime() {
-        return delegate.getDatetime();
+        return delegate.getDatetime().toString(DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss"));
     }
 
     public String getRating() {

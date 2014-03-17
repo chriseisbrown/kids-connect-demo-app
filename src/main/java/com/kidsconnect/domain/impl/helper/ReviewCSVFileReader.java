@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -50,6 +52,7 @@ public class ReviewCSVFileReader {
     
     private void load(){
 	try {
+	    DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss");
 	    
 	    ClassPathResource r = new ClassPathResource("reviews.csv");
 	    
@@ -69,7 +72,7 @@ public class ReviewCSVFileReader {
 			    fields[1],		//activityId
 			    fields[2], 		//userName
 			    fields[3], 		//userDisplayName
-			    fields[4],		//datetime
+			    formatter.parseDateTime(fields[4]),  //datetime
 			    fields[5],		//rating
 			    fields[6]		//narrative
 			    );		
