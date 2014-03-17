@@ -14,8 +14,10 @@ public class PojoVenueData implements VenueData {
     public String venueId;
     public Borough borough;
     public PostCode postCode;
-    
     public Location location;
+    public String transport;
+    public String access;
+
     
 
     public PojoVenueData(String id, String name) {
@@ -30,10 +32,14 @@ public class PojoVenueData implements VenueData {
 	this.location = location;
     }
     
-    public PojoVenueData(String id, String name, String address, Borough borough, PostCode postCode, Location location) {
+    public PojoVenueData(String id, String name, String address, Borough borough, PostCode postCode, Location location,
+	    		String transport, String access) {
 	this(id, name, address, location);
 	this.borough = borough;
 	this.postCode = postCode;
+	
+	this.transport = transport;
+	this.access = access;
     }
 
 
@@ -69,6 +75,14 @@ public class PojoVenueData implements VenueData {
     public PostCode getPostCode() {
         return postCode;
     }
+    
+    public String getTransport() {
+        return transport;
+    }
+
+    public String getAccess() {
+        return access;
+    }
 
     @Override
     public Venue makeDomainWrapper() {
@@ -79,7 +93,8 @@ public class PojoVenueData implements VenueData {
     public String toString() {
 	return "PojoVenueData [name=" + name + ", address=" + address
 		+ ", venueId=" + venueId + ", borough=" + borough
-		+ ", postCode=" + postCode + ", location=" + location + "]";
+		+ ", postCode=" + postCode + ", location=" + location
+		+ ", transport=" + transport + ", access=" + access + "]";
     }
 
     @Override

@@ -74,9 +74,7 @@ public class VenueServiceTest {
     @Test
     public void details(){
 	
-	Venue expectedVenue = 
-	    new PojoVenueData("10", "Martha Biggles House", "18 Priory Road, Southwark", new Borough("Southwark"),
-		    new PostCode("SE15 6BP"), new Location(0,0)).makeDomainWrapper();
+	Venue expectedVenue = VenueFinderData.POJO_VENUE_DATA_10;
 	
 	when(servletRequest.getSession(true)).thenReturn(session);
 	

@@ -82,9 +82,7 @@ public class PojoVenueFinderTest {
     @Test
     public void findManyIsCaseInsensitive() {
 
-	Venue v = 
-	new PojoVenueData("7", "Bickley Primary School", "Nightingale Road, Bickley", new Borough("Southwark"),
-		new PostCode("BR1 2BT"), new Location(0,0)).makeDomainWrapper();
+	Venue v = VenueFinderData.POJO_VENUE_DATA_7;
 
 	QueryCriteria<Venue> criteriaUpper = new QueryCriteria<Venue>(new String("Primary"));
 	ResultSet<Venue> venues = new PojoVenueFinder(this.venueList).findMany(criteriaUpper);
@@ -116,12 +114,9 @@ public class PojoVenueFinderTest {
     public void findManyIsASearchAcrossAttributesOfAVenue() {
 
 	
-	Venue expectedVenues[] = 
-		new Venue[]{new PojoVenueData("7", "Bickley Primary School", "Nightingale Road, Bickley", new Borough("Southwark"),
-			new PostCode("BR1 2BT"), new Location(0,0)).makeDomainWrapper(),
-			new PojoVenueData("10", "Martha Biggles House", "18 Priory Road, Southwark", new Borough("Southwark"),
-			new PostCode("SE15 6BP"), new Location(0,0)).makeDomainWrapper()};
-	
+	Venue expectedVenues[] = {VenueFinderData.POJO_VENUE_DATA_7,
+					VenueFinderData.POJO_VENUE_DATA_10};
+
 	List<Venue> expectedVenuesList = Arrays.asList(expectedVenues);
 
 	QueryCriteria<Venue> criteria = new QueryCriteria<Venue>(new String("pri"));

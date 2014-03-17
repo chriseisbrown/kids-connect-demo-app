@@ -13,6 +13,8 @@ public interface VenueData {
     public Borough getBorough();
     public String getId();
     public Location getLocation();
+    public String getTransport();
+    public String getAccess();
     
     Venue makeDomainWrapper();
     

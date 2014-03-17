@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 
-public class CSVFileReaderTest {
+public class ActivityCSVFileReaderTest {
 
     
     private ActivityCSVFileReader underTest = new ActivityCSVFileReader();

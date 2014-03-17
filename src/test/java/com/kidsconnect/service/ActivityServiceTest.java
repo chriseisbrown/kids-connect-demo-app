@@ -19,12 +19,14 @@ import org.mockito.Mock;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Maps;
 import com.kidsconnect.domain.impl.PojoActivityFinder;
+import com.kidsconnect.domain.impl.PojoVenueFinder;
 import com.kidsconnect.domain.model.Activity;
 import com.kidsconnect.domain.model.ActivityType;
 import com.kidsconnect.domain.model.ResultSet;
 import com.kidsconnect.domain.model.Venue;
 import com.kidsconnect.services.ActivityFinderData;
 import com.kidsconnect.services.ActivityService;
+import com.kidsconnect.services.VenueFinderData;
 
 
 public class ActivityServiceTest {
@@ -32,6 +34,7 @@ public class ActivityServiceTest {
     private ActivityService serviceUnderTest;
     
     private List<Activity> actList;
+    private List<Venue> venList;
   
     @Mock
     HttpServletRequest servletRequest;
@@ -47,6 +50,7 @@ public class ActivityServiceTest {
 	initMocks(this);
 	
 	this.actList = ActivityFinderData.datafromCSV();
+	this.venList = VenueFinderData.data();
     }
  
     @SuppressWarnings("unchecked")
@@ -63,7 +67,7 @@ public class ActivityServiceTest {
 	
 	ObjectMapper mapper = new ObjectMapper();
 	
-	this.serviceUnderTest = new ActivityService(mapper, new PojoActivityFinder(this.actList));
+	this.serviceUnderTest = new ActivityService(mapper, new PojoActivityFinder(this.actList), new PojoVenueFinder(this.venList));
 	
 	Response response = this.serviceUnderTest.search(servletRequest, "cooking");
 	    
@@ -95,7 +99,7 @@ public class ActivityServiceTest {
 	
 	ObjectMapper mapper = new ObjectMapper();
 	
-	this.serviceUnderTest = new ActivityService(mapper, new PojoActivityFinder(this.actList));
+	this.serviceUnderTest = new ActivityService(mapper, new PojoActivityFinder(this.actList), new PojoVenueFinder(this.venList));
 	
 	Response response = this.serviceUnderTest.search(servletRequest, "cooking");
 	    
@@ -126,7 +130,7 @@ public class ActivityServiceTest {
 	
 	ObjectMapper mapper = new ObjectMapper();
 	
-	this.serviceUnderTest = new ActivityService(mapper, new PojoActivityFinder(this.actList));
+	this.serviceUnderTest = new ActivityService(mapper, new PojoActivityFinder(this.actList), new PojoVenueFinder(this.venList));
 	
 	Response response = this.serviceUnderTest.search(servletRequest, "{search-query}");
 	    

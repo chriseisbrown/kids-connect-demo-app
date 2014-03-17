@@ -4,25 +4,48 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.kidsconnect.domain.data.impl.PojoVenueData;
+import com.kidsconnect.domain.impl.helper.ActivityCSVFileReader;
+import com.kidsconnect.domain.impl.helper.VenueCSVFileReader;
+import com.kidsconnect.domain.model.Activity;
 import com.kidsconnect.domain.model.Borough;
 import com.kidsconnect.domain.model.Location;
 import com.kidsconnect.domain.model.PostCode;
 import com.kidsconnect.domain.model.Venue;
 
 public class VenueFinderData {
+    
+    private static VenueCSVFileReader venueFileReader = new VenueCSVFileReader();
 
+    public static Venue POJO_VENUE_DATA_7 = venueFileReader.get("7"); 
+    public static Venue POJO_VENUE_DATA_8 = venueFileReader.get("8");
+    public static Venue POJO_VENUE_DATA_9 = venueFileReader.get("9");
+    public static Venue POJO_VENUE_DATA_10  = venueFileReader.get("10");
+    public static Venue POJO_VENUE_DATA_101 = venueFileReader.get("101");
+    public static Venue POJO_VENUE_DATA_102 = venueFileReader.get("102");
+    public static Venue POJO_VENUE_DATA_103 = venueFileReader.get("103");
+    public static Venue POJO_VENUE_DATA_104 = venueFileReader.get("104");
+    
+    
+    
     public static List<Venue> data(){
     
 	Venue v[] = new Venue[]{
-	new PojoVenueData("7", "Bickley Primary School", "Nightingale Road, Bickley", new Borough("Southwark"), new PostCode("BR1 2BT"), new Location(0,0)).makeDomainWrapper(),
-	new PojoVenueData("8", "Etheldred Day Centre", "92 Florence Road", new Borough("Southwark"), new PostCode("SE15 6XX"), new Location(0,0)).makeDomainWrapper(),
-	new PojoVenueData("9", "PlayBus", "All over", new Borough("Southwark"), new PostCode("SE15 6XX"), new Location(0,0)).makeDomainWrapper(),
-	new PojoVenueData("9", "PlayBus", "All over", new Borough("Southwark"), new PostCode("SE15 6XX"), new Location(0,0)).makeDomainWrapper(),
-	new PojoVenueData("10", "Martha Biggles House", "18 Priory Road, Southwark", new Borough("Southwark"), new PostCode("SE15 6BP"), new Location(0,0)).makeDomainWrapper(),
-	new PojoVenueData("101", "The Grove Children and Family Centre", "Tower Mill Road", new Borough("Southwark"), new PostCode("SE15 6BP"), new Location(0,0)).makeDomainWrapper(),
-	new PojoVenueData("102", "Albrighton Community Centre", "Albrighton Road, East Dulwich Estate", new Borough("Southwark"), new PostCode("SE22 8AH"), new Location(0,0)).makeDomainWrapper(),
-	new PojoVenueData("103", "Bessemer Grange Children\'s Centre", "Dylways", new Borough("Southwark"), new PostCode("SE5 8HP"), new Location(0,0)).makeDomainWrapper(),
-	new PojoVenueData("104", "Coin Street family and children's centre (Borough)", "108 Stamford Street", new Borough("Southwark"), new PostCode("SE1 9NH"), new Location(0,0)).makeDomainWrapper()};
+		POJO_VENUE_DATA_7,
+		POJO_VENUE_DATA_8,
+		POJO_VENUE_DATA_9,
+		POJO_VENUE_DATA_9,
+		POJO_VENUE_DATA_10,
+		POJO_VENUE_DATA_101,
+		POJO_VENUE_DATA_102,
+		POJO_VENUE_DATA_103,
+		POJO_VENUE_DATA_104,
+		POJO_VENUE_DATA_7
+		};
 	return Arrays.asList(v);
+    }
+    
+    
+    public static List<Venue> datafromCSV(){
+	return venueFileReader.data();
     }
 }
