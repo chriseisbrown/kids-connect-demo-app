@@ -13,6 +13,7 @@ public enum ActivityType {
     MUSICANDDANCE,
     DROPIN,
     PLAYGROUP,
+    STORIES,
     DADS;
     
     public static ActivityType fromString(String value){

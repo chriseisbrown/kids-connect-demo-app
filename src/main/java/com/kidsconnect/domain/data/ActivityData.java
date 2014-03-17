@@ -3,6 +3,7 @@ package com.kidsconnect.domain.data;
 import com.kidsconnect.domain.model.Activity;
 import com.kidsconnect.domain.model.ActivityType;
 import com.kidsconnect.domain.model.AgeRange;
+import com.kidsconnect.domain.model.Link;
 import com.kidsconnect.domain.model.Location;
 
 public interface ActivityData {
@@ -23,6 +24,9 @@ public interface ActivityData {
     public String getVenueId();
     public String getVenueName();  
     public Location getLocation();
+    
+    public Link getContactLink();
+    public String getContactPhone();
 
     Activity makeDomainWrapper();
 }

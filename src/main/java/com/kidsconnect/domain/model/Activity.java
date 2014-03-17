@@ -30,6 +30,13 @@ public class Activity implements DomainClass
 	return delegate.getType();
     }
 
+    public Link getContactLink(){
+	return delegate.getContactLink(); 
+    }
+    
+    public String getContactPhone(){
+	return delegate.getContactPhone();
+    }
     
     public AgeRange getAgeRange() {
 	return delegate.getAgeRange();

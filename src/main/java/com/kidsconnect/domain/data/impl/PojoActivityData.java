@@ -4,6 +4,7 @@ import com.kidsconnect.domain.data.ActivityData;
 import com.kidsconnect.domain.model.Activity;
 import com.kidsconnect.domain.model.ActivityType;
 import com.kidsconnect.domain.model.AgeRange;
+import com.kidsconnect.domain.model.Link;
 import com.kidsconnect.domain.model.Location;
 
 
@@ -27,6 +28,9 @@ public class PojoActivityData implements ActivityData {
     public String venueName = "";
     public Location location;
     
+    public Link contactLink;
+    public String contactPhone;
+    
     
     public PojoActivityData(String id) {
 	this.activityId = id;
@@ -48,7 +52,8 @@ public class PojoActivityData implements ActivityData {
 
     public PojoActivityData(String id, String name, ActivityType type,String description, AgeRange range, String venueId, String venueName,
 	    		    boolean bookingRequired, String bookingNarrative, boolean freeOfCharge, double price, boolean limitedCapacity,
-	    		    String capacityNarrative, Location location, String descNarrative) {
+	    		    String capacityNarrative, Location location, String descNarrative,
+	    		    Link contactLink, String contactPhone) {
 	this(id, name, type, description);
 	this.age = range;
 	this.venueId = venueId;
@@ -61,6 +66,8 @@ public class PojoActivityData implements ActivityData {
 	this.capacityNarrative = capacityNarrative;
 	this.location = location;
 	this.narrative = descNarrative;
+	this.contactLink = contactLink;
+	this.contactPhone = contactPhone;
     }
     
     @Override
@@ -131,7 +138,16 @@ public class PojoActivityData implements ActivityData {
     public Location getLocation() {
         return location;
     }
+    
+    @Override
+    public Link getContactLink() {
+	return contactLink;
+    }
 
+    @Override
+    public String getContactPhone() {
+	return contactPhone;
+    }
     @Override
     public Activity makeDomainWrapper() {
 	return new Activity(this);
@@ -140,13 +156,15 @@ public class PojoActivityData implements ActivityData {
     @Override
     public String toString() {
 	return "PojoActivityData [activityId=" + activityId + ", name=" + name
-		+ ", type=" + type + ", description=" + description + ", age="
-		+ age + ", bookingRequired=" + bookingRequired
+		+ ", type=" + type + ", description=" + description
+		+ ", narrative=" + narrative + ", age=" + age
+		+ ", bookingRequired=" + bookingRequired
 		+ ", bookingNarrative=" + bookingNarrative + ", freeOfCharge="
 		+ freeOfCharge + ", price=" + price + ", limitedCapacity="
 		+ limitedCapacity + ", capacityNarrative=" + capacityNarrative
 		+ ", venueId=" + venueId + ", venueName=" + venueName
-		+ ", location=" + location + "]";
+		+ ", location=" + location + ", contactLink=" + contactLink
+		+ ", contactPhone=" + contactPhone + "]";
     }
 
     @Override
@@ -174,6 +192,8 @@ public class PojoActivityData implements ActivityData {
 	    return false;
 	return true;
     }
+
+
 
 
 

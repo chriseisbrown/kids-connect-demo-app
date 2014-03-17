@@ -19,6 +19,7 @@ import com.kidsconnect.domain.data.impl.PojoActivityData;
 import com.kidsconnect.domain.model.Activity;
 import com.kidsconnect.domain.model.ActivityType;
 import com.kidsconnect.domain.model.AgeRange;
+import com.kidsconnect.domain.model.Link;
 import com.kidsconnect.domain.model.Location;
 
 
@@ -56,7 +57,7 @@ public class ActivityCSVFileReader {
 	    int rowCount = 0;
 
 	    while ((str = in.readLine()) != null) {
-		//System.out.println(str);
+		System.out.println(str);
 		if(rowCount !=0){
 		    String[] fields = str.split(",");
 		    // get fields from row, put in member variables
@@ -75,7 +76,9 @@ public class ActivityCSVFileReader {
 			    Boolean.parseBoolean(fields[11]),			//limited cap
 			    fields[12],						//cap narrative
 			    new Location(Double.parseDouble(fields[13]), Double.parseDouble(fields[14])),  //lat, long
-			    fields[15]	//long description
+			    fields[15],	//long description
+			    new Link(fields[16]),	//link
+			    fields[17]	//phone
 			    );		
 
 		    
@@ -87,7 +90,7 @@ public class ActivityCSVFileReader {
 		rowCount++;
 	    }
 	    
-	    LOG.info("Succesfully loaded " + (rowCount - 1) + " entries");
+	    LOG.info("Successfully loaded " + (rowCount - 1) + " entries");
 	    in.close();
 	} 
 	catch(UnsupportedEncodingException e) 
