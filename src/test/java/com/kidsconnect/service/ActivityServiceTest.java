@@ -19,13 +19,15 @@ import org.mockito.Mock;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Maps;
 import com.kidsconnect.domain.impl.PojoActivityFinder;
+import com.kidsconnect.domain.impl.PojoReviewFinder;
 import com.kidsconnect.domain.impl.PojoVenueFinder;
 import com.kidsconnect.domain.model.Activity;
-import com.kidsconnect.domain.model.ActivityType;
 import com.kidsconnect.domain.model.ResultSet;
+import com.kidsconnect.domain.model.Review;
 import com.kidsconnect.domain.model.Venue;
 import com.kidsconnect.services.ActivityFinderData;
 import com.kidsconnect.services.ActivityService;
+import com.kidsconnect.services.ReviewFinderData;
 import com.kidsconnect.services.VenueFinderData;
 
 
@@ -35,6 +37,7 @@ public class ActivityServiceTest {
     
     private List<Activity> actList;
     private List<Venue> venList;
+    private List<Review> reviewList;
   
     @Mock
     HttpServletRequest servletRequest;
@@ -51,6 +54,7 @@ public class ActivityServiceTest {
 	
 	this.actList = ActivityFinderData.datafromCSV();
 	this.venList = VenueFinderData.data();
+	this.reviewList = ReviewFinderData.data();
     }
  
     @SuppressWarnings("unchecked")
@@ -67,7 +71,10 @@ public class ActivityServiceTest {
 	
 	ObjectMapper mapper = new ObjectMapper();
 	
-	this.serviceUnderTest = new ActivityService(mapper, new PojoActivityFinder(this.actList), new PojoVenueFinder(this.venList));
+	this.serviceUnderTest = new ActivityService(mapper,
+						    new PojoActivityFinder(this.actList),
+						    new PojoVenueFinder(this.venList),
+						    new PojoReviewFinder(this.reviewList));
 	
 	Response response = this.serviceUnderTest.search(servletRequest, "cooking");
 	    
@@ -99,7 +106,10 @@ public class ActivityServiceTest {
 	
 	ObjectMapper mapper = new ObjectMapper();
 	
-	this.serviceUnderTest = new ActivityService(mapper, new PojoActivityFinder(this.actList), new PojoVenueFinder(this.venList));
+	this.serviceUnderTest = new ActivityService(mapper,
+							new PojoActivityFinder(this.actList),
+							new PojoVenueFinder(this.venList),
+							new PojoReviewFinder(this.reviewList));
 	
 	Response response = this.serviceUnderTest.search(servletRequest, "cooking");
 	    
@@ -110,6 +120,7 @@ public class ActivityServiceTest {
         Assert.assertThat(resultSet.size(), CoreMatchers.is(1));
         Assert.assertTrue(resultSet.getResults().contains(ActivityFinderData.POJO_ACTIVITY_DATA_1040));
     }
+    
     
     @SuppressWarnings("unchecked")
     @Test
@@ -130,7 +141,10 @@ public class ActivityServiceTest {
 	
 	ObjectMapper mapper = new ObjectMapper();
 	
-	this.serviceUnderTest = new ActivityService(mapper, new PojoActivityFinder(this.actList), new PojoVenueFinder(this.venList));
+	this.serviceUnderTest = new ActivityService(mapper,
+						    new PojoActivityFinder(this.actList),
+						    new PojoVenueFinder(this.venList),
+						    new PojoReviewFinder(this.reviewList));
 	
 	Response response = this.serviceUnderTest.search(servletRequest, "{search-query}");
 	    

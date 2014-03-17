@@ -4,7 +4,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -21,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kidsconnect.domain.ActivityFinder;
+import com.kidsconnect.domain.ReviewFinder;
 import com.kidsconnect.domain.VenueFinder;
 import com.kidsconnect.domain.model.Activity;
 import com.kidsconnect.domain.model.Criteria;
@@ -36,14 +36,19 @@ public class ActivityService extends EntityService<Activity>{
 
     private final ActivityFinder activityFinder;
     private final VenueFinder venuefinder;
+    private final ReviewFinder reviewfinder;
     private final ObjectMapper objectMapper;
    
     
     @Autowired
-    public ActivityService(ObjectMapper objectMapper, ActivityFinder finder, VenueFinder venueFinder)
+    public ActivityService(ObjectMapper objectMapper,
+	    		   ActivityFinder finder,
+	    		   VenueFinder venueFinder,
+	    		   ReviewFinder reviewFinder)
     {
         this.activityFinder = finder;
         this.venuefinder = venueFinder;
+        this.reviewfinder = reviewFinder;
         this.objectMapper = objectMapper;
     }
 
