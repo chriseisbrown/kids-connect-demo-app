@@ -22,6 +22,8 @@ import com.kidsconnect.domain.impl.PojoActivityFinder;
 import com.kidsconnect.domain.impl.PojoReviewFinder;
 import com.kidsconnect.domain.impl.PojoVenueFinder;
 import com.kidsconnect.domain.model.Activity;
+import com.kidsconnect.domain.model.ActivityType;
+import com.kidsconnect.domain.model.DeepActivity;
 import com.kidsconnect.domain.model.ResultSet;
 import com.kidsconnect.domain.model.Review;
 import com.kidsconnect.domain.model.Venue;
@@ -154,5 +156,30 @@ public class ActivityServiceTest {
         ResultSet<Activity> resultSet = (ResultSet<Activity>) response.getEntity();
         Assert.assertThat(resultSet.size(), CoreMatchers.is(1));
         Assert.assertTrue(resultSet.getResults().contains(ActivityFinderData.POJO_ACTIVITY_DATA_1019));
+    }
+    
+    
+
+    @Test
+    public void searchById(){
+	
+	ObjectMapper mapper = new ObjectMapper();
+	
+	this.serviceUnderTest = new ActivityService(mapper,
+							new PojoActivityFinder(this.actList),
+							new PojoVenueFinder(this.venList),
+							new PojoReviewFinder(this.reviewList));
+	
+	Response response = this.serviceUnderTest.details("1019");
+	    
+        Assert.assertThat(response.getStatus(), CoreMatchers.is(200));
+        Assert.assertThat(response.getEntity(), CoreMatchers.is(DeepActivity.class));
+
+        DeepActivity result = (DeepActivity) response.getEntity();
+        
+        Assert.assertEquals(ActivityType.MUSICANDDANCE, result.getActivity().getType()); 
+        Assert.assertEquals("101", result.getVenue().getId());
+        Assert.assertEquals(result.getActivity().getVenueId(), result.getVenue().getId()); 
+        Assert.assertEquals(this.reviewList.size(), result.getReviews().size());        
     }
 }

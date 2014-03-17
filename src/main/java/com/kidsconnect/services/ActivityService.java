@@ -25,6 +25,8 @@ import com.kidsconnect.domain.VenueFinder;
 import com.kidsconnect.domain.model.Activity;
 import com.kidsconnect.domain.model.Criteria;
 import com.kidsconnect.domain.model.DeepActivity;
+import com.kidsconnect.domain.model.ResultSet;
+import com.kidsconnect.domain.model.Review;
 import com.kidsconnect.domain.model.Venue;
 
 
@@ -108,7 +110,11 @@ public class ActivityService extends EntityService<Activity>{
             
             DeepActivity deepActivity = new DeepActivity(activity, venue);
             
-            
+            ResultSet<Review> reviews = this.reviewfinder.findByActivity(activityId);
+            if (reviews.getTotalResultsSize() > 0)
+            {
+                deepActivity.setReviews(reviews.getResults());
+            }
 
 	    this.objectMapper.getSerializationConfig().withView(com.kidsconnect.domain.external.DomainView.Deep.class);
 	    return Response.ok(deepActivity).build();

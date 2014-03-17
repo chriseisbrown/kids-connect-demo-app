@@ -60,7 +60,7 @@ public class ReviewCSVFileReader {
 	    int rowCount = 0;
 
 	    while ((str = in.readLine()) != null) {
-		System.out.println(str);
+		//System.out.println(str);
 		if(rowCount !=0){
 		    String[] fields = str.split(",");
 		    // get fields from row, put in member variables
