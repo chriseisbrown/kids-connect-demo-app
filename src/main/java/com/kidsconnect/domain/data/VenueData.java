@@ -16,6 +16,15 @@ public interface VenueData {
     public String getTransport();
     public String getAccess();
     
+    public boolean getBabyChange();
+    public boolean getLiftAccess();	
+    public boolean getBuggyParking();	
+    public boolean getBreastFeeding();	
+    public boolean getBottleWarming();	
+    public boolean getVendingMachine();	
+    public boolean getStepFree();
+    public boolean getRefreshments();
+    
     Venue makeDomainWrapper();
     
 }

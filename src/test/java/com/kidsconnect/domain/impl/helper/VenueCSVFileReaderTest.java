@@ -12,7 +12,7 @@ public class VenueCSVFileReaderTest {
     
     @Test (timeout=50)
     public void testLoadedCorrectNumberofRows() {
-	assertEquals(9, underTest.count());
+	assertEquals(10, underTest.count());
     }
 
 }

@@ -44,6 +44,38 @@ public class Venue implements DomainClass
 	return delegate.getAccess();
     }
     
+    public boolean getBabyChange(){
+	return delegate.getBabyChange();
+    }
+    
+    public boolean getLiftAccess(){
+	return delegate.getLiftAccess();
+    }
+    
+    public boolean getBuggyParking(){
+	return delegate.getBuggyParking();
+    }
+    
+    public boolean getBreastFeeding(){
+	return delegate.getBreastFeeding();
+    }
+    
+    public boolean getBottleWarming(){
+	return delegate.getBottleWarming();
+    }
+    
+    public boolean getVendingMachine(){
+	return delegate.getVendingMachine();
+    }
+    
+    public boolean getStepFree(){
+	return delegate.getStepFree();
+    }
+    
+    public boolean getRefreshments(){
+	return delegate.getRefreshments();
+    }
+    
     @Override
     public String toString() {
 	return "Venue [delegate=" + delegate + "]";

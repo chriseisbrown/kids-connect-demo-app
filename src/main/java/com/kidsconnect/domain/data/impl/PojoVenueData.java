@@ -18,6 +18,14 @@ public class PojoVenueData implements VenueData {
     public String transport;
     public String access;
 
+    public boolean babyChange;
+    public boolean liftAccess;	
+    public boolean buggyParking;	
+    public boolean breastFeeding;	
+    public boolean bottleWarming;	
+    public boolean vendingMachine;	
+    public boolean stepFree;
+    public boolean refreshments;
     
 
     public PojoVenueData(String id, String name) {
@@ -42,9 +50,63 @@ public class PojoVenueData implements VenueData {
 	this.access = access;
     }
 
+    public PojoVenueData(String venueId, String name, String address, 
+	    Borough borough, PostCode postCode, Location location,
+	    String transport, String access, boolean babyChange,
+	    boolean liftAccess, boolean buggyParking, boolean breastFeeding,
+	    boolean bottleWarming, boolean vendingMachine, boolean stepFree,
+	    boolean refreshments) {
+	super();
+	this.name = name;
+	this.address = address;
+	this.venueId = venueId;
+	this.borough = borough;
+	this.postCode = postCode;
+	this.location = location;
+	this.transport = transport;
+	this.access = access;
+	this.babyChange = babyChange;
+	this.liftAccess = liftAccess;
+	this.buggyParking = buggyParking;
+	this.breastFeeding = breastFeeding;
+	this.bottleWarming = bottleWarming;
+	this.vendingMachine = vendingMachine;
+	this.stepFree = stepFree;
+	this.refreshments = refreshments;
+    }
 
+    public boolean getBabyChange() {
+        return babyChange;
+    }
 
-    
+    public boolean getLiftAccess() {
+        return liftAccess;
+    }
+
+    public boolean getBuggyParking() {
+        return buggyParking;
+    }
+
+    public boolean getBreastFeeding() {
+        return breastFeeding;
+    }
+
+    public boolean getBottleWarming() {
+        return bottleWarming;
+    }
+
+    public boolean getVendingMachine() {
+        return vendingMachine;
+    }
+
+    public boolean getStepFree() {
+        return stepFree;
+    }
+
+    public boolean getRefreshments() {
+        return refreshments;
+    }
+
     @Override
     public String getName() {
 	return name;
@@ -94,7 +156,12 @@ public class PojoVenueData implements VenueData {
 	return "PojoVenueData [name=" + name + ", address=" + address
 		+ ", venueId=" + venueId + ", borough=" + borough
 		+ ", postCode=" + postCode + ", location=" + location
-		+ ", transport=" + transport + ", access=" + access + "]";
+		+ ", transport=" + transport + ", access=" + access
+		+ ", babyChange=" + babyChange + ", liftAccess=" + liftAccess
+		+ ", buggyParking=" + buggyParking + ", breastFeeding="
+		+ breastFeeding + ", bottleWarming=" + bottleWarming
+		+ ", vendingMachine=" + vendingMachine + ", stepFree="
+		+ stepFree + ", refreshments=" + refreshments + "]";
     }
 
     @Override

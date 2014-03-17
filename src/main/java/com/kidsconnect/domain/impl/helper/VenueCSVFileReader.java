@@ -58,7 +58,7 @@ public class VenueCSVFileReader {
 	    int rowCount = 0;
 
 	    while ((str = in.readLine()) != null) {
-		//System.out.println(str);
+		System.out.println(str);
 		if(rowCount !=0){
 		    String[] fields = str.split(",");
 		    // get fields from row, put in member variables
@@ -70,9 +70,16 @@ public class VenueCSVFileReader {
 			    new PostCode(fields[4]),	//postcode
 			    new Location(Double.parseDouble(fields[5]), Double.parseDouble(fields[6])),  //lat, long
 			    fields[7],		//transport
-			    fields[8]		//access
+			    fields[8],		//access
+		            Boolean.parseBoolean(fields[9]),    // babyChange;
+			    Boolean.parseBoolean(fields[10]),    // liftAccess;	
+		            Boolean.parseBoolean(fields[11]),    // buggyParking;	
+		            Boolean.parseBoolean(fields[12]),    // breastFeeding;	
+		            Boolean.parseBoolean(fields[13]),    // bottleWarming;	
+		            Boolean.parseBoolean(fields[14]),    // vendingMachine;	
+		            Boolean.parseBoolean(fields[15]),    // stepFree;
+		            Boolean.parseBoolean(fields[16])   // refreshments;
 			    );		
-
 		    
 		    venueMap.put(p.venueId, p.makeDomainWrapper());
 		    
