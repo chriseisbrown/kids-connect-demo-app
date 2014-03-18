@@ -82,7 +82,7 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
         'chkBooking': 'activityDetail_chkBooking',
         'chkLimitedPlaces': 'activityDetail_chkLimitedPlaces',
         'mobilegridcell_89': 'activityDetail_mobilegridcell_89',
-        'mobilecollapsblock_90': 'activityDetail_mobilecollapsblock_90',
+        'collapsblockVenue': 'activityDetail_collapsblockVenue',
         'collapseHdrVenueName': 'activityDetail_collapseHdrVenueName',
         'collapseHdrVenueContent': 'activityDetail_collapseHdrVenueContent',
         'grdAddress': 'activityDetail_grdAddress',
@@ -102,7 +102,7 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
         'mobilegridcell_112': 'activityDetail_mobilegridcell_112',
         'lblVenueTransport': 'activityDetail_lblVenueTransport',
         'mobilegridcell_109': 'activityDetail_mobilegridcell_109',
-        'mobilecheckboxgroup_117': 'activityDetail_mobilecheckboxgroup_117',
+        'chkboxgrpFacilities': 'activityDetail_chkboxgrpFacilities',
         'chkBabyChanging': 'activityDetail_chkBabyChanging',
         'chkBottleWarming': 'activityDetail_chkBottleWarming',
         'chkLiftAccess': 'activityDetail_chkLiftAccess',
@@ -111,6 +111,27 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
         'chkBuggyParking': 'activityDetail_chkBuggyParking',
         'chkBreastFeeding': 'activityDetail_chkBreastFeeding',
         'chkVendingMachine': 'activityDetail_chkVendingMachine',
+        'mobilegridcell_128': 'activityDetail_mobilegridcell_128',
+        'collapsblockReviews': 'activityDetail_collapsblockReviews',
+        'mobilecollapsblockheader_130': 'activityDetail_mobilecollapsblockheader_130',
+        'mobilecollapsblockcontent_131': 'activityDetail_mobilecollapsblockcontent_131',
+        'grdReview': 'activityDetail_grdReview',
+        'mobilegridcell_133': 'activityDetail_mobilegridcell_133',
+        'mobilegrid_137': 'activityDetail_mobilegrid_137',
+        'mobilegridcell_138': 'activityDetail_mobilegridcell_138',
+        'mobilegrid_143': 'activityDetail_mobilegrid_143',
+        'mobilegridcell_144': 'activityDetail_mobilegridcell_144',
+        'lblRating': 'activityDetail_lblRating',
+        'mobilegridcell_145': 'activityDetail_mobilegridcell_145',
+        'lblReviewRating': 'activityDetail_lblReviewRating',
+        'mobilegridcell_140': 'activityDetail_mobilegridcell_140',
+        'txtReviewNarrative': 'activityDetail_txtReviewNarrative',
+        'mobilegridcell_142': 'activityDetail_mobilegridcell_142',
+        'mobilegrid_151': 'activityDetail_mobilegrid_151',
+        'mobilegridcell_152': 'activityDetail_mobilegridcell_152',
+        'lblReviewUserName': 'activityDetail_lblReviewUserName',
+        'mobilegridcell_153': 'activityDetail_mobilegridcell_153',
+        'ldbReviewDateTime': 'activityDetail_ldbReviewDateTime',
         'lblId': 'activityDetail_lblId',
         'lblVenueId': 'activityDetail_lblVenueId'
     };
@@ -250,6 +271,26 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
             'PATH': ['venue', 'postCode', 'code'],
             'ID': 'lblVenuePostCode',
             'ATTR': '@'
+        }, {
+            'PATH': ['reviews'],
+            'ID': 'grdReview',
+            'SET': [{
+                'PATH': ['narrative'],
+                'ID': 'txtReviewNarrative',
+                'ATTR': 'value'
+            }, {
+                'PATH': ['userDisplayName'],
+                'ID': 'lblReviewUserName',
+                'ATTR': '@'
+            }, {
+                'PATH': ['datetime'],
+                'ID': 'ldbReviewDateTime',
+                'ATTR': '@'
+            }, {
+                'PATH': ['rating'],
+                'ID': 'lblReviewRating',
+                'ATTR': '@'
+            }]
         }],
         'requestMapping': [{
             'PATH': ['activity-id'],
@@ -312,9 +353,13 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
     screen_3671_elementsExtraJS = activityDetail_elementsExtraJS = function() {
         // screen (activityDetail) extra code
 
-        /* mobilecollapsblock_90 */
+        /* collapsblockVenue */
 
-        $("#activityDetail_mobilecollapsblock_90 .ui-collapsible-heading-toggle").attr("tabindex", "2");
+        $("#activityDetail_collapsblockVenue .ui-collapsible-heading-toggle").attr("tabindex", "2");
+
+        /* collapsblockReviews */
+
+        $("#activityDetail_collapsblockReviews .ui-collapsible-heading-toggle").attr("tabindex", "4");
 
     }
 
