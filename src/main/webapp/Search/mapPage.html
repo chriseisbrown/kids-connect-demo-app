@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>
+            mapPage
+        </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="initial-scale=1" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <link href="files/resources/lib/theme/jqm/jqm.css" rel="stylesheet" />
+        <link href="files/resources/lib/theme/ios7/ios7.css" rel="stylesheet" />
+        <link href="files/resources/lib/jquerymobile/1.3.0/jquery.mobile.structure-1.3.0.css"
+        rel="stylesheet" />
+        <script type="text/javascript" src="files/resources/lib/store/json2.js">
+        </script>
+        <script type="text/javascript" src="files/resources/lib/jquery/jquery-1.8.2.js">
+        </script>
+        <script type="text/javascript">
+                    $(document).bind("mobileinit", function()
+            {
+                if (navigator.userAgent.toLowerCase().indexOf("android") != -1)
+                {
+                    $.mobile.defaultPageTransition = 'none';
+                    $.mobile.defaultDialogTransition = 'none';
+                }
+                if (navigator.userAgent.toLowerCase().indexOf("msie") != -1)
+                {
+                    $.mobile.allowCrossDomainPages = true;
+                    $.support.cors = true;
+                }
+            });
+        </script>
+        <script type="text/javascript" src="files/resources/lib/jquerymobile/1.3.0/jquery.mobile-1.3.0.js">
+        </script>
+        <script type="text/javascript" src="files/resources/js/mobilebase.js">
+        </script>
+        <script type="text/javascript" src="files/resources/lib/event/customEventHandler.js">
+        </script>
+        <script type="text/javascript" src="files/resources/lib/base/sha1.js">
+        </script>
+        <script type="text/javascript" src="files/resources/lib/base/oauth.js">
+        </script>
+        <script type="text/javascript" src="files/resources/lib/base/contexts.js">
+        </script>
+        <script type="text/javascript" src="files/resources/lib/base/jsonpath.js">
+        </script>
+        <script type="text/javascript" src="files/resources/lib/base/jquery.xml2json.min.js">
+        </script>
+        <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true">
+        </script>
+        <script type="text/javascript" src="files/resources/lib/jquery-ui-map/jquery.ui.map.full.min.js">
+        </script>
+        <script type="text/javascript" src="files/resources/lib/base/appery.js">
+        </script>
+        <script type="text/javascript" src="files/resources/lib/get_target_platform.js">
+        </script>
+        <script type="text/javascript" src="files/resources/lib/cordova.js">
+        </script>
+        <script type="text/javascript" src="files/resources/lib/childbrowser.js">
+        </script>
+        <link href="files/resources/css/mobilebase.css" rel="stylesheet" type="text/css"
+        />
+        <script type="text/javascript" src="files/views/assets/js/TwitterSearchJS.js">
+        </script>
+        <script type="text/javascript" src="files/views/assets/js/locationHelper.js">
+        </script>
+        <script type="text/javascript" src="files/views/assets/js/services/service.js">
+        </script>
+    </head>
+    
+    <body>
+        <script language="JavaScript" type="text/javascript">
+                if (navigator.userAgent.match(/iP/i))
+        {
+            $(window).bind('orientationchange', function(event)
+            {
+                $('meta[name="viewport"]').attr('content', 'initial-scale=1.0,maximum-scale=1.0, ' + ((window.orientation == 90 || window.orientation == -90 || window.orientation == 270) ? "height=device-width,width=device-height" : "height=device-height,width=device-width"));
+            }).trigger('orientationchange');
+        }
+        </script>
+        <div data-role="page" style="min-height:480px;" dsid="mapPage" id="mapPage" class="type-interior"
+        data-theme="a" data-add-back-btn="false" data-back-btn-text="Back">
+            <!-- mobileheader -->
+            <div data-role="header" data-position="fixed" data-theme="a" name="mobileheader"
+            id="mapPage_mobileheader" class=' mapPage_mobileheader '>
+                <h1 dsid="mobileheader">
+                    KidsConnect
+                </h1>
+                <!-- btnSettings -->
+                <a data-role="button" name="btnSettings" dsid="btnSettings" class='ui-btn-left   mapPage_btnSettings'
+                id="mapPage_btnSettings" data-corners="true" data-icon="arrow-r" data-iconpos="left"
+                x-apple-data-detectors="false" data-inline='true' data-mini='true' data-theme="a"
+                tabindex="3">
+                Settings
+                </a>
+                <!-- btnSearch -->
+                <a data-role="button" name="btnSearch" dsid="btnSearch" class='ui-btn-right   mapPage_btnSearch'
+                id="mapPage_btnSearch" data-corners="true" data-icon="arrow-l" data-iconpos="left"
+                x-apple-data-detectors="false" data-inline='true' data-mini='true' data-theme="a"
+                tabindex="4">
+                Search
+                </a>
+            </div>
+            <!-- mobilecontainer -->
+            <div data-role="content" id="mapPage_mobilecontainer" name="mobilecontainer" class=" mapPage_mobilecontainer"
+            dsid="mobilecontainer" data-theme="a">
+                <link href="mapPage.css" rel="stylesheet" type="text/css" />
+                <script type="text/javascript" src="mapPage.js">
+                </script>
+                <!-- googlemap_1 -->
+                <div id="mapPage_googlemap_1" dsid="googlemap_1" name="googlemap_1" tiggzitype="object"
+                apperytype="object" class=' mapPage_googlemap_1' style='width:100%;'>
+                    <img class=' mapPage_googlemap_1' src="http://assets1.geocommons.com/d51ab1366bec6a2c4954db979e5921bd4cc140db/images/no_preview_map.png?1311276822"
+                    />
+                </div>
+                <ul data-role="listview" id="mapPage_googlemap_1_markers" name="googlemap_1_markers"
+                dsid="googlemap_1_markers" style="display:none">
+                    <!-- marker_2 -->
+                    <li id="mapPage_marker_2" name="marker_2" dsid="marker_2" tiggzitype="marker" apperytype="marker"
+                    rendered="true" latitude="" longitude="" text="Add Components Here" address="San Francisco, CA"
+                    show_info="true" style="display:none">
+                        <div id="mapPage_marker_2_infoWindow" name="marker_2_infoWindowContent" class='mapPage_marker_2'>
+                        </div>
+                    </li>
+                </ul>
+                <!-- mobileSearchbar -->
+                <div data-role="fieldcontain" class="mapPage_mobileSearchbar ">
+                    <div id="mapPage_mobileSearchbar-cover-div">
+                        <img id="mapPage_mobileSearchbar-cover-img" src="files/resources/image/icon-search-cover.png"
+                        />
+                    </div>
+                    <input type="search" name="mobileSearchbar" id="mapPage_mobileSearchbar" dsid="mobileSearchbar"
+                    value="" placeholder="" data-theme="a" tabindex="2" class=' mapPage_mobileSearchbar '
+                    />
+                </div>
+                <!-- lblResults -->
+                <div name="lblResults" id="mapPage_lblResults" dsid="lblResults" data-role="appery_label"
+                class=' mapPage_lblResults '>
+                    0
+                </div>
+                <!-- grdResult -->
+                <div class="mapPage_grdResult_wrapper">
+                    <table id="mapPage_grdResult" class=" mapPage_grdResult" dsid="grdResult" name="grdResult"
+                    cellpadding=0 cellspacing=0>
+                        <col style="width:auto;" />
+                        <col style="width:82px;" />
+                        <tr class="mapPage_grdResult_row_0">
+                            <!-- mobilegridcell_8 -->
+                            <td id="mapPage_mobilegridcell_8" name="mobilegridcell_8" class="mapPage_mobilegridcell_8"
+                            colspan=1 rowspan=1>
+                                <div class="cell-wrapper">
+                                    <!-- lblActivityName -->
+                                    <div name="lblActivityName" id="mapPage_lblActivityName" dsid="lblActivityName"
+                                    data-role="appery_label" class=' mapPage_lblActivityName '>
+                                        activityName
+                                    </div>
+                                </div>
+                            </td>
+                            <!-- mobilegridcell_9 -->
+                            <td id="mapPage_mobilegridcell_9" name="mobilegridcell_9" class="mapPage_mobilegridcell_9"
+                            colspan=1 rowspan=1>
+                                <div class="cell-wrapper">
+                                    <!-- lblActivityType -->
+                                    <div name="lblActivityType" id="mapPage_lblActivityType" dsid="lblActivityType"
+                                    data-role="appery_label" class=' mapPage_lblActivityType '>
+                                        activityType
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="mapPage_grdResult_row_1">
+                            <!-- mobilegridcell_10 -->
+                            <td id="mapPage_mobilegridcell_10" name="mobilegridcell_10" class="mapPage_mobilegridcell_10"
+                            colspan=1 rowspan=1>
+                                <div class="cell-wrapper">
+                                    <!-- lblDescription -->
+                                    <div name="lblDescription" id="mapPage_lblDescription" dsid="lblDescription" data-role="appery_label"
+                                    class=' mapPage_lblDescription '>
+                                        activityDescription
+                                    </div>
+                                </div>
+                            </td>
+                            <!-- mobilegridcell_11 -->
+                            <td id="mapPage_mobilegridcell_11" name="mobilegridcell_11" class="mapPage_mobilegridcell_11"
+                            colspan=1 rowspan=1>
+                                <div class="cell-wrapper">
+                                    <!-- lblNada -->
+                                    <div name="lblNada" id="mapPage_lblNada" dsid="lblNada" data-role="appery_label"
+                                    class=' mapPage_lblNada '>
+                                        activityId
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="mapPage_grdResult_row_2">
+                            <!-- mobilegridcell_12 -->
+                            <td id="mapPage_mobilegridcell_12" name="mobilegridcell_12" class="mapPage_mobilegridcell_12"
+                            colspan=1 rowspan=1>
+                                <div class="cell-wrapper">
+                                    <!-- lblAgeRange -->
+                                    <div name="lblAgeRange" id="mapPage_lblAgeRange" dsid="lblAgeRange" data-role="appery_label"
+                                    class=' mapPage_lblAgeRange '>
+                                        activityAgeRange
+                                    </div>
+                                </div>
+                            </td>
+                            <!-- mobilegridcell_13 -->
+                            <td id="mapPage_mobilegridcell_13" name="mobilegridcell_13" class="mapPage_mobilegridcell_13"
+                            colspan=1 rowspan=1>
+                                <div class="cell-wrapper">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="mapPage_grdResult_row_3">
+                            <!-- mobilegridcell_14 -->
+                            <td id="mapPage_mobilegridcell_14" name="mobilegridcell_14" class="mapPage_mobilegridcell_14"
+                            colspan=1 rowspan=1>
+                                <div class="cell-wrapper">
+                                    <!-- lblVenueName -->
+                                    <div name="lblVenueName" id="mapPage_lblVenueName" dsid="lblVenueName" data-role="appery_label"
+                                    class=' mapPage_lblVenueName '>
+                                        activityVenueName
+                                    </div>
+                                </div>
+                            </td>
+                            <!-- mobilegridcell_15 -->
+                            <td id="mapPage_mobilegridcell_15" name="mobilegridcell_15" class="mapPage_mobilegridcell_15"
+                            colspan=1 rowspan=1>
+                                <div class="cell-wrapper">
+                                    <!-- lblVenueId -->
+                                    <div name="lblVenueId" id="mapPage_lblVenueId" dsid="lblVenueId" data-role="appery_label"
+                                    class=' mapPage_lblVenueId '>
+                                        actVenueId
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- mobilefooter -->
+            <div data-role="footer" data-position="fixed" class=" mapPage_mobilefooter" name="mobilefooter"
+            dsid="mobilefooter" id="mapPage_mobilefooter" data-theme="a">
+            </div>
+            <!-- pnlSettings -->
+            <div data-role="panel" tabindex="-1" data-position="left" data-display="overlay"
+            id="mapPage_pnlSettings" class=" mapPage_pnlSettings" name="pnlSettings" dsid="pnlSettings"
+            data-theme="a">
+                <!-- btnCloseSettings -->
+                <a data-role="button" name="btnCloseSettings" dsid="btnCloseSettings" class='  mapPage_btnCloseSettings'
+                id="mapPage_btnCloseSettings" data-corners="true" data-icon="arrow-l" data-iconpos="left"
+                x-apple-data-detectors="false" data-mini="false" data-theme="a" tabindex="7">
+                Close Settings
+                </a>
+                <!-- mobilelist_31 -->
+                <ul data-role="listview" id="mapPage_mobilelist_31" class=' mapPage_mobilelist_31 '
+                name="mobilelist_31" dsid="mobilelist_31" data-inset="true" data-theme="a" data-divider-theme="b"
+                data-count-theme="b" style="">
+                    <!-- lstProfile -->
+                    <li onclick="" class=' mapPage_lstProfile '>
+                        <a id="mapPage_lstProfile" name="lstProfile" dsid="lstProfile" tabindex="5" class=' mapPage_lstProfile '>
+                        <h3>Profile</h3>
+                        </a>
+                    </li>
+                    <!-- mobilelistitem_34 -->
+                    <li onclick="" class=' mapPage_mobilelistitem_34 '>
+                        <a id="mapPage_mobilelistitem_34" name="mobilelistitem_34" dsid="mobilelistitem_34"
+                        tabindex="5" class=' mapPage_mobilelistitem_34 '>
+                        <h3>Settings</h3>
+                        </a>
+                    </li>
+                    <!-- mobilelistitem_36 -->
+                    <li onclick="" class=' mapPage_mobilelistitem_36 '>
+                        <a id="mapPage_mobilelistitem_36" name="mobilelistitem_36" dsid="mobilelistitem_36"
+                        tabindex="5" class=' mapPage_mobilelistitem_36 '>
+                        <h3>Help</h3>
+                        </a>
+                    </li>
+                    <!-- mobilelistitem_38 -->
+                    <li onclick="" class=' mapPage_mobilelistitem_38 '>
+                        <a id="mapPage_mobilelistitem_38" name="mobilelistitem_38" dsid="mobilelistitem_38"
+                        tabindex="5" class=' mapPage_mobilelistitem_38 '>
+                        <h3>Send Feedback</h3>
+                        </a>
+                    </li>
+                </ul>
+                <!-- mobilelabel_78 -->
+                <div name="mobilelabel_78" id="mapPage_mobilelabel_78" dsid="mobilelabel_78" data-role="appery_label"
+                class=' mapPage_mobilelabel_78 '>
+                    v 1.0
+                </div>
+            </div>
+            <!-- pnlSearch -->
+            <div data-role="panel" tabindex="-1" data-position="right" data-display="overlay"
+            id="mapPage_pnlSearch" class=" mapPage_pnlSearch" name="pnlSearch" dsid="pnlSearch"
+            data-theme="a">
+                <!-- btnCloseSearch -->
+                <a data-role="button" name="btnCloseSearch" dsid="btnCloseSearch" class='  mapPage_btnCloseSearch'
+                id="mapPage_btnCloseSearch" data-corners="true" data-icon="arrow-r" data-iconpos="left"
+                x-apple-data-detectors="false" data-mini="false" data-theme="a" tabindex="6">
+                Close Search
+                </a>
+                <!-- gridCriteria -->
+                <div class="mapPage_gridCriteria_wrapper">
+                    <table id="mapPage_gridCriteria" class=" mapPage_gridCriteria" dsid="gridCriteria"
+                    name="gridCriteria" cellpadding=0 cellspacing=0>
+                        <col style="width:129px;" />
+                        <col style="width:auto;" />
+                        <tr class="mapPage_gridCriteria_row_0">
+                            <!-- mobilegridcell_42 -->
+                            <td id="mapPage_mobilegridcell_42" name="mobilegridcell_42" class="mapPage_mobilegridcell_42"
+                            colspan=1 rowspan=1>
+                                <div class="cell-wrapper">
+                                    <!-- lblDistance -->
+                                    <div name="lblDistance" id="mapPage_lblDistance" dsid="lblDistance" data-role="appery_label"
+                                    class=' mapPage_lblDistance '>
+                                        Distance (miles)
+                                    </div>
+                                </div>
+                            </td>
+                            <!-- mobilegridcell_43 -->
+                            <td id="mapPage_mobilegridcell_43" name="mobilegridcell_43" class="mapPage_mobilegridcell_43"
+                            colspan=1 rowspan=1>
+                                <div class="cell-wrapper">
+                                    <!-- inputDistance -->
+                                    <div data-role="fieldcontain" class="mapPage_inputDistance ">
+                                        <input type="text" name="inputDistance" dsid="inputDistance" value="0.7" placeholder=""
+                                        id="mapPage_inputDistance" tabindex="8" data-theme="a" class=' mapPage_inputDistance '
+                                        />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="mapPage_gridCriteria_row_1">
+                            <!-- mobilegridcell_44 -->
+                            <td id="mapPage_mobilegridcell_44" name="mobilegridcell_44" class="mapPage_mobilegridcell_44"
+                            colspan=1 rowspan=1>
+                                <div class="cell-wrapper">
+                                    <!-- lblFree -->
+                                    <div name="lblFree" id="mapPage_lblFree" dsid="lblFree" data-role="appery_label"
+                                    class=' mapPage_lblFree '>
+                                        Free
+                                    </div>
+                                </div>
+                            </td>
+                            <!-- mobilegridcell_45 -->
+                            <td id="mapPage_mobilegridcell_45" name="mobilegridcell_45" class="mapPage_mobilegridcell_45"
+                            colspan=1 rowspan=1>
+                                <div class="cell-wrapper">
+                                    <!-- selectFree -->
+                                    <div data-role="fieldcontain" class="mapPage_selectFree ">
+                                        <select name="selectFree" id="mapPage_selectFree" dsid="selectFree" data-theme="a"
+                                        data-inline="false" data-mini="false" data-icon="arrow-d" data-iconpos="right" data-native-menu="false"
+                                        tabindex="18" appery-class="mapPage_selectFree">
+                                            <option id="mapPage_selectFree-0" value="ANY" reRender="selectFree" dsid="selectFree-0"
+                                            selected="selected">
+                                                Any
+                                            </option>
+                                            <option id="mapPage_selectFree-1" value="true" reRender="selectFree" dsid="selectFree-1">
+                                                Free
+                                            </option>
+                                            <option id="mapPage_selectFree-2" value="false" reRender="selectFree" dsid="selectFree-2">
+                                                Charges
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="mapPage_gridCriteria_row_2">
+                            <!-- mobilegridcell_49 -->
+                            <td id="mapPage_mobilegridcell_49" name="mobilegridcell_49" class="mapPage_mobilegridcell_49"
+                            colspan=1 rowspan=1>
+                                <div class="cell-wrapper">
+                                    <!-- lblBookingReqd -->
+                                    <div name="lblBookingReqd" id="mapPage_lblBookingReqd" dsid="lblBookingReqd" data-role="appery_label"
+                                    class=' mapPage_lblBookingReqd '>
+                                        Booking Required
+                                    </div>
+                                </div>
+                            </td>
+                            <!-- mobilegridcell_50 -->
+                            <td id="mapPage_mobilegridcell_50" name="mobilegridcell_50" class="mapPage_mobilegridcell_50"
+                            colspan=1 rowspan=1>
+                                <div class="cell-wrapper">
+                                    <!-- selectBooking -->
+                                    <div data-role="fieldcontain" class="mapPage_selectBooking ">
+                                        <select name="selectBooking" id="mapPage_selectBooking" dsid="selectBooking" data-theme="a"
+                                        data-inline="false" data-mini="false" data-icon="arrow-d" data-iconpos="right" data-native-menu="false"
+                                        tabindex="17" appery-class="mapPage_selectBooking">
+                                            <option id="mapPage_selectBooking-0" value="true" reRender="selectBooking" dsid="selectBooking-0">
+                                                Yes
+                                            </option>
+                                            <option id="mapPage_selectBooking-1" value="false" reRender="selectBooking" dsid="selectBooking-1">
+                                                No
+                                            </option>
+                                            <option id="mapPage_selectBooking-2" value="ANY" reRender="selectBooking" dsid="selectBooking-2"
+                                            selected="selected">
+                                                Any
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="mapPage_gridCriteria_row_3">
+                            <!-- mobilegridcell_61 -->
+                            <td id="mapPage_mobilegridcell_61" name="mobilegridcell_61" class="mapPage_mobilegridcell_61"
+                            colspan=1 rowspan=1>
+                                <div class="cell-wrapper">
+                                    <!-- lblSuitableFor -->
+                                    <div name="lblSuitableFor" id="mapPage_lblSuitableFor" dsid="lblSuitableFor" data-role="appery_label"
+                                    class=' mapPage_lblSuitableFor '>
+                                        Suitable For
+                                    </div>
+                                </div>
+                            </td>
+                            <!-- mobilegridcell_62 -->
+                            <td id="mapPage_mobilegridcell_62" name="mobilegridcell_62" class="mapPage_mobilegridcell_62"
+                            colspan=1 rowspan=1>
+                                <div class="cell-wrapper">
+                                    <!-- selectSuitable -->
+                                    <div data-role="fieldcontain" class="mapPage_selectSuitable ">
+                                        <select name="selectSuitable" id="mapPage_selectSuitable" dsid="selectSuitable"
+                                        data-theme="a" data-inline="false" data-mini="false" data-icon="arrow-d" data-iconpos="right"
+                                        data-native-menu="false" tabindex="19" appery-class="mapPage_selectSuitable">
+                                            <option id="mapPage_selectSuitable-0" value="ANY" reRender="selectSuitable" dsid="selectSuitable-0"
+                                            selected="selected">
+                                                Any
+                                            </option>
+                                            <option id="mapPage_selectSuitable-1" value="FROM18MONTHS" reRender="selectSuitable"
+                                            dsid="selectSuitable-1">
+                                                From 18 months
+                                            </option>
+                                            <option id="mapPage_selectSuitable-2" value="YRS2ANDUNDER" reRender="selectSuitable"
+                                            dsid="selectSuitable-2">
+                                                2 and under
+                                            </option>
+                                            <option id="mapPage_selectSuitable-3" value="YRS5ANDUNDER" reRender="selectSuitable"
+                                            dsid="selectSuitable-3">
+                                                5 and under
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="mapPage_gridCriteria_row_4">
+                            <!-- mobilegridcell_66 -->
+                            <td id="mapPage_mobilegridcell_66" name="mobilegridcell_66" class="mapPage_mobilegridcell_66"
+                            colspan=1 rowspan=1>
+                                <div class="cell-wrapper">
+                                    <!-- lblActivity -->
+                                    <div name="lblActivity" id="mapPage_lblActivity" dsid="lblActivity" data-role="appery_label"
+                                    class=' mapPage_lblActivity '>
+                                        Activity
+                                    </div>
+                                </div>
+                            </td>
+                            <!-- mobilegridcell_67 -->
+                            <td id="mapPage_mobilegridcell_67" name="mobilegridcell_67" class="mapPage_mobilegridcell_67"
+                            colspan=1 rowspan=1>
+                                <div class="cell-wrapper">
+                                    <!-- selectActivity -->
+                                    <div data-role="fieldcontain" class="mapPage_selectActivity ">
+                                        <select name="selectActivity" id="mapPage_selectActivity" dsid="selectActivity"
+                                        data-theme="a" data-inline="false" data-mini="false" data-icon="arrow-d" data-iconpos="right"
+                                        data-native-menu="false" tabindex="20" appery-class="mapPage_selectActivity">
+                                            <option id="mapPage_selectActivity-0" value="ANY" reRender="selectActivity" dsid="selectActivity-0"
+                                            selected="selected">
+                                                Any
+                                            </option>
+                                            <option id="mapPage_selectActivity-1" value="COOKING" reRender="selectActivity"
+                                            dsid="selectActivity-1">
+                                                Cooking
+                                            </option>
+                                            <option id="mapPage_selectActivity-2" value="STAYANDPLAY" reRender="selectActivity"
+                                            dsid="selectActivity-2">
+                                                StayAndPlay
+                                            </option>
+                                            <option id="mapPage_selectActivity-3" value="MUSICANDDANCE" reRender="selectActivity"
+                                            dsid="selectActivity-3">
+                                                Music and Dance
+                                            </option>
+                                            <option id="mapPage_selectActivity-4" value="PLAYGROUP" reRender="selectActivity"
+                                            dsid="selectActivity-4">
+                                                Playgroup
+                                            </option>
+                                            <option id="mapPage_selectActivity-5" value="DADS" reRender="selectActivity" dsid="selectActivity-5">
+                                                Dads
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- btnFacetedSearch -->
+                <a data-role="button" name="btnFacetedSearch" dsid="btnFacetedSearch" class='  mapPage_btnFacetedSearch'
+                id="mapPage_btnFacetedSearch" data-corners="true" data-icon="search" data-iconpos="left"
+                x-apple-data-detectors="false" data-mini="false" data-theme="a" tabindex="9">
+                Do Search
+                </a>
+            </div>
+        </div>
+    </body>
+
+</html>
