@@ -45,7 +45,7 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
         'mobilegridcell_39': 'activityDetail_mobilegridcell_39',
         'lblActivityLongName': 'activityDetail_lblActivityLongName',
         'mobilegridcell_41': 'activityDetail_mobilegridcell_41',
-        'mobilelabel_44': 'activityDetail_mobilelabel_44',
+        'lblActivityDescription': 'activityDetail_lblActivityDescription',
         'mobilegridcell_33': 'activityDetail_mobilegridcell_33',
         'mobilegrid_45': 'activityDetail_mobilegrid_45',
         'mobilegridcell_46': 'activityDetail_mobilegridcell_46',
@@ -69,9 +69,9 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
         'mobilegridcell_49': 'activityDetail_mobilegridcell_49',
         'mobilegrid_77': 'activityDetail_mobilegrid_77',
         'mobilegridcell_78': 'activityDetail_mobilegridcell_78',
-        'lblTimeLabel': 'activityDetail_lblTimeLabel',
+        'lblDisplayTimeStart': 'activityDetail_lblDisplayTimeStart',
         'mobilegridcell_79': 'activityDetail_mobilegridcell_79',
-        'lblDisplayTime': 'activityDetail_lblDisplayTime',
+        'lblDisplayTimeEnd': 'activityDetail_lblDisplayTimeEnd',
         'mobilegridcell_35': 'activityDetail_mobilegridcell_35',
         'mobilegrid_64': 'activityDetail_mobilegrid_64',
         'mobilegridcell_65': 'activityDetail_mobilegridcell_65',
@@ -116,15 +116,43 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
         'onSuccess': function(data) {},
         'onError': function(jqXHR, textStatus, errorThrown) {},
         'responseMapping': [{
+            'PATH': ['activity', 'displayAgeRange'],
+            'ID': 'lblDisplayAgeRange',
+            'ATTR': '@'
+        }, {
+            'PATH': ['activity', 'displayDay'],
+            'ID': 'lblDisplayDay',
+            'ATTR': '@'
+        }, {
+            'PATH': ['activity', 'narrative'],
+            'ID': 'lblDisplayNarrative',
+            'ATTR': '@'
+        }, {
+            'PATH': ['activity', 'description'],
+            'ID': 'lblActivityDescription',
+            'ATTR': '@'
+        }, {
+            'PATH': ['activity', 'end'],
+            'ID': 'lblDisplayTimeEnd',
+            'ATTR': '@'
+        }, {
+            'PATH': ['activity', 'start'],
+            'ID': 'lblDisplayTimeStart',
+            'ATTR': '@'
+        }, {
             'PATH': ['activity', 'name'],
             'ID': 'lblActivityLongName',
+            'ATTR': '@'
+        }, {
+            'PATH': ['activity', 'type'],
+            'ID': 'lblDisplayType',
             'ATTR': '@'
         }],
         'requestMapping': [{
             'PATH': ['activity-id'],
             'TYPE': 'STRING',
-            'ID': '___local_storage___',
-            'ATTR': 'activityIdentifier'
+            'ID': 'lblId',
+            'ATTR': '@'
         }]
     });
 
@@ -146,6 +174,12 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
     screen_3671_onLoad = activityDetail_onLoad = function() {
         screen_3671_elementsExtraJS();
         setText('activityDetail_lblId', localStorage.getItem('activityIdentifier'));
+        try {
+            KCActivityDetail.execute({})
+        } catch (ex) {
+            console.log(ex.name + '  ' + ex.message);
+            hideSpinner();
+        };
 
         // TODO fire device events only if necessary (with JS logic)
         activityDetail_deviceEvents();

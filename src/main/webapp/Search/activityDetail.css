@@ -83,8 +83,8 @@
 	padding: 0;
 	margin: 0;
 }
-/* mobilelabel_44 */
-.activityDetail_mobilelabel_44 {
+/* lblActivityDescription */
+.activityDetail_lblActivityDescription {
 	text-decoration: none; font-weight: normal; font-style: italic; text-align: left; font-family: Helvetica; font-size: 12px;
 	margin: 4px 0px 4px 0px;
 	word-wrap: break-word;
@@ -318,9 +318,9 @@
 	padding: 0;
 	margin: 0;
 }
-/* lblTimeLabel */
-.activityDetail_lblTimeLabel {
-	text-decoration: none; font-weight: normal; text-align: left; font-family: Helvetica; font-size: 10px;
+/* lblDisplayTimeStart */
+.activityDetail_lblDisplayTimeStart {
+	text-decoration: none; font-weight: bold; font-style: italic; text-align: left; font-family: Helvetica; font-size: 10px;
 	margin: 4px 0px 4px 0px;
 	word-wrap: break-word;
 }
@@ -334,8 +334,8 @@
 	padding: 0;
 	margin: 0;
 }
-/* lblDisplayTime */
-.activityDetail_lblDisplayTime {
+/* lblDisplayTimeEnd */
+.activityDetail_lblDisplayTimeEnd {
 	text-decoration: none; font-weight: bold; font-style: italic; text-align: left; font-family: Helvetica; font-size: 10px;
 	margin: 4px 0px 4px 0px;
 	word-wrap: break-word;
