@@ -39,6 +39,9 @@ Appery.AppPages = [{
 
 activityDetail_js = function(runBeforeShow) { /* Object & array with components "name-to-id" mapping */
     var n2id_buf = {
+        'btnMyEvents': 'activityDetail_btnMyEvents',
+        'lblId': 'activityDetail_lblId',
+        'lblVenueId': 'activityDetail_lblVenueId',
         'bigGrid': 'activityDetail_bigGrid',
         'mobilegridcell_29': 'activityDetail_mobilegridcell_29',
         'mobilegrid_38': 'activityDetail_mobilegrid_38',
@@ -71,17 +74,29 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
         'mobilegridcell_78': 'activityDetail_mobilegridcell_78',
         'lblDisplayTimeStart': 'activityDetail_lblDisplayTimeStart',
         'mobilegridcell_79': 'activityDetail_mobilegridcell_79',
+        'mobilelabel_175': 'activityDetail_mobilelabel_175',
+        'mobilegridcell_174': 'activityDetail_mobilegridcell_174',
         'lblDisplayTimeEnd': 'activityDetail_lblDisplayTimeEnd',
         'mobilegridcell_35': 'activityDetail_mobilegridcell_35',
         'mobilegrid_64': 'activityDetail_mobilegrid_64',
         'mobilegridcell_65': 'activityDetail_mobilegridcell_65',
         'lblDisplayNarrative': 'activityDetail_lblDisplayNarrative',
         'mobilegridcell_37': 'activityDetail_mobilegridcell_37',
+        'mobilegrid_159': 'activityDetail_mobilegrid_159',
+        'mobilegridcell_160': 'activityDetail_mobilegridcell_160',
+        'lblPhone': 'activityDetail_lblPhone',
+        'mobilegridcell_161': 'activityDetail_mobilegridcell_161',
+        'lblActivityPhone': 'activityDetail_lblActivityPhone',
+        'mobilegridcell_162': 'activityDetail_mobilegridcell_162',
+        'lblLink': 'activityDetail_lblLink',
+        'mobilegridcell_163': 'activityDetail_mobilegridcell_163',
+        'mlblActivityLink': 'activityDetail_mlblActivityLink',
+        'mobilegridcell_89': 'activityDetail_mobilegridcell_89',
         'mobilecheckboxgroup_85': 'activityDetail_mobilecheckboxgroup_85',
         'chkFree': 'activityDetail_chkFree',
         'chkBooking': 'activityDetail_chkBooking',
         'chkLimitedPlaces': 'activityDetail_chkLimitedPlaces',
-        'mobilegridcell_89': 'activityDetail_mobilegridcell_89',
+        'mobilegridcell_128': 'activityDetail_mobilegridcell_128',
         'collapsblockVenue': 'activityDetail_collapsblockVenue',
         'collapseHdrVenueName': 'activityDetail_collapseHdrVenueName',
         'collapseHdrVenueContent': 'activityDetail_collapseHdrVenueContent',
@@ -91,7 +106,10 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
         'mobilegridcell_100': 'activityDetail_mobilegridcell_100',
         'lblVenueAddress': 'activityDetail_lblVenueAddress',
         'mobilegridcell_102': 'activityDetail_mobilegridcell_102',
+        'mobilegrid_169': 'activityDetail_mobilegrid_169',
+        'mobilegridcell_170': 'activityDetail_mobilegridcell_170',
         'lblVenueBorough': 'activityDetail_lblVenueBorough',
+        'mobilegridcell_171': 'activityDetail_mobilegridcell_171',
         'lblVenuePostCode': 'activityDetail_lblVenuePostCode',
         'mobilegridcell_104': 'activityDetail_mobilegridcell_104',
         'lblVenueAccess': 'activityDetail_lblVenueAccess',
@@ -111,9 +129,9 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
         'chkBuggyParking': 'activityDetail_chkBuggyParking',
         'chkBreastFeeding': 'activityDetail_chkBreastFeeding',
         'chkVendingMachine': 'activityDetail_chkVendingMachine',
-        'mobilegridcell_128': 'activityDetail_mobilegridcell_128',
+        'mobilegridcell_158': 'activityDetail_mobilegridcell_158',
         'collapsblockReviews': 'activityDetail_collapsblockReviews',
-        'mobilecollapsblockheader_130': 'activityDetail_mobilecollapsblockheader_130',
+        'collapsblockhdrReviews': 'activityDetail_collapsblockhdrReviews',
         'mobilecollapsblockcontent_131': 'activityDetail_mobilecollapsblockcontent_131',
         'grdReview': 'activityDetail_grdReview',
         'mobilegridcell_133': 'activityDetail_mobilegridcell_133',
@@ -131,9 +149,7 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
         'mobilegridcell_152': 'activityDetail_mobilegridcell_152',
         'lblReviewUserName': 'activityDetail_lblReviewUserName',
         'mobilegridcell_153': 'activityDetail_mobilegridcell_153',
-        'ldbReviewDateTime': 'activityDetail_ldbReviewDateTime',
-        'lblId': 'activityDetail_lblId',
-        'lblVenueId': 'activityDetail_lblVenueId'
+        'ldbReviewDateTime': 'activityDetail_ldbReviewDateTime'
     };
 
     if ("n2id" in window && window.n2id !== undefined) {
@@ -196,6 +212,10 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
             'ID': 'chkLimitedPlaces',
             'ATTR': 'checked'
         }, {
+            'PATH': ['activity', 'contactPhone'],
+            'ID': 'lblActivityPhone',
+            'ATTR': '@'
+        }, {
             'PATH': ['activity', 'description'],
             'ID': 'lblActivityDescription',
             'ATTR': '@'
@@ -214,6 +234,10 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
         }, {
             'PATH': ['activity', 'type'],
             'ID': 'lblDisplayType',
+            'ATTR': '@'
+        }, {
+            'PATH': ['activity', 'contactLink', 'url'],
+            'ID': 'mlblActivityLink',
             'ATTR': '@'
         }, {
             'PATH': ['venue', 'access'],

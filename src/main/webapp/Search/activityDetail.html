@@ -88,6 +88,13 @@
                 <h1 dsid="mobileheader1">
                     Activity
                 </h1>
+                <!-- btnMyEvents -->
+                <a data-role="button" name="btnMyEvents" dsid="btnMyEvents" class='ui-btn-right   activityDetail_btnMyEvents'
+                id="activityDetail_btnMyEvents" data-corners="true" data-icon="plus" data-iconpos="left"
+                x-apple-data-detectors="false" data-inline='true' data-mini='true' data-theme="b"
+                tabindex="6">
+                Events
+                </a>
             </div>
             <!-- activityContainer -->
             <div data-role="content" id="activityDetail_activityContainer" name="activityContainer"
@@ -95,6 +102,16 @@
                 <link href="activityDetail.css" rel="stylesheet" type="text/css" />
                 <script type="text/javascript" src="activityDetail.js">
                 </script>
+                <!-- lblId -->
+                <div name="lblId" id="activityDetail_lblId" dsid="lblId" data-role="appery_label"
+                class=' activityDetail_lblId '>
+                    Id
+                </div>
+                <!-- lblVenueId -->
+                <div name="lblVenueId" id="activityDetail_lblVenueId" dsid="lblVenueId" data-role="appery_label"
+                class=' activityDetail_lblVenueId '>
+                    venueId
+                </div>
                 <!-- bigGrid -->
                 <div class="activityDetail_bigGrid_wrapper">
                     <table id="activityDetail_bigGrid" class=" activityDetail_bigGrid" dsid="bigGrid"
@@ -161,7 +178,7 @@
                                                         <div class="activityDetail_mobilegrid_50_wrapper">
                                                             <table id="activityDetail_mobilegrid_50" class=" activityDetail_mobilegrid_50" dsid="mobilegrid_50"
                                                             name="mobilegrid_50" cellpadding=0 cellspacing=0>
-                                                                <col style="width:auto;" />
+                                                                <col style="width:46px;" />
                                                                 <col style="width:auto;" />
                                                                 <tr class="activityDetail_mobilegrid_50_row_0">
                                                                     <!-- mobilegridcell_51 -->
@@ -239,7 +256,7 @@
                                                         <div class="activityDetail_mobilegrid_70_wrapper">
                                                             <table id="activityDetail_mobilegrid_70" class=" activityDetail_mobilegrid_70" dsid="mobilegrid_70"
                                                             name="mobilegrid_70" cellpadding=0 cellspacing=0>
-                                                                <col style="width:auto;" />
+                                                                <col style="width:46px;" />
                                                                 <col style="width:auto;" />
                                                                 <tr class="activityDetail_mobilegrid_70_row_0">
                                                                     <!-- mobilegridcell_71 -->
@@ -279,6 +296,7 @@
                                                             name="mobilegrid_77" cellpadding=0 cellspacing=0>
                                                                 <col style="width:auto;" />
                                                                 <col style="width:auto;" />
+                                                                <col style="width:auto;" />
                                                                 <tr class="activityDetail_mobilegrid_77_row_0">
                                                                     <!-- mobilegridcell_78 -->
                                                                     <td id="activityDetail_mobilegridcell_78" name="mobilegridcell_78" class="activityDetail_mobilegridcell_78"
@@ -293,6 +311,17 @@
                                                                     </td>
                                                                     <!-- mobilegridcell_79 -->
                                                                     <td id="activityDetail_mobilegridcell_79" name="mobilegridcell_79" class="activityDetail_mobilegridcell_79"
+                                                                    colspan=1 rowspan=1>
+                                                                        <div class="cell-wrapper">
+                                                                            <!-- mobilelabel_175 -->
+                                                                            <div name="mobilelabel_175" id="activityDetail_mobilelabel_175" dsid="mobilelabel_175"
+                                                                            data-role="appery_label" class=' activityDetail_mobilelabel_175 '>
+                                                                                to
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <!-- mobilegridcell_174 -->
+                                                                    <td id="activityDetail_mobilegridcell_174" name="mobilegridcell_174" class="activityDetail_mobilegridcell_174"
                                                                     colspan=1 rowspan=1>
                                                                         <div class="cell-wrapper">
                                                                             <!-- lblDisplayTimeEnd -->
@@ -346,6 +375,70 @@
                             <td id="activityDetail_mobilegridcell_37" name="mobilegridcell_37" class="activityDetail_mobilegridcell_37"
                             colspan=1 rowspan=1>
                                 <div class="cell-wrapper">
+                                    <!-- mobilegrid_159 -->
+                                    <div class="activityDetail_mobilegrid_159_wrapper">
+                                        <table id="activityDetail_mobilegrid_159" class=" activityDetail_mobilegrid_159"
+                                        dsid="mobilegrid_159" name="mobilegrid_159" cellpadding=0 cellspacing=0>
+                                            <col style="width:79px;" />
+                                            <col style="width:auto;" />
+                                            <tr class="activityDetail_mobilegrid_159_row_0">
+                                                <!-- mobilegridcell_160 -->
+                                                <td id="activityDetail_mobilegridcell_160" name="mobilegridcell_160" class="activityDetail_mobilegridcell_160"
+                                                colspan=1 rowspan=1>
+                                                    <div class="cell-wrapper">
+                                                        <!-- lblPhone -->
+                                                        <div name="lblPhone" id="activityDetail_lblPhone" dsid="lblPhone" data-role="appery_label"
+                                                        class=' activityDetail_lblPhone '>
+                                                            phone:
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <!-- mobilegridcell_161 -->
+                                                <td id="activityDetail_mobilegridcell_161" name="mobilegridcell_161" class="activityDetail_mobilegridcell_161"
+                                                colspan=1 rowspan=1>
+                                                    <div class="cell-wrapper">
+                                                        <!-- lblActivityPhone -->
+                                                        <div name="lblActivityPhone" id="activityDetail_lblActivityPhone" dsid="lblActivityPhone"
+                                                        data-role="appery_label" class=' activityDetail_lblActivityPhone '>
+                                                            ph
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="activityDetail_mobilegrid_159_row_1">
+                                                <!-- mobilegridcell_162 -->
+                                                <td id="activityDetail_mobilegridcell_162" name="mobilegridcell_162" class="activityDetail_mobilegridcell_162"
+                                                colspan=1 rowspan=1>
+                                                    <div class="cell-wrapper">
+                                                        <!-- lblLink -->
+                                                        <div name="lblLink" id="activityDetail_lblLink" dsid="lblLink" data-role="appery_label"
+                                                        class=' activityDetail_lblLink '>
+                                                            link:
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <!-- mobilegridcell_163 -->
+                                                <td id="activityDetail_mobilegridcell_163" name="mobilegridcell_163" class="activityDetail_mobilegridcell_163"
+                                                colspan=1 rowspan=1>
+                                                    <div class="cell-wrapper">
+                                                        <!-- mlblActivityLink -->
+                                                        <div name="mlblActivityLink" id="activityDetail_mlblActivityLink" dsid="mlblActivityLink"
+                                                        data-role="appery_label" class=' activityDetail_mlblActivityLink '>
+                                                            link
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="activityDetail_bigGrid_row_4">
+                            <!-- mobilegridcell_89 -->
+                            <td id="activityDetail_mobilegridcell_89" name="mobilegridcell_89" class="activityDetail_mobilegridcell_89"
+                            colspan=1 rowspan=1>
+                                <div class="cell-wrapper">
                                     <div data-role="fieldcontain" class=" activityDetail_mobilecheckboxgroup_85" id="activityDetail_mobilecheckboxgroup_85"
                                     dsid="mobilecheckboxgroup_85">
                                         <fieldset data-role="controlgroup" data-mini="true">
@@ -375,9 +468,9 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr class="activityDetail_bigGrid_row_4">
-                            <!-- mobilegridcell_89 -->
-                            <td id="activityDetail_mobilegridcell_89" name="mobilegridcell_89" class="activityDetail_mobilegridcell_89"
+                        <tr class="activityDetail_bigGrid_row_5">
+                            <!-- mobilegridcell_128 -->
+                            <td id="activityDetail_mobilegridcell_128" name="mobilegridcell_128" class="activityDetail_mobilegridcell_128"
                             colspan=1 rowspan=1>
                                 <div class="cell-wrapper">
                                     <!-- collapsblockVenue -->
@@ -420,15 +513,37 @@
                                                                         <td id="activityDetail_mobilegridcell_102" name="mobilegridcell_102" class="activityDetail_mobilegridcell_102"
                                                                         colspan=1 rowspan=1>
                                                                             <div class="cell-wrapper">
-                                                                                <!-- lblVenueBorough -->
-                                                                                <div name="lblVenueBorough" id="activityDetail_lblVenueBorough" dsid="lblVenueBorough"
-                                                                                data-role="appery_label" class=' activityDetail_lblVenueBorough '>
-                                                                                    borough
-                                                                                </div>
-                                                                                <!-- lblVenuePostCode -->
-                                                                                <div name="lblVenuePostCode" id="activityDetail_lblVenuePostCode" dsid="lblVenuePostCode"
-                                                                                data-role="appery_label" class=' activityDetail_lblVenuePostCode '>
-                                                                                    postCode
+                                                                                <!-- mobilegrid_169 -->
+                                                                                <div class="activityDetail_mobilegrid_169_wrapper">
+                                                                                    <table id="activityDetail_mobilegrid_169" class=" activityDetail_mobilegrid_169"
+                                                                                    dsid="mobilegrid_169" name="mobilegrid_169" cellpadding=0 cellspacing=0>
+                                                                                        <col style="width:auto;" />
+                                                                                        <col style="width:auto;" />
+                                                                                        <tr class="activityDetail_mobilegrid_169_row_0">
+                                                                                            <!-- mobilegridcell_170 -->
+                                                                                            <td id="activityDetail_mobilegridcell_170" name="mobilegridcell_170" class="activityDetail_mobilegridcell_170"
+                                                                                            colspan=1 rowspan=1>
+                                                                                                <div class="cell-wrapper">
+                                                                                                    <!-- lblVenueBorough -->
+                                                                                                    <div name="lblVenueBorough" id="activityDetail_lblVenueBorough" dsid="lblVenueBorough"
+                                                                                                    data-role="appery_label" class=' activityDetail_lblVenueBorough '>
+                                                                                                        borough
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </td>
+                                                                                            <!-- mobilegridcell_171 -->
+                                                                                            <td id="activityDetail_mobilegridcell_171" name="mobilegridcell_171" class="activityDetail_mobilegridcell_171"
+                                                                                            colspan=1 rowspan=1>
+                                                                                                <div class="cell-wrapper">
+                                                                                                    <!-- lblVenuePostCode -->
+                                                                                                    <div name="lblVenuePostCode" id="activityDetail_lblVenuePostCode" dsid="lblVenuePostCode"
+                                                                                                    data-role="appery_label" class=' activityDetail_lblVenuePostCode '>
+                                                                                                        postCode
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </table>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -460,7 +575,7 @@
                                                             <div class="activityDetail_mobilegrid_110_wrapper">
                                                                 <table id="activityDetail_mobilegrid_110" class=" activityDetail_mobilegrid_110"
                                                                 dsid="mobilegrid_110" name="mobilegrid_110" cellpadding=0 cellspacing=0>
-                                                                    <col style="width:75px;" />
+                                                                    <col style="width:84px;" />
                                                                     <col style="width:auto;" />
                                                                     <tr class="activityDetail_mobilegrid_110_row_0">
                                                                         <!-- grdCellTransport -->
@@ -566,17 +681,16 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr class="activityDetail_bigGrid_row_5">
-                            <!-- mobilegridcell_128 -->
-                            <td id="activityDetail_mobilegridcell_128" name="mobilegridcell_128" class="activityDetail_mobilegridcell_128"
+                        <tr class="activityDetail_bigGrid_row_6">
+                            <!-- mobilegridcell_158 -->
+                            <td id="activityDetail_mobilegridcell_158" name="mobilegridcell_158" class="activityDetail_mobilegridcell_158"
                             colspan=1 rowspan=1>
                                 <div class="cell-wrapper">
                                     <!-- collapsblockReviews -->
                                     <div data-role="collapsible" id="activityDetail_collapsblockReviews" name="collapsblockReviews"
                                     dsid="collapsblockReviews" data-mini="true" data-collapsed="false" data-theme="b"
                                     data-content-theme="b" data-iconpos='left' class=' activityDetail_collapsblockReviews ui-corner-all'>
-                                        <h3 id="activityDetail_mobilecollapsblockheader_130" name="mobilecollapsblockheader_130"
-                                        dsid="mobilecollapsblockheader_130">
+                                        <h3 id="activityDetail_collapsblockhdrReviews" name="collapsblockhdrReviews" dsid="collapsblockhdrReviews">
                                             reviews
                                         </h3>
                                         <!-- grdReview -->
@@ -701,20 +815,6 @@
                         </tr>
                     </table>
                 </div>
-                <!-- lblId -->
-                <div name="lblId" id="activityDetail_lblId" dsid="lblId" data-role="appery_label"
-                class=' activityDetail_lblId '>
-                    Id
-                </div>
-                <!-- lblVenueId -->
-                <div name="lblVenueId" id="activityDetail_lblVenueId" dsid="lblVenueId" data-role="appery_label"
-                class=' activityDetail_lblVenueId '>
-                    venueId
-                </div>
-            </div>
-            <!-- mobilefooter1 -->
-            <div data-role="footer" data-position="fixed" class="mobileFooter activityDetail_mobilefooter1"
-            name="mobilefooter1" dsid="mobilefooter1" id="activityDetail_mobilefooter1" data-theme="b">
             </div>
         </div>
     </body>
