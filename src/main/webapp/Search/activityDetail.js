@@ -396,6 +396,31 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
             }
         });
 
+        $('#activityDetail_activityContainer [name="chkFree"]').die().live({
+            click: function() {
+                if (!$(this).attr('disabled')) {
+                    return false;
+
+                }
+            },
+        });
+        $('#activityDetail_activityContainer [name="chkBooking"]').die().live({
+            click: function() {
+                if (!$(this).attr('disabled')) {
+                    return false;
+
+                }
+            },
+        });
+        $('#activityDetail_activityContainer [name="chkLimitedPlaces"]').die().live({
+            click: function() {
+                if (!$(this).attr('disabled')) {
+                    return false;
+
+                }
+            },
+        });
+
     }
 
     $("#activityDetail").die("pagebeforeshow").live("pagebeforeshow", function(event, ui) {

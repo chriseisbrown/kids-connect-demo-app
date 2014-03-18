@@ -33,7 +33,7 @@ public class Review implements DomainClass
     }
 
     public String getDatetime() {
-        return delegate.getDatetime().toString(DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss"));
+        return delegate.getDatetime().toString(DateTimeFormat.forPattern("dd/MM/yyyy HH:mm"));
     }
 
     public String getRating() {
