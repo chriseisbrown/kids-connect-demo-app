@@ -39,7 +39,7 @@ Appery.AppPages = [{
 
 activityDetail_js = function(runBeforeShow) { /* Object & array with components "name-to-id" mapping */
     var n2id_buf = {
-        'mobilegrid_28': 'activityDetail_mobilegrid_28',
+        'bigGrid': 'activityDetail_bigGrid',
         'mobilegridcell_29': 'activityDetail_mobilegridcell_29',
         'mobilegrid_38': 'activityDetail_mobilegrid_38',
         'mobilegridcell_39': 'activityDetail_mobilegridcell_39',
@@ -77,6 +77,25 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
         'mobilegridcell_65': 'activityDetail_mobilegridcell_65',
         'lblDisplayNarrative': 'activityDetail_lblDisplayNarrative',
         'mobilegridcell_37': 'activityDetail_mobilegridcell_37',
+        'mobilecheckboxgroup_85': 'activityDetail_mobilecheckboxgroup_85',
+        'chkFree': 'activityDetail_chkFree',
+        'chkBooking': 'activityDetail_chkBooking',
+        'chkLimitedPlaces': 'activityDetail_chkLimitedPlaces',
+        'mobilegridcell_89': 'activityDetail_mobilegridcell_89',
+        'mobilecollapsblock_90': 'activityDetail_mobilecollapsblock_90',
+        'mobilecollapsblockheader_91': 'activityDetail_mobilecollapsblockheader_91',
+        'mobilecollapsblockcontent_92': 'activityDetail_mobilecollapsblockcontent_92',
+        'grdAddress': 'activityDetail_grdAddress',
+        'mobilegridcell_94': 'activityDetail_mobilegridcell_94',
+        'mobilegrid_99': 'activityDetail_mobilegrid_99',
+        'mobilegridcell_100': 'activityDetail_mobilegridcell_100',
+        'lblVenueAddress': 'activityDetail_lblVenueAddress',
+        'mobilegridcell_102': 'activityDetail_mobilegridcell_102',
+        'lblVenueBorough': 'activityDetail_lblVenueBorough',
+        'lblVenuePostCode': 'activityDetail_lblVenuePostCode',
+        'mobilegridcell_104': 'activityDetail_mobilegridcell_104',
+        'lblVenueAccess': 'activityDetail_lblVenueAccess',
+        'mobilegridcell_96': 'activityDetail_mobilegridcell_96',
         'lblId': 'activityDetail_lblId'
     };
 
@@ -128,6 +147,18 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
             'ID': 'lblDisplayNarrative',
             'ATTR': '@'
         }, {
+            'PATH': ['activity', 'bookingRequired'],
+            'ID': 'chkBooking',
+            'ATTR': 'checked'
+        }, {
+            'PATH': ['activity', 'freeOfCharge'],
+            'ID': 'chkFree',
+            'ATTR': 'checked'
+        }, {
+            'PATH': ['activity', 'limitedCapacity'],
+            'ID': 'chkLimitedPlaces',
+            'ATTR': 'checked'
+        }, {
             'PATH': ['activity', 'description'],
             'ID': 'lblActivityDescription',
             'ATTR': '@'
@@ -146,6 +177,26 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
         }, {
             'PATH': ['activity', 'type'],
             'ID': 'lblDisplayType',
+            'ATTR': '@'
+        }, {
+            'PATH': ['venue', 'access'],
+            'ID': 'lblVenueAccess',
+            'ATTR': '@'
+        }, {
+            'PATH': ['venue', 'address'],
+            'ID': 'lblVenueAddress',
+            'ATTR': '@'
+        }, {
+            'PATH': ['venue', 'name'],
+            'ID': 'mobilecollapsblockheader_91',
+            'ATTR': '@'
+        }, {
+            'PATH': ['venue', 'borough', 'name'],
+            'ID': 'lblVenueBorough',
+            'ATTR': '@'
+        }, {
+            'PATH': ['venue', 'postCode', 'code'],
+            'ID': 'lblVenuePostCode',
             'ATTR': '@'
         }],
         'requestMapping': [{
@@ -208,6 +259,10 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
     // screen elements extra js
     screen_3671_elementsExtraJS = activityDetail_elementsExtraJS = function() {
         // screen (activityDetail) extra code
+
+        /* mobilecollapsblock_90 */
+
+        $("#activityDetail_mobilecollapsblock_90 .ui-collapsible-heading-toggle").attr("tabindex", "2");
 
     }
 
