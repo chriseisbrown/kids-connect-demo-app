@@ -427,7 +427,7 @@
 	margin: 4px 8px 4px 8px;
 }
 .activityDetail_mobilecollapsblock_90 .ui-collapsible-content {
-	padding: 10px 10px 10px 10px;
+	padding: 5px 5px 5px 5px;
 }
 /* grdAddress */
 .activityDetail_grdAddress {
@@ -444,6 +444,9 @@
 	height: 30px
 }
 .activityDetail_grdAddress_row_1, .activityDetail_grdAddress_row_1 > td {
+	height: 30px
+}
+.activityDetail_grdAddress_row_2, .activityDetail_grdAddress_row_2 > td {
 	height: 30px
 }
 /* mobilegridcell_94 */
@@ -510,7 +513,7 @@
 }
 /* lblVenuePostCode */
 .activityDetail_lblVenuePostCode {
-	text-decoration: none; font-weight: normal; font-style: italic; text-align: left; font-family: Helvetica; font-size: 12px;
+	text-decoration: none; font-weight: normal; text-align: left; font-family: Helvetica; font-size: 12px;
 	margin: 2px 0px 2px 0px;
 	word-wrap: break-word;
 }
@@ -540,8 +543,114 @@
 	padding: 0;
 	margin: 0;
 }
+/* mobilegrid_110 */
+.activityDetail_mobilegrid_110 {
+	height: auto;
+	width:100%;
+	margin: 4px 0px 4px 0px;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+.activityDetail_mobilegrid_110 > tr > td {
+	vertical-align: top;
+}
+.activityDetail_mobilegrid_110_row_0, .activityDetail_mobilegrid_110_row_0 > td {
+	height: 30px
+}
+/* grdCellTransport */
+.activityDetail_grdCellTransport {
+	height:30px !important;
+	width:71px;
+	padding: 2px 2px 2px 2px;
+}
+.activityDetail_grdCellTransport > .cell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* lblTransport */
+.activityDetail_lblTransport {
+	text-decoration: none; font-weight: normal; text-align: left; font-family: Helvetica; font-size: 12px;
+	margin: 2px 0px 2px 0px;
+	word-wrap: break-word;
+}
+/* mobilegridcell_112 */
+.activityDetail_mobilegridcell_112 {
+	height:30px !important;
+	width:auto;
+	padding: 2px 2px 2px 2px;
+}
+.activityDetail_mobilegridcell_112 > .cell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* lblVenueTransport */
+.activityDetail_lblVenueTransport {
+	text-decoration: none; font-weight: normal; text-align: left; font-family: Helvetica; font-size: 12px;
+	margin: 2px 0px 2px 0px;
+	word-wrap: break-word;
+}
+/* mobilegridcell_109 */
+.activityDetail_mobilegridcell_109 {
+	height:30px !important;
+	width:auto;
+	padding: 2px 2px 2px 2px;
+}
+.activityDetail_mobilegridcell_109 > .cell-wrapper {
+	padding: 0;
+	margin: 0;
+}
+/* mobilecheckboxgroup_117 */
+.activityDetail_mobilecheckboxgroup_117 {
+	margin: 4px 0px 4px 0px;
+}
+/* chkBabyChanging */
+.activityDetail_chkBabyChanging {
+	-webkit-border-radius: inherit;
+	border-radius: inherit;
+}
+/* chkBottleWarming */
+.activityDetail_chkBottleWarming {
+	-webkit-border-radius: inherit;
+	border-radius: inherit;
+}
+/* chkLiftAccess */
+.activityDetail_chkLiftAccess {
+	-webkit-border-radius: inherit;
+	border-radius: inherit;
+}
+/* chkStepFree */
+.activityDetail_chkStepFree {
+	-webkit-border-radius: inherit;
+	border-radius: inherit;
+}
+/* chkRefreshments */
+.activityDetail_chkRefreshments {
+	-webkit-border-radius: inherit;
+	border-radius: inherit;
+}
+/* chkBuggyParking */
+.activityDetail_chkBuggyParking {
+	-webkit-border-radius: inherit;
+	border-radius: inherit;
+}
+/* chkBreastFeeding */
+.activityDetail_chkBreastFeeding {
+	-webkit-border-radius: inherit;
+	border-radius: inherit;
+}
+/* chkVendingMachine */
+.activityDetail_chkVendingMachine {
+	-webkit-border-radius: inherit;
+	border-radius: inherit;
+}
 /* lblId */
 .activityDetail_lblId {
+	text-decoration: none; font-weight: normal; font-style: italic; text-align: left; font-family: Helvetica; font-size: 16px;
+	margin: 4px 0px 4px 0px;
+	word-wrap: break-word;
+}
+/* lblVenueId */
+.activityDetail_lblVenueId {
 	text-decoration: none; font-weight: normal; font-style: italic; text-align: left; font-family: Helvetica; font-size: 16px;
 	margin: 4px 0px 4px 0px;
 	word-wrap: break-word;

@@ -83,8 +83,8 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
         'chkLimitedPlaces': 'activityDetail_chkLimitedPlaces',
         'mobilegridcell_89': 'activityDetail_mobilegridcell_89',
         'mobilecollapsblock_90': 'activityDetail_mobilecollapsblock_90',
-        'mobilecollapsblockheader_91': 'activityDetail_mobilecollapsblockheader_91',
-        'mobilecollapsblockcontent_92': 'activityDetail_mobilecollapsblockcontent_92',
+        'collapseHdrVenueName': 'activityDetail_collapseHdrVenueName',
+        'collapseHdrVenueContent': 'activityDetail_collapseHdrVenueContent',
         'grdAddress': 'activityDetail_grdAddress',
         'mobilegridcell_94': 'activityDetail_mobilegridcell_94',
         'mobilegrid_99': 'activityDetail_mobilegrid_99',
@@ -96,7 +96,23 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
         'mobilegridcell_104': 'activityDetail_mobilegridcell_104',
         'lblVenueAccess': 'activityDetail_lblVenueAccess',
         'mobilegridcell_96': 'activityDetail_mobilegridcell_96',
-        'lblId': 'activityDetail_lblId'
+        'mobilegrid_110': 'activityDetail_mobilegrid_110',
+        'grdCellTransport': 'activityDetail_grdCellTransport',
+        'lblTransport': 'activityDetail_lblTransport',
+        'mobilegridcell_112': 'activityDetail_mobilegridcell_112',
+        'lblVenueTransport': 'activityDetail_lblVenueTransport',
+        'mobilegridcell_109': 'activityDetail_mobilegridcell_109',
+        'mobilecheckboxgroup_117': 'activityDetail_mobilecheckboxgroup_117',
+        'chkBabyChanging': 'activityDetail_chkBabyChanging',
+        'chkBottleWarming': 'activityDetail_chkBottleWarming',
+        'chkLiftAccess': 'activityDetail_chkLiftAccess',
+        'chkStepFree': 'activityDetail_chkStepFree',
+        'chkRefreshments': 'activityDetail_chkRefreshments',
+        'chkBuggyParking': 'activityDetail_chkBuggyParking',
+        'chkBreastFeeding': 'activityDetail_chkBreastFeeding',
+        'chkVendingMachine': 'activityDetail_chkVendingMachine',
+        'lblId': 'activityDetail_lblId',
+        'lblVenueId': 'activityDetail_lblVenueId'
     };
 
     if ("n2id" in window && window.n2id !== undefined) {
@@ -183,12 +199,48 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
             'ID': 'lblVenueAccess',
             'ATTR': '@'
         }, {
+            'PATH': ['venue', 'babyChange'],
+            'ID': 'chkBabyChanging',
+            'ATTR': 'checked'
+        }, {
+            'PATH': ['venue', 'liftAccess'],
+            'ID': 'chkLiftAccess',
+            'ATTR': 'checked'
+        }, {
+            'PATH': ['venue', 'bottleWarming'],
+            'ID': 'chkBottleWarming',
+            'ATTR': 'checked'
+        }, {
+            'PATH': ['venue', 'vendingMachine'],
+            'ID': 'chkVendingMachine',
+            'ATTR': 'checked'
+        }, {
+            'PATH': ['venue', 'stepFree'],
+            'ID': 'chkStepFree',
+            'ATTR': 'checked'
+        }, {
+            'PATH': ['venue', 'refreshments'],
+            'ID': 'chkRefreshments',
+            'ATTR': 'checked'
+        }, {
+            'PATH': ['venue', 'transport'],
+            'ID': 'lblVenueTransport',
+            'ATTR': '@'
+        }, {
+            'PATH': ['venue', 'buggyParking'],
+            'ID': 'chkBuggyParking',
+            'ATTR': 'checked'
+        }, {
+            'PATH': ['venue', 'breastFeeding'],
+            'ID': 'chkBreastFeeding',
+            'ATTR': 'checked'
+        }, {
             'PATH': ['venue', 'address'],
             'ID': 'lblVenueAddress',
             'ATTR': '@'
         }, {
             'PATH': ['venue', 'name'],
-            'ID': 'mobilecollapsblockheader_91',
+            'ID': 'collapseHdrVenueName',
             'ATTR': '@'
         }, {
             'PATH': ['venue', 'borough', 'name'],
