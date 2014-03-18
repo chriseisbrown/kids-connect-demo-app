@@ -10,6 +10,15 @@ var TwitterSearchSettings = {
  * Services
  */
 
+var TwitterRESTAuthService = new Appery.RestService({
+    'url': 'https://api.appery.io/rest/1/proxy/tunnel',
+    'dataType': 'json',
+    'type': 'post',
+    'contentType': 'application/x-www-form-urlencoded',
+
+    'serviceSettings': TwitterSearchSettings
+});
+
 var TwitterSearch_SearchService = new Appery.RestService({
     'url': 'https://api.appery.io/rest/1/proxy/tunnel',
     'dataType': 'json',
@@ -22,11 +31,8 @@ var KCActivitiesSearchService = new Appery.RestService({
     'type': 'get',
 });
 
-var TwitterRESTAuthService = new Appery.RestService({
-    'url': 'https://api.appery.io/rest/1/proxy/tunnel',
+var KCActivityDetailService = new Appery.RestService({
+    'url': 'http://kids-connect-rtmuv2dzja.elasticbeanstalk.com/api/activities/{activity-id}',
     'dataType': 'json',
-    'type': 'post',
-    'contentType': 'application/x-www-form-urlencoded',
-
-    'serviceSettings': TwitterSearchSettings
+    'type': 'get',
 });

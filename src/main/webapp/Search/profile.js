@@ -30,8 +30,8 @@ Appery.AppPages = [{
     "name": "mapPage",
     "location": "mapPage.html"
 }, {
-    "name": "startScreen",
-    "location": "startScreen.html"
+    "name": "activityDetail",
+    "location": "activityDetail.html"
 }, {
     "name": "profile",
     "location": "profile.html"

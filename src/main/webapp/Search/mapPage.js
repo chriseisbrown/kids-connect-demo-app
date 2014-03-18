@@ -30,8 +30,8 @@ Appery.AppPages = [{
     "name": "mapPage",
     "location": "mapPage.html"
 }, {
-    "name": "startScreen",
-    "location": "startScreen.html"
+    "name": "activityDetail",
+    "location": "activityDetail.html"
 }, {
     "name": "profile",
     "location": "profile.html"
@@ -215,6 +215,10 @@ mapPage_js = function(runBeforeShow) { /* Object & array with components "name-t
             }, {
                 'PATH': ['name'],
                 'ID': 'lblActivityName',
+                'ATTR': '@'
+            }, {
+                'PATH': ['id'],
+                'ID': 'lblNada',
                 'ATTR': '@'
             }, {
                 'PATH': ['type'],
@@ -413,6 +417,18 @@ mapPage_js = function(runBeforeShow) { /* Object & array with components "name-t
                     console.log(ex.name + '  ' + ex.message);
                     hideSpinner();
                 };
+            },
+        });
+
+        $('#mapPage_mobilecontainer [name="lblActivityName"]').die().live({
+            click: function() {
+                if (!$(this).attr('disabled')) {
+                    setVar_('activityIdentifier', 'mapPage_lblNada', 'text', '', this);
+                    Appery.navigateTo('activityDetail', {
+                        reverse: false
+                    });
+
+                }
             },
         });
 
