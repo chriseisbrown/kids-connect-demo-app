@@ -1,6 +1,7 @@
 package com.kidsconnect.domain.model;
 
 import org.codehaus.jackson.map.annotate.JsonView;
+import org.joda.time.format.DateTimeFormat;
 
 
 import com.kidsconnect.domain.data.ActivityData;
@@ -40,6 +41,10 @@ public class Activity implements DomainClass
     
     public AgeRange getAgeRange() {
 	return delegate.getAgeRange();
+    }
+
+    public String getDisplayAgeRange() {
+	return delegate.getAgeRange().getDescription();
     }
     
     public String getDescription(){
@@ -87,7 +92,25 @@ public class Activity implements DomainClass
     public Location getLocation(){
 	return delegate.getLocation();
     }
-     
+    
+    public Day getDay(){
+	return delegate.getDay();
+    }
+    
+    public String getDisplayDay(){
+	return delegate.getDay().getDescription();
+    }
+    
+    public String getStart() {
+        return delegate.getStart().toString(DateTimeFormat.forPattern("HH:mm"));
+    }
+    
+    public String getEnd() {
+        return delegate.getEnd().toString(DateTimeFormat.forPattern("HH:mm"));
+    }
+    
+    
+    
     @Override
     public String toString() {
 	return "Venue [delegate=" + delegate + "]";

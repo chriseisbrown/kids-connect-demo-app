@@ -1,9 +1,12 @@
 package com.kidsconnect.domain.data.impl;
 
+import org.joda.time.LocalTime;
+
 import com.kidsconnect.domain.data.ActivityData;
 import com.kidsconnect.domain.model.Activity;
 import com.kidsconnect.domain.model.ActivityType;
 import com.kidsconnect.domain.model.AgeRange;
+import com.kidsconnect.domain.model.Day;
 import com.kidsconnect.domain.model.Link;
 import com.kidsconnect.domain.model.Location;
 
@@ -31,6 +34,10 @@ public class PojoActivityData implements ActivityData {
     public Link contactLink;
     public String contactPhone;
     
+    public Day day;
+    public LocalTime start;
+    public LocalTime end;
+    
     
     public PojoActivityData(String id) {
 	this.activityId = id;
@@ -53,7 +60,7 @@ public class PojoActivityData implements ActivityData {
     public PojoActivityData(String id, String name, ActivityType type,String description, AgeRange range, String venueId, String venueName,
 	    		    boolean bookingRequired, String bookingNarrative, boolean freeOfCharge, double price, boolean limitedCapacity,
 	    		    String capacityNarrative, Location location, String descNarrative,
-	    		    Link contactLink, String contactPhone) {
+	    		    Link contactLink, String contactPhone, Day day, LocalTime start, LocalTime end) {
 	this(id, name, type, description);
 	this.age = range;
 	this.venueId = venueId;
@@ -68,6 +75,9 @@ public class PojoActivityData implements ActivityData {
 	this.narrative = descNarrative;
 	this.contactLink = contactLink;
 	this.contactPhone = contactPhone;
+	this.day = day;
+	this.start = start;
+	this.end = end;
     }
     
     @Override
@@ -148,6 +158,19 @@ public class PojoActivityData implements ActivityData {
     public String getContactPhone() {
 	return contactPhone;
     }
+    
+    public Day getDay() {
+        return day;
+    }
+
+    public LocalTime getStart() {
+        return start;
+    }
+
+    public LocalTime getEnd() {
+        return end;
+    }
+
     @Override
     public Activity makeDomainWrapper() {
 	return new Activity(this);
@@ -164,7 +187,8 @@ public class PojoActivityData implements ActivityData {
 		+ limitedCapacity + ", capacityNarrative=" + capacityNarrative
 		+ ", venueId=" + venueId + ", venueName=" + venueName
 		+ ", location=" + location + ", contactLink=" + contactLink
-		+ ", contactPhone=" + contactPhone + "]";
+		+ ", contactPhone=" + contactPhone + ", day=" + day
+		+ ", start=" + start + ", end=" + end + "]";
     }
 
     @Override

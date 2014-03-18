@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -19,6 +21,7 @@ import com.kidsconnect.domain.data.impl.PojoActivityData;
 import com.kidsconnect.domain.model.Activity;
 import com.kidsconnect.domain.model.ActivityType;
 import com.kidsconnect.domain.model.AgeRange;
+import com.kidsconnect.domain.model.Day;
 import com.kidsconnect.domain.model.Link;
 import com.kidsconnect.domain.model.Location;
 
@@ -47,6 +50,7 @@ public class ActivityCSVFileReader {
     
     private void load(){
 	try {
+	    DateTimeFormatter formatter = DateTimeFormat.forPattern("HH:mm");
 	    
 	    ClassPathResource r = new ClassPathResource("activities.csv");
 	    
@@ -78,7 +82,10 @@ public class ActivityCSVFileReader {
 			    new Location(Double.parseDouble(fields[13]), Double.parseDouble(fields[14])),  //lat, long
 			    fields[15],	//long description
 			    new Link(fields[16]),	//link
-			    fields[17]	//phone
+			    fields[17],	//phone
+			    Day.fromString(fields[18]),			//day
+			    formatter.parseLocalTime(fields[19]),		//start
+			    formatter.parseLocalTime(fields[20])		//end
 			    );		
 
 		    

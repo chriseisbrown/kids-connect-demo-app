@@ -1,8 +1,11 @@
 package com.kidsconnect.domain.data;
 
+import org.joda.time.LocalTime;
+
 import com.kidsconnect.domain.model.Activity;
 import com.kidsconnect.domain.model.ActivityType;
 import com.kidsconnect.domain.model.AgeRange;
+import com.kidsconnect.domain.model.Day;
 import com.kidsconnect.domain.model.Link;
 import com.kidsconnect.domain.model.Location;
 
@@ -27,6 +30,10 @@ public interface ActivityData {
     
     public Link getContactLink();
     public String getContactPhone();
+    
+    public Day getDay();
+    public LocalTime getStart();
+    public LocalTime getEnd();
 
     Activity makeDomainWrapper();
 }
