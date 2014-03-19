@@ -48,19 +48,15 @@ mapPage_js = function(runBeforeShow) { /* Object & array with components "name-t
         'grdResult': 'mapPage_grdResult',
         'mobilegridcell_8': 'mapPage_mobilegridcell_8',
         'lblActivityName': 'mapPage_lblActivityName',
+        'lblDescription': 'mapPage_lblDescription',
+        'lblAgeRange': 'mapPage_lblAgeRange',
         'mobilegridcell_9': 'mapPage_mobilegridcell_9',
+        'imgActivity': 'mapPage_imgActivity',
         'lblActivityType': 'mapPage_lblActivityType',
         'mobilegridcell_10': 'mapPage_mobilegridcell_10',
-        'lblDescription': 'mapPage_lblDescription',
+        'lblVenueName': 'mapPage_lblVenueName',
         'mobilegridcell_11': 'mapPage_mobilegridcell_11',
         'lblNada': 'mapPage_lblNada',
-        'mobilegridcell_12': 'mapPage_mobilegridcell_12',
-        'lblAgeRange': 'mapPage_lblAgeRange',
-        'mobilegridcell_13': 'mapPage_mobilegridcell_13',
-        'mobilegridcell_14': 'mapPage_mobilegridcell_14',
-        'lblVenueName': 'mapPage_lblVenueName',
-        'mobilegridcell_15': 'mapPage_mobilegridcell_15',
-        'lblVenueId': 'mapPage_lblVenueId',
         'btnCloseSettings': 'mapPage_btnCloseSettings',
         'mobilelist_31': 'mapPage_mobilelist_31',
         'lstProfile': 'mapPage_lstProfile',
@@ -197,13 +193,12 @@ mapPage_js = function(runBeforeShow) { /* Object & array with components "name-t
             'PATH': ['results'],
             'ID': 'grdResult',
             'SET': [{
-                'PATH': ['venueId'],
-                'ID': 'lblVenueId',
-                'ATTR': '@'
-            }, {
-                'PATH': ['ageRange'],
+                'PATH': ['displayAgeRange'],
                 'ID': 'lblAgeRange',
-                'ATTR': '@'
+                'ATTR': '@',
+                'TRANSFORMATION': function(value, element) {
+                    return "Ages: " + value;
+                }
             }, {
                 'PATH': ['venueName'],
                 'ID': 'lblVenueName',
@@ -221,7 +216,7 @@ mapPage_js = function(runBeforeShow) { /* Object & array with components "name-t
                 'ID': 'lblNada',
                 'ATTR': '@'
             }, {
-                'PATH': ['type'],
+                'PATH': ['displayType'],
                 'ID': 'lblActivityType',
                 'ATTR': '@'
             }]
@@ -230,7 +225,7 @@ mapPage_js = function(runBeforeShow) { /* Object & array with components "name-t
             'ID': 'lblResults',
             'ATTR': '@',
             'TRANSFORMATION': function(value, element) {
-                return value + " results found";
+                return value + " activities found";
             }
         }],
         'requestMapping': [{

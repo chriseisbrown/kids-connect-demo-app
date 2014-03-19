@@ -149,7 +149,8 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
         'mobilegridcell_152': 'activityDetail_mobilegridcell_152',
         'lblReviewUserName': 'activityDetail_lblReviewUserName',
         'mobilegridcell_153': 'activityDetail_mobilegridcell_153',
-        'ldbReviewDateTime': 'activityDetail_ldbReviewDateTime'
+        'ldbReviewDateTime': 'activityDetail_ldbReviewDateTime',
+        'mobileimage_176': 'activityDetail_mobileimage_176'
     };
 
     if ("n2id" in window && window.n2id !== undefined) {
@@ -232,7 +233,7 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
             'ID': 'lblActivityLongName',
             'ATTR': '@'
         }, {
-            'PATH': ['activity', 'type'],
+            'PATH': ['activity', 'displayType'],
             'ID': 'lblDisplayType',
             'ATTR': '@'
         }, {
@@ -413,6 +414,64 @@ activityDetail_js = function(runBeforeShow) { /* Object & array with components 
             },
         });
         $('#activityDetail_activityContainer [name="chkLimitedPlaces"]').die().live({
+            click: function() {
+                if (!$(this).attr('disabled')) {
+                    return false;
+
+                }
+            },
+        });
+
+        $('#activityDetail_activityContainer [name="chkBabyChanging"]').die().live({
+            click: function() {
+                if (!$(this).attr('disabled')) {
+                    return false;
+
+                }
+            },
+        });
+        $('#activityDetail_activityContainer [name="chkBottleWarming"]').die().live({
+            click: function() {
+                if (!$(this).attr('disabled')) {
+                    return false;
+
+                }
+            },
+        });
+        $('#activityDetail_activityContainer [name="chkLiftAccess"]').die().live({
+            click: function() {
+                if (!$(this).attr('disabled')) {
+                    return false;
+
+                }
+            },
+        });
+        $('#activityDetail_activityContainer [name="chkStepFree"]').die().live({
+            click: function() {
+                if (!$(this).attr('disabled')) {
+                    return false;
+
+                }
+            },
+        });
+        $('#activityDetail_activityContainer [name="chkRefreshments"]').die().live({
+            click: function() {
+                if (!$(this).attr('disabled')) {
+                    return false;
+
+                }
+            },
+        });
+
+        $('#activityDetail_activityContainer [name="chkBreastFeeding"]').die().live({
+            click: function() {
+                if (!$(this).attr('disabled')) {
+                    return false;
+
+                }
+            },
+        });
+        $('#activityDetail_activityContainer [name="chkVendingMachine"]').die().live({
             click: function() {
                 if (!$(this).attr('disabled')) {
                     return false;

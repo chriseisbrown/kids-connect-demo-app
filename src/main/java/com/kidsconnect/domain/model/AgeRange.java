@@ -5,10 +5,10 @@ import static com.kidsconnect.domain.impl.helper.EnumFromString.getEnumFromStrin
 public enum AgeRange {
     ANY("Any"),
     FROM18MONTHS("From 18 months"),
-    YRS2ANDUNDER("Years 2 And under"),
-    YRS5ANDUNDER("Years 5 And under"),
-    YRS6ANDUNDER("Years 6 And under"),
-    EXPECTANT_PARENTS("Expectant Parents");
+    YRS2ANDUNDER("2 and under"),
+    YRS5ANDUNDER("5 and under"),
+    YRS6ANDUNDER("6 and under"),
+    EXPECTANT_PARENTS("Expectant parents");
     
     
     private final String description;

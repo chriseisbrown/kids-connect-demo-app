@@ -30,6 +30,10 @@ public class Activity implements DomainClass
     public ActivityType getType() {
 	return delegate.getType();
     }
+    
+    public String getDisplayType() {
+	return delegate.getType().getDescription();
+    }
 
     public Link getContactLink(){
 	return delegate.getContactLink(); 
