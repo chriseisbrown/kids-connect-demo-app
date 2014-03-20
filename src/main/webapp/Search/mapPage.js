@@ -427,6 +427,18 @@ mapPage_js = function(runBeforeShow) { /* Object & array with components "name-t
             },
         });
 
+        $('#mapPage_mobilecontainer [name="imgActivity"]').die().live({
+            click: function() {
+                if (!$(this).attr('disabled')) {
+                    setVar_('activityIdentifier', 'mapPage_lblNada', 'text', '', this);
+                    Appery.navigateTo('activityDetail', {
+                        reverse: false
+                    });
+
+                }
+            },
+        });
+        
         $('[name="btnCloseSettings"]').die().live({
             click: function() {
                 if (!$(this).attr('disabled')) {
