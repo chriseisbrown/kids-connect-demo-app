@@ -142,6 +142,16 @@
 	padding: 0;
 	margin: 0;
 }
+/* mobilegridcell_99 */
+.profile_mobilegridcell_99 {
+    height:240px !important;
+    width:auto;
+    padding: 20px 2px 20px 2px;
+}
+.profile_mobilegridcell_99 > .cell-wrapper {
+    padding: 0;
+    margin: 0;
+}
 /* chkgrpBuddy */
 .profile_chkgrpBuddy {
 	margin: 4px 0px 4px 0px;

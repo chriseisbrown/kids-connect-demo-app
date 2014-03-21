@@ -54,6 +54,7 @@ profile_js = function(runBeforeShow) { /* Object & array with components "name-t
         'txtPostCode': 'profile_txtPostCode',
         'mobilegridcell_8': 'profile_mobilegridcell_8',
         'mobilegridcell_9': 'profile_mobilegridcell_9',
+        'mobilegridcell_99': 'profile_mobilegridcell_99',
         'chkgrpBuddy': 'profile_chkgrpBuddy',
         'chkBuddy': 'profile_chkBuddy',
         'btnProfileChanges': 'profile_btnProfileChanges'
