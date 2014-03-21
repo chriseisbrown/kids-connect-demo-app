@@ -12,7 +12,7 @@ public class ActivityCSVFileReaderTest {
     
     @Test (timeout=50)
     public void testLoadedCorrectNumberofRows() {
-	assertEquals(8, underTest.count());
+	assertEquals(25, underTest.count());
     }
 
 }
