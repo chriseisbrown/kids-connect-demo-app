@@ -131,7 +131,7 @@ mapPage_js = function(runBeforeShow) { /* Object & array with components "name-t
             $t.refreshScreenFormElements("mapPage");
         },
         'onSuccess': function(data) {
-            var homeLatlng = new google.maps.LatLng(51.470678, -0.078129);
+            var homeLatlng = new google.maps.LatLng(51.489845, -0.048284);
 
             var myOptions = {
                 zoom: 14,
