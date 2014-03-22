@@ -317,8 +317,8 @@ mapPage_js = function(runBeforeShow) { /* Object & array with components "name-t
 
         var googlemap_1_options = {
             markerSourceName: "googlemap_1_markers",
-            latitude: "51.505836",
-            longitude: "-0.116789",
+            latitude: "51.489845",
+            longitude: "-0.048284",
             address: "",
             zoom: 14,
             showLocationMarker: true
